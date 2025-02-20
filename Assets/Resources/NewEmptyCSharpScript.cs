@@ -16,7 +16,7 @@ public class PropertyLoader : MonoBehaviour
     {
         string[] lines = propertyCSV.text.Split('\n');
 
-        for (int i = 1; i < lines.Length; i++) // Skip header row
+        for (int i = 3; i < lines.Length; i++) // Skip header row
         {
             string[] values = lines[i].Split(',');
             if (values.Length < 4) continue;
