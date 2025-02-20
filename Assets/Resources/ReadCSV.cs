@@ -25,7 +25,7 @@ public class ReadCSV : MonoBehaviour
 
     public void Search()
     {
-        string[] data = TextAssetData.text.Split(new string[] { ";", "\n" }, System.StringSplitOptions.None);
+        string[] data = TextAssetData.text.Split(new string[] { ",", "\n" }, System.StringSplitOptions.None);
         for (int i = 0; i<data.Length; i++)
         {
             if (Text == data[i])
