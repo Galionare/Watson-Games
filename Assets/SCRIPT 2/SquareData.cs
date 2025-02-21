@@ -12,5 +12,18 @@ public class SquareData : MonoBehaviour
         {
             propertyData = CSVLoader.LoadPropertyData();
         }
+        foreach (var entry in propertyData)
+        {
+            PropertyData data = entry.Value;
+
+            if (data.CanBeBought)
+            {
+                Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Rent with houses: {string.Join(", ", data.Houses)}");
+            }
+            else
+            {
+                Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Action: {data.Action} (Not Buyable)");
+            }
+        }
     }
 }
