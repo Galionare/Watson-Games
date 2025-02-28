@@ -18,7 +18,7 @@ public class BetterReadCSV : MonoBehaviour
     public TextMeshProUGUI Rent4H;
     public TextMeshProUGUI RentHotel;
 
-    public TextMeshProUGUI Colour;
+    private string Colour;
     public Image EmptyCard;
     public Sprite BrownProp;
     public Sprite BlueProp;
@@ -56,42 +56,42 @@ public class BetterReadCSV : MonoBehaviour
                 Rent3H.text = data[i + 11];
                 Rent4H.text = data[i + 12];
                 RentHotel.text = data[i + 13];
-                Colour.text = data[i + 2];
+                Colour = data[i + 2];
                 SpriteChanger();
             }
         }
     }
     public void SpriteChanger()
     {
-        if (Colour.text.Trim().Equals("Brown", System.StringComparison.OrdinalIgnoreCase))
+        if (Colour.Trim().Equals("Brown", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = BrownProp;
         }
-        else if (Colour.text.Trim().Equals("Red", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Red", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = RedProp;
         }
-        else if (Colour.text.Trim().Equals("Blue", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Blue", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = BlueProp;
         }
-        else if (Colour.text.Trim().Equals("Purple", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Purple", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = PurpleProp;
         }
-        else if (Colour.text.Trim().Equals("Orange", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Orange", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = OrangeProp;
         }
-        else if (Colour.text.Trim().Equals("Yellow", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Yellow", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = YellowProp;
         }
-        else if (Colour.text.Trim().Equals("Green", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Green", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = GreenProp;
         }
-        else if (Colour.text.Trim().Equals("Deep Blue", System.StringComparison.OrdinalIgnoreCase))
+        else if (Colour.Trim().Equals("Deep Blue", System.StringComparison.OrdinalIgnoreCase))
         {
             EmptyCard.sprite = DeepBlueProp;
         }
