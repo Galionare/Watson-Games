@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2590268069973166781}
   - component: {fileID: 7848874463233520836}
   - component: {fileID: 806648421532706254}
-  - component: {fileID: 4187652027002816967}
+  - component: {fileID: 3041821623068829589}
   m_Layer: 5
-  m_Name: FinalCardPrefeb
+  m_Name: StreetCardPrefeb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4187652027002816967
+--- !u!114 &3041821623068829589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117622364284449936}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31713089d5bb7544fb418b11ddb0a129, type: 3}
+  m_Script: {fileID: 11500000, guid: ef47efb872714f24dbb63cea8f6ad784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TextAssetData: {fileID: 4900000, guid: f93781a973f542d40942ac8b7b37e686, type: 3}
@@ -2412,8 +2412,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4187652027002816967}
-        m_TargetAssemblyTypeName: BetterReadCSV, Assembly-CSharp
+      - m_Target: {fileID: 3041821623068829589}
+        m_TargetAssemblyTypeName: StreetReadCSV, Assembly-CSharp
         m_MethodName: Search
         m_Mode: 1
         m_Arguments:
