@@ -23,7 +23,7 @@ public class RollDice : MonoBehaviour
         diceCount++;
         GameObject newDice = Instantiate(gameDice);
         newDice.name = "Dice" + diceCount;
-        newDice.transform.position = new Vector3(diceCount, 8, 0);
+        newDice.transform.position = new Vector3(2*diceCount, 8, 0);
 
         DiceRolling diceRolling = newDice.GetComponent<DiceRolling>();
         int diceNumber = diceRolling.diceNumber;
