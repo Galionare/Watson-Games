@@ -4025,7 +4025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5822,93 +5822,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048548040}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1798961715999130377 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-  m_PrefabInstance: {fileID: 2053327017463687864}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2053327017463687864
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_Name
-      value: Dice_d6
-      objectReference: {fileID: 0}
-    - target: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1472088442905906258, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_Mass
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291281942226417811, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3164349212862530129}
-  m_SourcePrefab: {fileID: 100100000, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
---- !u!114 &3164349212862530129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798961715999130377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b20ddf92558bd4f982ed6c9ec1f317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: 1, y: 1, z: 0}
-  diceNumber: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5919,5 +5832,4 @@ SceneRoots:
   - {fileID: 33662527}
   - {fileID: 558008898}
   - {fileID: 1513636276}
-  - {fileID: 2053327017463687864}
   - {fileID: 1383111308}

@@ -1,6 +1,7 @@
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class DiceRolling : MonoBehaviour
 { 
@@ -10,17 +11,24 @@ public class DiceRolling : MonoBehaviour
     private SphereCollider[] colliders;
     void Awake()
     {
+        rb = GetComponent<Rigidbody>();
+        colliders = GetComponentsInChildren<SphereCollider>();
         diceNumber = 0;
-        transform.rotation = Random.rotation; //starts the throw in a random direction effectively, could probably randmoise the vectors but this is cleaner
+        transform.rotation = UnityEngine.Random.rotation; //starts the throw in a random direction effectively, could probably randmoise the vectors but this is cleaner
         //transform.position = direction * Time.deltaTime; (was always throwing from world origin? probably timedelta starting at 0?)
-        rb.AddForce(direction * 999, ForceMode.Impulse); //the throw itself, adding velocity effectively using direction * force 
+        rb.AddForce(direction * 9, ForceMode.Impulse); //the throw itself, adding velocity effectively using direction * force 
         
     }
     void Update()
     {
+        Debug.Log("1. Update Method is actually running");
         if (rb.linearVelocity == Vector3.zero)
         {
+            SphereCollider topCollider = colliders.OrderByDescending(c => c.transform.position.y).FirstOrDefault();
+            diceNumber = Int32.Parse(topCollider.name);
+            /*
             float maxY = colliders.Max(c => c.transform.position.y);
+            //int maxY = Mathf.RoundToDouble(floatMaxY); this fix doesnt work as the float is so small that it rounds to 1 always
            switch (maxY) {
                 case 1:
                      diceNumber = 1;
@@ -40,8 +48,11 @@ public class DiceRolling : MonoBehaviour
                 case 6:
                      diceNumber = 6;
                      break;
+                     
               }
+             */
         }
+         Debug.Log("Dice Number: " + diceNumber);
     }
     
     //Some Method That Returns the top facing number, be it using raycast or having a collision on the opposite side labelled with its number
