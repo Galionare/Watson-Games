@@ -31,8 +31,8 @@ public class PropertyData
         Houses = houses;
         StatRent1 = statRent1;
         StatRent2 = statRent2;
-        StatRent2 = statRent3;
-        StatRent2 = statRent4;
+        StatRent3 = statRent3;
+        StatRent4 = statRent4;
         UtilRent1 = utilRent1;
         UtilRent2 = utilRent2;
     }

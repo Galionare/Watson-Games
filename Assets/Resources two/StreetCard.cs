@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
 
-public class Test : MonoBehaviour
+public class StreetCard : MonoBehaviour
 {
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Rent;
@@ -24,58 +24,39 @@ public class Test : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
-    private int position = 6;
+    private int position = 7;
     private Dictionary<int, PropertyData> propertyData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
-        /*if (int.TryParse(gameObject.name, out position))
-        {
-            propertyData = CSVLoader.LoadPropertyData();
-        }*/
         propertyData = CSVLoader.LoadPropertyData();
 
-        if (int.TryParse(gameObject.name, out position) && PropertyData.TryGetValue(position, out PropertyData data))
+        if (propertyData.TryGetValue(position, out PropertyData data))
         {
-
-        }
-
-
-       // foreach (var entry in propertyData)
-       // {
-       //     PropertyData data = entry.Value;
-            Name.text = $"{data.NameProperty}";
-
             if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep Blue")))
             {
-             //   Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Full Rent: {data.FullRent}, Rent with houses: {string.Join(", ", data.Houses)}");
 
                 Name.text = $"{data.NameProperty}";
-                Rent.text = $"{data.Rent.ToString()}";
+                Rent.text = $"{data.Rent}";
                 RentFull.text = $"{data.FullRent}";
-                Rent1H.text = $"{data.Houses[0].ToString()}";
-                Rent2H.text = $"{data.Houses[1].ToString()}";
-                Rent3H.text = $"{data.Houses[2].ToString()}";
-                Rent4H.text = $"{data.Houses[3].ToString()}";
-                RentHotel.text = $"{data.Houses[4].ToString()}";
+                Rent1H.text = $"{data.Houses[0]}";
+                Rent2H.text = $"{data.Houses[1]}";
+                Rent3H.text = $"{data.Houses[2]}";
+                Rent4H.text = $"{data.Houses[3]}";
+                RentHotel.text = $"{data.Houses[4]}";
 
                 SpriteChanger();
             }
-      //  }
+        }
     }
 
 
     public void SpriteChanger()
     {
-        if (int.TryParse(gameObject.name, out position))
+        propertyData = CSVLoader.LoadPropertyData();
+
+        if (propertyData.TryGetValue(position, out PropertyData data))
         {
-            propertyData = CSVLoader.LoadPropertyData();
-        }
-        foreach (var entry in propertyData)
-        {
-            PropertyData data = entry.Value;
-        
 
             if (data.Group.Contains("Brown"))
             {
