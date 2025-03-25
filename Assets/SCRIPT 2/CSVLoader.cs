@@ -77,17 +77,17 @@ public static class CSVLoader
             //find the rent of utilities only
             string utilRent1 = "nothing";
             string utilRent2 = "nothing";
-            if (canBeBought && group.Contains("Utility"))
+            if (canBeBought && group.Contains("Utilities"))
             {
-                for (int k = 0; k >= lines.Length; k++)
+                for (int k = lines.Length - 1; k >= 0; k--)
                 {
                     if (lines[k].Contains("Notes"))
                     {
                         string[] values1 = lines[k + 1].Split(',');
                         string[] values2 = lines[k + 2].Split(',');
-                        utilRent1 = values1[0];
-                        utilRent2 = values2[0];
-
+                        utilRent1 = values1[0] + values1[1];
+                        utilRent2 = values2[0] + values2[1];
+                        break;
                     }
                 }
             }
