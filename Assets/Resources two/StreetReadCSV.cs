@@ -12,7 +12,7 @@ public class StreetReadCSV : MonoBehaviour
     public TextMeshProUGUI Rent;
     public TextMeshProUGUI RentFull;
     public TextMeshProUGUI Rent1H;
-    public TextMeshProUGUI Rent2H;
+    public TextMeshProUGUI Rent2H; 
     public TextMeshProUGUI Rent3H;
     public TextMeshProUGUI Rent4H;
     public TextMeshProUGUI RentHotel;

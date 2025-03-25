@@ -29,33 +29,40 @@ public class Test : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         /*if (int.TryParse(gameObject.name, out position))
         {
             propertyData = CSVLoader.LoadPropertyData();
         }*/
         propertyData = CSVLoader.LoadPropertyData();
 
-        foreach (var entry in propertyData)
+        if (int.TryParse(gameObject.name, out position) && PropertyData.TryGetValue(position, out PropertyData data))
         {
-            PropertyData data = entry.Value;
 
-       //     if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep Blue")))
-        //    {
-                Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Full Rent: {data.FullRent}, Rent with houses: {string.Join(", ", data.Houses)}");
-
-                Name.text = data.NameProperty;
-                Rent.text = data.Rent.ToString();
-                RentFull.text = data.FullRent.ToString();
-                Rent1H.text = data.Houses[0].ToString();
-                Rent2H.text = data.Houses[1].ToString();
-                Rent3H.text = data.Houses[2].ToString();
-                Rent4H.text = data.Houses[3].ToString();
-                RentHotel.text = data.Houses[4].ToString();
-
-          //  }
-
-            SpriteChanger();
         }
+
+
+       // foreach (var entry in propertyData)
+       // {
+       //     PropertyData data = entry.Value;
+            Name.text = $"{data.NameProperty}";
+
+            if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep Blue")))
+            {
+             //   Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Full Rent: {data.FullRent}, Rent with houses: {string.Join(", ", data.Houses)}");
+
+                Name.text = $"{data.NameProperty}";
+                Rent.text = $"{data.Rent.ToString()}";
+                RentFull.text = $"{data.FullRent}";
+                Rent1H.text = $"{data.Houses[0].ToString()}";
+                Rent2H.text = $"{data.Houses[1].ToString()}";
+                Rent3H.text = $"{data.Houses[2].ToString()}";
+                Rent4H.text = $"{data.Houses[3].ToString()}";
+                RentHotel.text = $"{data.Houses[4].ToString()}";
+
+                SpriteChanger();
+            }
+      //  }
     }
 
 
