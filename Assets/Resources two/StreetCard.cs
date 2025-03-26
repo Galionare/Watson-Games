@@ -24,16 +24,32 @@ public class StreetCard : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
-    private int position = 7;
+    public int Position = 4;
     private Dictionary<int, PropertyData> propertyData;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+   /* void OnEnable()
+    {
+        // Subscribe to position updates
+        AllCards.OnPositionUpdated += LoadData;
+    }
+
+    void OnDisable()
+    {
+        // Unsubscribe to prevent memory leaks
+        AllCards.OnPositionUpdated -= LoadData;
+    }*/
     void Start()
     {
         propertyData = CSVLoader.LoadPropertyData();
 
-        if (propertyData.TryGetValue(position, out PropertyData data))
+        //    Position = GetComponent<AllCards>().position;
+        //   Position = newPosition;
+        Debug.Log(Position+"Street");
+
+        if (propertyData.TryGetValue(Position, out PropertyData data))
         {
-            if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep Blue")))
+            if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep blue")))
             {
 
                 Name.text = $"{data.NameProperty}";
@@ -55,7 +71,7 @@ public class StreetCard : MonoBehaviour
     {
         propertyData = CSVLoader.LoadPropertyData();
 
-        if (propertyData.TryGetValue(position, out PropertyData data))
+        if (propertyData.TryGetValue(Position, out PropertyData data))
         {
 
             if (data.Group.Contains("Brown"))
@@ -86,7 +102,7 @@ public class StreetCard : MonoBehaviour
             {
                 EmptyCard.sprite = GreenProp;
             }
-            else if (data.Group.Contains("Deep Blue"))
+            else if (data.Group.Contains("Deep blue"))
             {
                 EmptyCard.sprite = DeepBlueProp;
             }

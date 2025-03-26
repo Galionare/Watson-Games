@@ -35,7 +35,7 @@ public static class CSVLoader
                 continue; // Skip non-numeric rows (like headers)
             
             
-            if (canBeBought && (group.Contains("Brown") || group.Contains("Blue") || group.Contains("Purple") || group.Contains("Orange") || group.Contains("Red") || group.Contains("Yellow") || group.Contains("Green") || group.Contains("Deep Blue")))
+            if (canBeBought && (group.Contains("Brown") || group.Contains("Blue") || group.Contains("Purple") || group.Contains("Orange") || group.Contains("Red") || group.Contains("Yellow") || group.Contains("Green") || group.Contains("Deep blue")))
             {
                 int.TryParse(values[7], out price);
                 int.TryParse(values[8], out rent);

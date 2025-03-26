@@ -11,14 +11,15 @@ public class StationCard : MonoBehaviour
     public TextMeshProUGUI Info3;
     public TextMeshProUGUI Info4;
 
-    private int position = 6;
+    private int Position = 6;
     private Dictionary<int, PropertyData> propertyData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         propertyData = CSVLoader.LoadPropertyData();
-
-        if (propertyData.TryGetValue(position, out PropertyData data))
+        Debug.Log(Position+"Station"); 
+        
+        if (propertyData.TryGetValue(Position, out PropertyData data))
         {
             if (data.CanBeBought && (data.Group.Contains("Station")))
             {
