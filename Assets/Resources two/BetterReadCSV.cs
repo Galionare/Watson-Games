@@ -38,7 +38,9 @@ public class BetterReadCSV : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Text = TextInput.text;
+        Text.ToLower();
     }
 
     public void Search()
@@ -46,7 +48,7 @@ public class BetterReadCSV : MonoBehaviour
         string[] data = TextAssetData.text.Split(new string[] { ";", "\n" }, System.StringSplitOptions.None);
         for (int i = 0; i < data.Length; i++)
         {
-            if (Text == data[i])
+            if (Text == data[i].ToLower())
             {
                 Name.text = data[i];
                 Rent.text = data[i + 6];
