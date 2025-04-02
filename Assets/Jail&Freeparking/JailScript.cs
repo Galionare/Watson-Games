@@ -4,9 +4,10 @@ public class JailScript : MonoBehaviour
 {
     //This script has a million errors because the script this script RELIES on in the timeline is not done (looking at you emil) but its been so long i just gotta get this done 
 
-    
+
     // OBSTACLE: Should JustVisiting be a seperate tile ontop of tile 11(jail) eg 11.5 or should it just be a playerstate when the player is in jail? honestly having Jail be its own tile not within the standard array of movement for the player is infinitely easier to implement.
     // Solution, without the calling of the jail script a player should be able to sit on the jail square just fine without anything negative, this can act as JustVisiting
+    FreeParkiingScript ParkingScript;
     void Release(Player player)
     {
         player.position = 10;
@@ -36,7 +37,7 @@ public class JailScript : MonoBehaviour
         else if (player.money >= 50 && playerWantToPay = true)
         {
             player.money -= 50;
-            FreeParkiingScript.freeParkingFines += 50;
+            ParkingScript.freeParkingFines += 50;
             //money is added to the free parking pool
             playerPaid = true;
             Release(player);
