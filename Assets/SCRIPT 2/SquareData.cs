@@ -7,7 +7,7 @@ public class SquareData : MonoBehaviour
     private int position;
     private Dictionary<int, PropertyData> propertyData;
     [SerializeField] private TextMeshPro Name;
-    [SerializeField] private TextMeshPro Price;
+    [SerializeField] private TextMeshPro Cost;
     [SerializeField] private TextMeshPro Action;
 
     void Start()
@@ -25,14 +25,14 @@ public class SquareData : MonoBehaviour
         Name.text = $"{data.NameProperty}";
         if (data.CanBeBought)
         {
-            Price.text = $"£{data.Price}";
-            Price.gameObject.SetActive(true);
+            Cost.text = $"£{data.Cost}";
+            Cost.gameObject.SetActive(true);
             Action.gameObject.SetActive(false);
         }
         else
         {
             Action.text = $"{data.Action}";
-            Price.gameObject.SetActive(false);
+            Cost.gameObject.SetActive(false);
             Action.gameObject.SetActive(true);
         }
     }

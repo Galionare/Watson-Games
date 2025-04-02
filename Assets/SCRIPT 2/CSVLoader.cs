@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+
 
 public static class CSVLoader
 {
@@ -14,7 +13,7 @@ public static class CSVLoader
 
         string[] lines = File.ReadAllLines(filePath);
 
-        for (int i = 1; i < lines.Length; i++) // Skip header row
+        for (int i = 1; i < lines.Length; i++)
         {
             string[] values = lines[i].Split(',');
 
@@ -30,12 +29,12 @@ public static class CSVLoader
             string action = values[4].Trim();
             bool canBeBought = values[5].Trim().ToLower() == "yes";
 
-            int price = 0, rent = 0;
+            int cost = 0, rent = 0;
             int[] houses = new int[5]; // 1 house to 1 hotel
 
             if (canBeBought)
             {
-                int.TryParse(values[7], out price);
+                int.TryParse(values[7], out cost);
                 int.TryParse(values[8], out rent);
 
                 for (int j = 0; j < 5; j++) // Rent values from columns 9-13
@@ -43,7 +42,7 @@ public static class CSVLoader
                     int.TryParse(values[10 + j], out houses[j]);
                 }
             }
-            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, rent, houses);
+            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, cost, rent, houses);
         }
 
         return dataDictionary;
