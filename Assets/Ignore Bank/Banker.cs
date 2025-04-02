@@ -4,7 +4,7 @@ public class Banker
 {
     private int totalCash;
     public GameObject player;
-    private int numOfPlayers = 1; //"temp, don't know how players are working"
+    private int numOfPlayers = 1; //temp, don't know how players are working
 
     ///
     private int position;
@@ -21,8 +21,8 @@ public class Banker
         totalCash = 50000;
         // 3. assign all players 1,500 at start of game
         for (int i = 1; i <= numOfPlayers; i++) {
-            player.cash = 1500; //"does this money have to come from the bank?"
-            //"totalCash -= 1500;?"
+            player.cash = 1500; //does this money have to come from the bank?
+            //totalCash -= 1500;?
         }
     }
 
