@@ -9,14 +9,18 @@ public class UtilityCard : MonoBehaviour
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
-    private int position = 13;
+    public int Position = 13;
     private Dictionary<int, PropertyData> propertyData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CreateCard(Position);
+    }
+    public void CreateCard(int Position)
+    {
         propertyData = CSVLoader.LoadPropertyData();
 
-        if (propertyData.TryGetValue(position, out PropertyData data))
+        if (propertyData.TryGetValue(Position, out PropertyData data))
         {
             if (data.CanBeBought && (data.Group.Contains("Utilities")))
             {

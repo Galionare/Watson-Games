@@ -24,28 +24,17 @@ public class StreetCard : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
-    public int Position = 4;
+    public int Position;
     private Dictionary<int, PropertyData> propertyData;
 
 
-   /* void OnEnable()
-    {
-        // Subscribe to position updates
-        AllCards.OnPositionUpdated += LoadData;
-    }
-
-    void OnDisable()
-    {
-        // Unsubscribe to prevent memory leaks
-        AllCards.OnPositionUpdated -= LoadData;
-    }*/
     void Start()
     {
+        CreateCard(Position);
+    }
+    public void CreateCard(int Position)
+    {
         propertyData = CSVLoader.LoadPropertyData();
-
-        //    Position = GetComponent<AllCards>().position;
-        //   Position = newPosition;
-        Debug.Log(Position+"Street");
 
         if (propertyData.TryGetValue(Position, out PropertyData data))
         {
