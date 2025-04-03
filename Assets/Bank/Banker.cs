@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class Banker
 {
-    private int bankCash;
-    public GameObject player;
-    private int numOfPlayers = 1; //temp, don't know how players are working
+    private int numOfPlayers = 1; //temp
 
     ///
     private int position;
     private Dictionary<int, PropertyData> propertyData;
+    ///
 
     private void Start() {
         ///
@@ -16,23 +15,24 @@ public class Banker
         {
             propertyData = CSVLoader.LoadPropertyData();
         }
+        ///
+        // for each property check what group they're in and append to that group's list
+        for ()
 
         // 3. bank has 50,000 cash at start
-        bankCash = 50000;
+        // does this matter? bankCash = 50000; - bank has no limit so no operations
         // 3. assign all players 1,500 at start of game
         for (int i = 1; i <= numOfPlayers; i++) {
-            player.cash = 1500; //does this money have to come from the bank?
-            //bankCash -= 1500;?
+            player.cash = 1500;
         }
     }
 
     public void collectGoCash() {
         // 9. when a player pasts Go they collect 200 cash from the bank
         player.cash += 200;
-        bankCash -= 200;
     }
 
-    // 10. all properties are originally the bank's
+    // - 10. all properties are originally the bank's - to do in property script
     public void purchaseProperty(currentPlayer) {
         // 9. players may not purchase properties until they've made on circuit of the board (pass go once)
         PropertyData property = propertyData[currentPlayer.position];
@@ -43,7 +43,6 @@ public class Banker
                 // 10. when property is bought the property is transferred from the bank to player and the money paid from player to bank
                 property.owner = currentPlayer;
                 currentPlayer.cash -= property.Price;
-                bankCash += property.Price;
                 property.CanBeBought = false; 
             }
             else if (Input.GetKeyDown(KeyCode.n)){
@@ -53,36 +52,42 @@ public class Banker
         }
     }
 
-
-    public void auctionProperty(refusedPlayer, property) {
-        // 11. if there are no bids then the property remains unsold
+    public void auctioning(refusedPlayer, property) {
         highestBid = 0;
-        highestBidderNum = 0; //0 = banker?
-        for (int i = 1; i <= numOfPlayers; i++) {
-            currentPlayer // = the player number, idk arrays or whatever, shall figure it out
+        // 11. if there are no bids then the property remains unsold
+        highestBidder = 0;
+
+        bidders = players; //imagining a player array
+        bidders[(refusedPlayer.index)] = 0;
+        numOfBidders = numOfPlayers - 1;
+
+        while ((numOfBidders > 1) && (bidders[i] != 0)) {
             // 11. all bidding players must've completed one circuit of the board
-            if (currentPlayer.circuitComplete && refusedPlayer.num != currentPlayer.num) {
-                Console.WriteLine("Do you want to bid on this property? Y/N ");
-                if (Input.GetKeyDown(KeyCode.y)){
-                    Console.WriteLine("Enter amount you want to bid: ");
+            if (bidders[i].circuitComplete) {
+                Console.WriteLine("Would you like to bid on this property? Y/N ");
+                if (Input.GetKeyDown(KeyCode.y)) {
+                    Console.WriteLine("Enter the amount you want to bid: ");
                     int bid = Console.ReadLine();
+                    // 11. in auction each player makes a bid to the bank and the bank sells to the highest bidder
+                    if (bid > highestBid) {
+                        highestBid = bid;
+                        highestBidder = i;
+                    }
                 }
-                // 11. in auction each player makes a bid to the bank and the bank sells to the highest bidder
-                if (bid > highestBid) {
-                    highestBid = bid;
-                    highestBidderNum = i;
+                else {
+                    numOfBidders--;
+                    bidders[i] = 0;
                 }
             }
+            i++;
         }
-        property.owner = 0;// player num i'll figure it out
-
+        property.owner = i;
     }
 
     public void mortgageProperty(currentPlayer, property) {
         // 23. if a player needs to raise funds, they may mortgage a property with the bank. the bank will pay the player one half of the value
         // - of the property. no rents may be collected for that property whilst it is under mortgage
         currentPlayer.cash += (property.Price/2);
-        bankCash -= (property.Price/2);
         property.rentCollect = false;
         property.mortgaged = true;
     }
@@ -97,13 +102,21 @@ public class Banker
     public void sellProperty(rentToPay, currentPlayer) {
         // 15. all rents must be paid in cash, if a player is unable to pay the rent then they must sell game assets to make good on the rent
         while (rentToPay > currentPlayer.cash){
-            Console.WriteLine("Which property would you like to sell ");
-            propertyToSell = Console.ReadLine();
-            // need to find which property
+            found = false;
+            while (!found) {
+                Console.WriteLine("Which property would you like to sell ");
+                propertyToSell = Console.ReadLine();
+                for(int i = 0; i < len(currentPlayer.owned); i++;) {
+                    // maybe the Player object needs an array of the positions (keys) of the properties they own
+                    if (owned[i].NameProperty == propertyToSell) {
+                        property = owned[i];
+                        found = true;
+                    }
+                }
+            }
             // need to deal with houses and hotels
             // need to deal with if they have no properties left to sell
-            // maybe the Player object needs an array of the positions (keys) of the properties they own
-            PropertyData propertyToSell = propertyData[currentPlayer.position]; //temp
+        
             sellPrice = property.Price;
             // 24. if a mortgaged property is then sold back to the bank it is sold for one half of the property price as shown on the card
             if (property.mortgaged) {
@@ -111,7 +124,6 @@ public class Banker
             }
             // 20. if a player needs to raise funds they can sell a property back to the bank for its original value as shown on the game card
             currentPlayer.cash += sellPrice;
-            bankCash -= sellPrice;
         }
     }
 
@@ -136,11 +148,12 @@ public class Banker
     }
 
 
-    // 17. only during turn after movement and after completing any property purchase, the current player has the option to buy houses
+    // - 17. only during turn after movement and after completing any property purchase, the current player has the option to buy houses
     // - and hotels to improve their properties
 
     public void improveProperty(currentPlayer) {
-        // idk if you get to pick which properties you wanna improve or if it's just the one you're on rn, so for now I'm assuming the latter
+        // Q idk if you get to pick which properties you wanna improve or if it's just the one you're on rn, so for now I'm assuming the latter
+        // A improve whichever and as many as you want
         PropertyData currentProperty = propertyData[currentPlayer.position];
 
         // 22. the maximum development permitted on any one property is one hotel
@@ -149,7 +162,7 @@ public class Banker
         }
 
         groupOwned = true;
-        // can we make arrays of the positions of each property in the groups or is that not good
+        // !changing 
         group = currentProperty.GroupArray; // think we do need arrays otherwise we'll have to check the entire board
         for (int i = 0; i < len(group); i++) {
             if (group[i].owner != currentPlayer) {
@@ -161,7 +174,6 @@ public class Banker
         if (groupOwned) {
             Console.WriteLine("Would you like to improve this property? Y/N");
             Console.ReadLine();
-            // I'm assuming since you can't have more than 1 house different between properties in the same group you can only buy one house at time?
                 // 21. where a colour group of properties is owned by a player there can never be a difference of more than 1 house between the
                 // - properties in that set if a player wishes to buy a hotel, that is the equivalent of 5 houses cost. a player may have 4 houses 
                 // - on one set and a hotel on another in that set
@@ -170,7 +182,6 @@ public class Banker
                 price = currentProperty.houses[currentProperty.numOfHouses];
                 // 19. houses and hotels are purchased for the amount shown on the game card
                 currentPlayer.cash -= price;
-                bankCash += price;
                 currentProperty.numOfHouses ++;
             }
         }
