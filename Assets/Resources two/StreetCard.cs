@@ -40,7 +40,8 @@ public class StreetCard : MonoBehaviour
         {
             if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep blue")))
             {
-                SpriteChanger(Position);
+                int Position1 = Position;
+                SpriteChanger(Position1);
 
                 Name.text = $"{data.NameProperty}";
                 Rent.text = $"{data.Rent}";

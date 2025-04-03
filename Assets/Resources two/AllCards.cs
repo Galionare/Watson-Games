@@ -31,8 +31,6 @@ public class AllCards : MonoBehaviour
                 {
                     GameObject Card1 = Instantiate(PropCard, Canvas.transform) as GameObject;
                     Card1.GetComponent<StreetCard>().CreateCard(Position);
-                    Card1.GetComponent<StreetCard>().SpriteChanger(Position);
-
 
                 }
 
