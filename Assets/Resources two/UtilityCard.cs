@@ -9,7 +9,7 @@ public class UtilityCard : MonoBehaviour
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
-    public int Position = 13;
+    public int Position;
     private Dictionary<int, PropertyData> propertyData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

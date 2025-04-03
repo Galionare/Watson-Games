@@ -1084,7 +1084,7 @@ MonoBehaviour:
   YellowProp: {fileID: 21300000, guid: 6a29fad2dc7f56c40ab75541457c7c1a, type: 3}
   GreenProp: {fileID: 21300000, guid: 38fc7f7676bc47d41bb7cc577acddd3f, type: 3}
   DeepBlueProp: {fileID: 21300000, guid: 7102fdeb651bbf94d9e100f31b1b2de8, type: 3}
-  Position: 4
+  Position: 0
 --- !u!1 &7379029323298487458
 GameObject:
   m_ObjectHideFlags: 0

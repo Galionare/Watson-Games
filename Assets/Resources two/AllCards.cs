@@ -8,9 +8,6 @@ public class AllCards : MonoBehaviour
     public GameObject StatCard;
     public GameObject UtilCard;
     public GameObject Canvas;
-    public StreetCard StreetCard;
-    public StationCard StationCard;
-    public UtilityCard UtilityCard;
 
     // to define when the variable position gets updates
     //public static event Action<int> OnPositionUpdated;
@@ -32,27 +29,23 @@ public class AllCards : MonoBehaviour
                 
                 if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep blue")))
                 {
-                    StreetCard.CreateCard(i);
-
                     GameObject Card1 = Instantiate(PropCard, Canvas.transform) as GameObject;
-
                     Card1.GetComponent<StreetCard>().CreateCard(Position);
-
-                //    ScriptName sn = gameObject.GetComponent<ScriptName>()
-               //     sn.DoSomething();
 
                 }
 
                 if (data.CanBeBought && (data.Group.Contains("Station")))
                 {
-                    StationCard.CreateCard(i);
                     GameObject Card2 = Instantiate(StatCard, Canvas.transform) as GameObject;
+                    Card2.GetComponent<StationCard>().CreateCard(Position);
+
                 }
 
                 if (data.CanBeBought && (data.Group.Contains("Utilities")))
                 {
-                    UtilityCard.CreateCard(i);
                     GameObject Card3 = Instantiate(UtilCard, Canvas.transform) as GameObject;
+                    Card3.GetComponent<UtilityCard>().CreateCard(Position);
+
                 }
             }
         }

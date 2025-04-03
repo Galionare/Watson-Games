@@ -370,6 +370,7 @@ MonoBehaviour:
   Info2: {fileID: 4690695298142067571}
   Info3: {fileID: 1532751147019841516}
   Info4: {fileID: 5130811959182189478}
+  Position: 0
 --- !u!1 &6048632946609898457
 GameObject:
   m_ObjectHideFlags: 0

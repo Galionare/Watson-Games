@@ -94,6 +94,7 @@ MonoBehaviour:
   Name: {fileID: 3475785406502354357}
   Info1: {fileID: 5451290882097726747}
   Info2: {fileID: 7676811931576633075}
+  Position: 0
 --- !u!1 &430409833190322974
 GameObject:
   m_ObjectHideFlags: 0

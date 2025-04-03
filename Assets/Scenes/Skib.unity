@@ -148,10 +148,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788cef7285fb5b04589932ef8c91912e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PropCard: {fileID: 7359997130420646610, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
   StatCard: {fileID: 5359949182981585827, guid: 279412ba7c751054c81502da2ebcb59e, type: 3}
   UtilCard: {fileID: 113538590801912500, guid: fa422e57744cfe7499f933308c5f565e, type: 3}
   Canvas: {fileID: 1999732178}
+  StreetCard: {fileID: 4045792235524502397, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
+  StationCard: {fileID: 2959780913081909464, guid: 279412ba7c751054c81502da2ebcb59e, type: 3}
+  UtilityCard: {fileID: 8562247902490627953, guid: fa422e57744cfe7499f933308c5f565e, type: 3}
   position: 0
 --- !u!4 &76316137
 Transform:
