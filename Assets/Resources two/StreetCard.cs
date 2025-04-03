@@ -40,6 +40,8 @@ public class StreetCard : MonoBehaviour
         {
             if (data.CanBeBought && (data.Group.Contains("Brown") || data.Group.Contains("Blue") || data.Group.Contains("Purple") || data.Group.Contains("Orange") || data.Group.Contains("Red") || data.Group.Contains("Yellow") || data.Group.Contains("Green") || data.Group.Contains("Deep blue")))
             {
+                SpriteChanger(Position);
+
                 Name.text = $"{data.NameProperty}";
                 Rent.text = $"{data.Rent}";
                 RentFull.text = $"{data.FullRent}";
@@ -48,12 +50,11 @@ public class StreetCard : MonoBehaviour
                 Rent3H.text = $"{data.Houses[2]}";
                 Rent4H.text = $"{data.Houses[3]}";
                 RentHotel.text = $"{data.Houses[4]}";
-                SpriteChanger();
             }
         }
     }
 
-    public void SpriteChanger()
+    public void SpriteChanger(int Position)
     {
         propertyData = CSVLoader.LoadPropertyData();
 
