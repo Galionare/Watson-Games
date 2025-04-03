@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class StreetCard : MonoBehaviour
+public class FullStreetCard : MonoBehaviour
 {
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Rent;
@@ -98,5 +98,10 @@ public class StreetCard : MonoBehaviour
                 EmptyCard.sprite = DeepBlueProp;
             }
         }
+    }
+    public void FlipCard()
+    {
+        Flipped = !Flipped;
+        transform.DORotate(new(0, Flipped ? 0f : 180f, 0), 0.25f);
     }
 }
