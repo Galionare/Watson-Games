@@ -17,8 +17,10 @@ public class PropertyData
     public string StatRent4;
     public string UtilRent1;
     public string UtilRent2;
+    public int Mortgage;
+    public double ReturnMotrtgage;
 
-    public PropertyData(int position, string nameproperty, string group, string action, bool canBeBought, int price, int rent, int fullRent,  int[] houses, string statRent1, string statRent2, string statRent3, string statRent4, string utilRent1, string utilRent2)
+    public PropertyData(int position, string nameproperty, string group, string action, bool canBeBought, int price, int mortgage, double returnMortgage, int rent, int fullRent,  int[] houses, string statRent1, string statRent2, string statRent3, string statRent4, string utilRent1, string utilRent2)
     {
         Position = position;
         NameProperty = nameproperty;
@@ -35,5 +37,7 @@ public class PropertyData
         StatRent4 = statRent4;
         UtilRent1 = utilRent1;
         UtilRent2 = utilRent2;
+        Mortgage = mortgage;
+        ReturnMotrtgage = returnMortgage;
     }
 }

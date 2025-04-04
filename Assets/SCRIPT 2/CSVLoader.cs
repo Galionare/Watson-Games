@@ -28,6 +28,8 @@ public static class CSVLoader
 
             int price = 0, rent = 0;
             int fullRent = 0;
+            int mortgage = 0;
+            double returnMortgage = 0;
             int[] houses = new int[5]; // 1 house to 1 hotel
             int position;
            
@@ -40,6 +42,8 @@ public static class CSVLoader
                 int.TryParse(values[7], out price);
                 int.TryParse(values[8], out rent);
                 fullRent = rent * 2;
+                mortgage = price / 2;
+                returnMortgage = mortgage * (1.1);
 
                 for (int j = 0; j < 5; j++) // Rent values from columns 9-13
                 {
@@ -92,7 +96,7 @@ public static class CSVLoader
                 }
             }
 
-            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2);
+            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2);
         }
 
         return dataDictionary;

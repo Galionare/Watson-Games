@@ -25,6 +25,9 @@ public class StreetCard : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
+    public GameObject BigCard;
+    private GameObject Canvas;
+
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
 
@@ -98,5 +101,23 @@ public class StreetCard : MonoBehaviour
                 EmptyCard.sprite = DeepBlueProp;
             }
         }
+    }
+    public void ShowFullCard()
+    {
+        GameObject Canvas = GameObject.Find("Canvas");
+
+        GameObject Card = Instantiate(BigCard, Canvas.transform) as GameObject;
+
+
+        Card.GetComponent<FullStreetCard>().CreateCard(Position);
+        RectTransform rectTransform = Card.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = new Vector2(0, 0);
+        // Card.transform.localScale *= 2f;
+
+        RectTransform uiElement = GetComponent<RectTransform>();
+        Canvas = GetComponentInParent<GameObject>();
+        RectTransform canvasRect = Canvas.GetComponent<RectTransform>();
+        uiElement.anchoredPosition = Vector2.zero;
+
     }
 }

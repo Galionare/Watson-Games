@@ -15,6 +15,10 @@ public class FullStreetCard : MonoBehaviour
     public TextMeshProUGUI Rent4H;
     public TextMeshProUGUI RentHotel;
 
+    public TextMeshProUGUI Name2;
+    public TextMeshProUGUI Mortgage;
+    public TextMeshProUGUI ReturnMortgage;
+
     public Image EmptyCard;
     public Sprite BrownProp;
     public Sprite BlueProp;
@@ -24,6 +28,9 @@ public class FullStreetCard : MonoBehaviour
     public Sprite YellowProp;
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
+
+    public Transform Front;
+    public Transform Back;
 
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
@@ -35,6 +42,8 @@ public class FullStreetCard : MonoBehaviour
     {
         CreateCard(Position);
     }
+
+ 
     public void CreateCard(int Position)
     {
         propertyData = CSVLoader.LoadPropertyData();
@@ -54,6 +63,11 @@ public class FullStreetCard : MonoBehaviour
                 Rent3H.text = $"{data.Houses[2]}";
                 Rent4H.text = $"{data.Houses[3]}";
                 RentHotel.text = $"{data.Houses[4]}";
+
+                Name2.text = $"{data.NameProperty}";
+                Mortgage.text = $"{data.Mortgage}";
+                ReturnMortgage.text = $"{data.ReturnMotrtgage}";
+
             }
         }
     }
@@ -103,5 +117,21 @@ public class FullStreetCard : MonoBehaviour
     {
         Flipped = !Flipped;
         transform.DORotate(new(0, Flipped ? 0f : 180f, 0), 0.25f);
+
+        Invoke(nameof(ChangeSiblingIndex), 0.08f);
+        
+    }
+    void ChangeSiblingIndex()
+    {
+        if (Flipped)
+        {
+            Transform Front1 = Front;
+            Front1.SetSiblingIndex(1);
+        }
+        if (!Flipped)
+        {
+            Transform Back1 = Back;
+            Back1.SetSiblingIndex(1);
+        }
     }
 }
