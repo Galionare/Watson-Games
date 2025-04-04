@@ -31,8 +31,6 @@ public class StreetCard : MonoBehaviour
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
 
-    private bool Flipped = false;
-
 
     void Start()
     {
@@ -112,13 +110,7 @@ public class StreetCard : MonoBehaviour
         Transform JustCard = CardButton.transform.GetChild(1);
         JustCard.GetComponent<FullStreetCard>().CreateCard(position);
 
-        FullStreetCard pos = CardButton.GetComponent<FullStreetCard>();
+        FullStreetCard pos = JustCard.GetComponent<FullStreetCard>();
         pos.Position = position;
-
-
-        RectTransform rectTransform = CardButton.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(0, 0);
-        // Card.transform.localScale *= 2f;
-
     }
 }
