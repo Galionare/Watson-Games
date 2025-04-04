@@ -33,6 +33,8 @@ public class AllCards : MonoBehaviour
                 {
                     GameObject Card1 = Instantiate(PropCard, Canvas.transform) as GameObject;
                     Card1.GetComponent<StreetCard>().CreateCard(Position);
+                    StreetCard pos = Card1.GetComponent<StreetCard>();
+                    pos.Position = Position;
 
 
                     if (Counter1 <= 7)
