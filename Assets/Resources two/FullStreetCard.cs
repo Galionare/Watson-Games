@@ -32,6 +32,7 @@ public class FullStreetCard : MonoBehaviour
     public Transform Front;
     public Transform Back;
 
+
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
 
@@ -43,7 +44,7 @@ public class FullStreetCard : MonoBehaviour
         CreateCard(Position);
     }
 
- 
+
     public void CreateCard(int Position)
     {
         propertyData = CSVLoader.LoadPropertyData();

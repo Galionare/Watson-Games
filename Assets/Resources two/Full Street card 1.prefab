@@ -72,6 +72,7 @@ MonoBehaviour:
   DeepBlueProp: {fileID: 21300000, guid: f980bb6972151174eac466dfe387c1e8, type: 3}
   Front: {fileID: 5683209373950267771}
   Back: {fileID: 2372233315238025153}
+  ThisCard: {fileID: 0}
   Position: 4
 --- !u!1001 &484021285690135576
 PrefabInstance:
@@ -251,6 +252,10 @@ PrefabInstance:
     - target: {fileID: 913218287752195537, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -132.00003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383904305419797159, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1950736767186006542, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_AnchoredPosition.x
