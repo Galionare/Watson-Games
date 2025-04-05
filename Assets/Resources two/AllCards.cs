@@ -65,6 +65,8 @@ public class AllCards : MonoBehaviour
                 {
                     GameObject Card2 = Instantiate(StatCard, Canvas.transform) as GameObject;
                     Card2.GetComponent<StationCard>().CreateCard(Position);
+                    StationCard pos = Card2.GetComponent<StationCard>();
+                    pos.Position = Position;
                     RectTransform rectTransform = Card2.GetComponent<RectTransform>();
                     rectTransform.anchoredPosition = new Vector2(350, 320 - (Counter2 * 200));
                     spawnedCards.Add(Card2);
@@ -76,6 +78,8 @@ public class AllCards : MonoBehaviour
                 {
                     GameObject Card3 = Instantiate(UtilCard, Canvas.transform) as GameObject;
                     Card3.GetComponent<UtilityCard>().CreateCard(Position);
+                    UtilityCard pos = Card3.GetComponent<UtilityCard>();
+                    pos.Position = Position;
                     RectTransform rectTransform = Card3.GetComponent<RectTransform>();
                     rectTransform.anchoredPosition = new Vector2(700, 320 - (Counter3 * 200));
                     spawnedCards.Add(Card3);

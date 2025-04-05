@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -564, y: 10}
-  m_SizeDelta: {x: 420, y: 420.00003}
+  m_SizeDelta: {x: 235, y: 375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3954264549886778663
 MonoBehaviour:
@@ -72,7 +72,6 @@ MonoBehaviour:
   DeepBlueProp: {fileID: 21300000, guid: f980bb6972151174eac466dfe387c1e8, type: 3}
   Front: {fileID: 5683209373950267771}
   Back: {fileID: 2372233315238025153}
-  ThisCard: {fileID: 0}
   Position: 4
 --- !u!1001 &484021285690135576
 PrefabInstance:
@@ -112,11 +111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2764167193466094553, guid: 7e5907ea148750a4fabe80763a08e451, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 700
+      value: 395
       objectReference: {fileID: 0}
     - target: {fileID: 2764167193466094553, guid: 7e5907ea148750a4fabe80763a08e451, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 700
+      value: 625
       objectReference: {fileID: 0}
     - target: {fileID: 2764167193466094553, guid: 7e5907ea148750a4fabe80763a08e451, type: 3}
       propertyPath: m_LocalScale.x
@@ -174,6 +173,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6755512618308808069, guid: 7e5907ea148750a4fabe80763a08e451, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 610d4cfc9bb1802498d5d9568693fae8, type: 3}
     - target: {fileID: 6755512618308808069, guid: 7e5907ea148750a4fabe80763a08e451, type: 3}
       propertyPath: m_Material
       value: 
@@ -244,7 +247,7 @@ PrefabInstance:
     - target: {fileID: 845393900515700991, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5e510e1ca4e99884687013ae8ec63a9f, type: 3}
+      objectReference: {fileID: 21300000, guid: c9b57f73e50b3bf4fb444a920c8582c1, type: 3}
     - target: {fileID: 845393900515700991, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_Material
       value: 
@@ -287,11 +290,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1964589935475864135, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 700
+      value: 395
       objectReference: {fileID: 0}
     - target: {fileID: 1964589935475864135, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 700
+      value: 625
       objectReference: {fileID: 0}
     - target: {fileID: 1964589935475864135, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
       propertyPath: m_LocalPosition.x

@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
-using DG.Tweening;
 
 public class StreetCard : MonoBehaviour
 {
@@ -26,11 +25,9 @@ public class StreetCard : MonoBehaviour
     public Sprite DeepBlueProp;
 
     public GameObject BigCard;
- //   private GameObject Canvas;
 
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
-
 
     void Start()
     {
