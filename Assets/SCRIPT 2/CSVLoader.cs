@@ -43,6 +43,9 @@ public static class CSVLoader
             string utilRent1 = "nothing";
             string utilRent2 = "nothing";
 
+            string costHouse = "nothing";
+            string costHotel = "nothing";
+
             if (!int.TryParse(values[0], out position))
                 continue; // Skip non-numeric rows (like headers)
 
@@ -62,6 +65,66 @@ public static class CSVLoader
                     for (int j = 0; j < 5; j++) // Rent values from columns 9-13
                     {
                         int.TryParse(values[10 + j], out houses[j]);
+                    }
+                    if (group.Contains("Blue") || group.Contains("Brown"))
+                    {
+                        for (int p = lines.Length - 1; p >= 0; p--)
+                        {
+                            if (lines[p].Contains("Brown, Blue"))
+                            {
+                                string[] values1 = lines[p].Split(',');
+
+                                costHouse = values1[11];
+                                costHotel = values1[12];
+                                //   int.TryParse(values[p+1], out CostHouse);
+                                //   int.TryParse(values[p + 1], out CostHotel);
+                            }
+                        }
+                    }
+                    if (group.Contains("Purple") || group.Contains("Orange"))
+                    {
+                        for (int p = lines.Length - 1; p >= 0; p--)
+                        {
+                            if (lines[p].Contains("Purple, Orange"))
+                            {
+                                string[] values1 = lines[p].Split(',');
+
+                                costHouse = values1[11];
+                                costHotel = values1[12];
+                                //   int.TryParse(values[p+1], out CostHouse);
+                                //   int.TryParse(values[p + 1], out CostHotel);
+                            }
+                        }
+                    }
+                    if (group.Contains("Red") || group.Contains("Yellow"))
+                    {
+                        for (int p = lines.Length - 1; p >= 0; p--)
+                        {
+                            if (lines[p].Contains("Red, Yellow"))
+                            {
+                                string[] values1 = lines[p].Split(',');
+
+                                costHouse = values1[11];
+                                costHotel = values1[12];
+                                //   int.TryParse(values[p+1], out CostHouse);
+                                //   int.TryParse(values[p + 1], out CostHotel);
+                            }
+                        }
+                    }
+                    if (group.Contains("Green") || group.Contains("Deep blue"))
+                    {
+                        for (int p = lines.Length - 1; p >= 0; p--)
+                        {
+                            if (lines[p].Contains("Green, Deep blue"))
+                            {
+                                string[] values1 = lines[p].Split(',');
+
+                                costHouse = values1[11];
+                                costHotel = values1[12];
+                                //   int.TryParse(values[p+1], out CostHouse);
+                                //   int.TryParse(values[p + 1], out CostHotel);
+                            }
+                        }
                     }
                 }
 
@@ -101,7 +164,7 @@ public static class CSVLoader
                 }
             }
 
-            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2);
+            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2, costHouse, costHotel);
         }
 
         return dataDictionary;

@@ -357,6 +357,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 166d864141c495e4c91f09c53df3dff0, type: 3}
     - target: {fileID: 3954264549886778663, guid: 9afc2beae80a25341a216ff80f0c9598, type: 3}
+      propertyPath: CostHotel
+      value: 
+      objectReference: {fileID: 8420535348018179551}
+    - target: {fileID: 3954264549886778663, guid: 9afc2beae80a25341a216ff80f0c9598, type: 3}
+      propertyPath: CostHouse
+      value: 
+      objectReference: {fileID: 7764150120726862870}
+    - target: {fileID: 3954264549886778663, guid: 9afc2beae80a25341a216ff80f0c9598, type: 3}
       propertyPath: GreenProp
       value: 
       objectReference: {fileID: 21300000, guid: e6fe369fb624e2642b48419f4860f636, type: 3}
@@ -503,3 +511,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5683209373950267771, guid: 9afc2beae80a25341a216ff80f0c9598, type: 3}
   m_PrefabInstance: {fileID: 2003984455449848643}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7764150120726862870 stripped
+MonoBehaviour:
+  m_PrefabInstance: {fileID: 2003984455449848643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8420535348018179551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8004116404636763804, guid: 9afc2beae80a25341a216ff80f0c9598, type: 3}
+  m_PrefabInstance: {fileID: 2003984455449848643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
