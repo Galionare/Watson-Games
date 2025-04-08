@@ -37,7 +37,7 @@ public class JailScript : MonoBehaviour
         }
         else if (player.money >= 50 && playerWantToPay = true)
         {
-            player.money -= 50
+            player.money -= 50;
             ParkingScript.freeParkingFines += 50;
             //money is added to the free parking pool
             playerPaid = true;
