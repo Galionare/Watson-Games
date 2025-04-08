@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BackButton : MonoBehaviour
 {
+
     void Start()
     {
         HideButton();
     }
-
 
     public void ShowButton()
     {

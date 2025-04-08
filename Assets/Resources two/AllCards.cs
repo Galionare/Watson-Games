@@ -87,6 +87,7 @@ public class AllCards : MonoBehaviour
                 }
             }
         }
+
         GameObject Button1 = ViewButton;
         Button1.GetComponent<ButtonSc>().HideButton();
 

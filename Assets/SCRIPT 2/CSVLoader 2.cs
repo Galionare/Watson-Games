@@ -30,7 +30,7 @@ public static class CSVLoader2
            // description = values[0].Trim();
           //  action = values[3].Trim();
 
-            if (values.Length < 4)
+            /*if (values.Length < 4)
             {
                 description = values[0];
                 action = values[3];
@@ -43,7 +43,7 @@ public static class CSVLoader2
                 {
                     cardType = lines[25].Split(',')[0];
                 }
-            }
+            }*/
 
 
             dataDictionary[position] = new CardData(position, cardType, description, action);
