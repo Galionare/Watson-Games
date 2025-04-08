@@ -16,14 +16,14 @@ public class SquareData : MonoBehaviour
         {
             PropertyData data = entry.Value;
 
-            if (data.CanBeBought)
-            {
-                Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Rent with houses: {string.Join(", ", data.Houses)}");
-            }
-            else
-            {
-                Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Action: {data.Action} (Not Buyable)");
-            }
+            // if (data.CanBeBought)
+            // {
+            //     Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Rent with houses: {string.Join(", ", data.Houses)}");
+            // }
+            // else
+            // {
+            //     Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Action: {data.Action} (Not Buyable)");
+            // }
         }
     }
 }
