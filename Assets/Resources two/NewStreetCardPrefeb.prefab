@@ -1088,7 +1088,7 @@ MonoBehaviour:
   GreenProp: {fileID: 21300000, guid: e6fe369fb624e2642b48419f4860f636, type: 3}
   DeepBlueProp: {fileID: 21300000, guid: a1234a80b6f9f6e488151e31d361052a, type: 3}
   BigCard: {fileID: 4680501538433068825, guid: be829e89c466c9346821b459e72c3f1b, type: 3}
-  Position: 0
+  Position: 4
 --- !u!114 &1383904305419797159
 MonoBehaviour:
   m_ObjectHideFlags: 0
