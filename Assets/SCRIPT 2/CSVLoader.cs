@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public static class CSVLoader
 {
+
     public static Dictionary<int, PropertyData> LoadPropertyData()
     {
         Dictionary<int, PropertyData> dataDictionary = new Dictionary<int, PropertyData>();
