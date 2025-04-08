@@ -22,7 +22,7 @@ public class PropertyData
     public string CostHouse;
     public string CostHotel;
 
-    public PropertyData(int position, string nameproperty, string group, string action, bool canBeBought, int price, int mortgage, double returnMortgage, int rent, int fullRent,  int[] houses, string statRent1, string statRent2, string statRent3, string statRent4, string utilRent1, string utilRent2, string costHouse, string costHotel)
+    public PropertyData(int position, string nameproperty, string group, string action, bool canBeBought, int cost, int mortgage, double returnMortgage, int rent, int fullRent,  int[] houses, string statRent1, string statRent2, string statRent3, string statRent4, string utilRent1, string utilRent2, string costHouse, string costHotel)
     {
         Position = position;
         NameProperty = nameproperty;
