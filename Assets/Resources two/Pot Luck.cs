@@ -20,12 +20,6 @@ public class PotLuck : MonoBehaviour
     {
         CreateCard(Position);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void CreateCard(int Position)
     {
         cardData = CSVLoader2.LoadCardData();
