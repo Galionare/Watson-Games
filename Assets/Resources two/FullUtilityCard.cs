@@ -2,14 +2,22 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
-public class UtilityCard : MonoBehaviour
+public class FullUtilityCard : MonoBehaviour
 {
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
-    public GameObject BigCard;
+    public TextMeshProUGUI Name2;
+    public TextMeshProUGUI Mortgage;
+    public TextMeshProUGUI ReturnMortgage;
+
+    public Transform Front;
+    public Transform Back;
+
+    private bool Flipped = false;
 
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
@@ -29,21 +37,32 @@ public class UtilityCard : MonoBehaviour
                 Name.text = $"{data.NameProperty}";
                 Info1.text = $"{data.UtilRent1}";
                 Info2.text = $"{data.UtilRent2}";
+
+                Name2.text = $"{data.NameProperty}";
+                Mortgage.text = $"{data.Mortgage}";
+                ReturnMortgage.text = $"{data.ReturnMotrtgage}";
             }
         }
     }
-
-    public void ShowFullCard()
+    public void FlipCard()
     {
-        GameObject Canvas = GameObject.Find("Canvas");
+        Flipped = !Flipped;
+        transform.DORotate(new(0, Flipped ? 0f : 180f, 0), 0.25f);
 
-        GameObject CardButton = Instantiate(BigCard, Canvas.transform) as GameObject;
-        int position = Position;
+        Invoke(nameof(ChangeSiblingIndex), 0.08f);
 
-        Transform JustCard = CardButton.transform.GetChild(1);
-        JustCard.GetComponent<FullUtilityCard>().CreateCard(position);
-
-        FullUtilityCard pos = JustCard.GetComponent<FullUtilityCard>();
-        pos.Position = position;
+    }
+    void ChangeSiblingIndex()
+    {
+        if (Flipped)
+        {
+            Transform Front1 = Front;
+            Front1.SetSiblingIndex(1);
+        }
+        if (!Flipped)
+        {
+            Transform Back1 = Back;
+            Back1.SetSiblingIndex(1);
+        }
     }
 }

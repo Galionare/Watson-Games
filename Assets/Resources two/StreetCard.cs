@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
-using DG.Tweening;
 
 public class StreetCard : MonoBehaviour
 {
@@ -15,6 +14,9 @@ public class StreetCard : MonoBehaviour
     public TextMeshProUGUI Rent4H;
     public TextMeshProUGUI RentHotel;
 
+    public TextMeshProUGUI CostHouse;
+    public TextMeshProUGUI CostHotel;
+
     public Image EmptyCard;
     public Sprite BrownProp;
     public Sprite BlueProp;
@@ -26,11 +28,9 @@ public class StreetCard : MonoBehaviour
     public Sprite DeepBlueProp;
 
     public GameObject BigCard;
- //   private GameObject Canvas;
 
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
-
 
     void Start()
     {
@@ -55,6 +55,9 @@ public class StreetCard : MonoBehaviour
                 Rent3H.text = $"{data.Houses[2]}";
                 Rent4H.text = $"{data.Houses[3]}";
                 RentHotel.text = $"{data.Houses[4]}";
+
+                CostHouse.text = $"{data.CostHouse}";
+                CostHotel.text = $"{data.CostHotel}";
             }
         }
     }

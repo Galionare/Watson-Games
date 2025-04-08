@@ -11,10 +11,11 @@ public class StationCard : MonoBehaviour
     public TextMeshProUGUI Info3;
     public TextMeshProUGUI Info4;
 
+    public GameObject BigCard;
+
     public int Position;
 
     private Dictionary<int, PropertyData> propertyData;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         CreateCard(Position);
@@ -34,5 +35,18 @@ public class StationCard : MonoBehaviour
                 Info4.text = $"{data.StatRent4}";
             }
         }
+    }
+    public void ShowFullCard()
+    {
+        GameObject Canvas = GameObject.Find("Canvas");
+
+        GameObject CardButton = Instantiate(BigCard, Canvas.transform) as GameObject;
+        int position = Position;
+
+        Transform JustCard = CardButton.transform.GetChild(1);
+        JustCard.GetComponent<FullStationCard>().CreateCard(position);
+
+        FullStationCard pos = JustCard.GetComponent<FullStationCard>();
+        pos.Position = position;
     }
 }

@@ -29,6 +29,9 @@ public class FullStreetCard : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
+    public TextMeshProUGUI CostHouse;
+    public TextMeshProUGUI CostHotel;
+
     public Transform Front;
     public Transform Back;
 
@@ -64,6 +67,9 @@ public class FullStreetCard : MonoBehaviour
                 Rent3H.text = $"{data.Houses[2]}";
                 Rent4H.text = $"{data.Houses[3]}";
                 RentHotel.text = $"{data.Houses[4]}";
+
+                CostHouse.text = $"{data.CostHouse}";
+                CostHotel.text = $"{data.CostHotel}";
 
                 Name2.text = $"{data.NameProperty}";
                 Mortgage.text = $"{data.Mortgage}";
