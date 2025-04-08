@@ -14,39 +14,51 @@ public class NewEmptyCSharpScript
 
         Debug.Log("Dice 1: " + Dice1 + " Dice 2: " + Dice2);
     }
-    static int diceRoll(/*player*/) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
+    static int diceRoll(player) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
     {
-     int PlayerRoll = 0;
+     int PlayerRoll = 0; //Initialises their roll as 0 from last turn
      int Temp1 =0 ,Temp2 = 0;
      bool isDouble = false;
      int JailIfThree = 0;
+     RollDice Dice = new RollDice();
     
-        while(isDouble == false && JailIfThree < 3)
-        {
-            for( int i = 0; i == UnityEngine.Random.Range(1,11); ){
-            Temp1 = UnityEngine.Random.Range(1,7); //Replace this with a call to RollDice method, this method should simply create an instance of a dice gameobject and then take the number returned from the method within DiceRolling.cs (attached to the dice)
-            Temp2 = UnityEngine.Random.Range(1,7); //Ditto, see above
-            displayDice(Temp1,Temp2); //See comment within method
-            Thread.Sleep(15); //This sleep was here to simulate "bounces" not knowing when itll stop, can be kept but will most likely be REMOVED once the physics bouncing/dice roll is linked to this script via method mentioned above (see above comment)
-            i++;
-            }
-            PlayerRoll = Temp1 + Temp2; //Finalised Player roll, method returns this value at the end
+     Temp1 = Dice.Roll(); //Calls the function within the RollDice Script to roll the board dice visually/physically for the player
+     Temp2 = Dice.Roll();
+     PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
             if(Temp1 == Temp2)
             {
                 isDouble = true;
                 JailIfThree++;
+                while(isDouble == true && JailIfThree != 3) //Rolls Again if user rolled a double, will do this until 3 doubles have been reached OR a double is not rolled
+                {
+                    Debug.Log("You rolled a double! Roll again!");
+                    Temp1 = Dice.Roll();
+                    Temp2 = Dice.Roll();
+                    PlayerRoll += Temp1 + Temp2;
+                    if(Temp1 == Temp2)
+                    {
+                        JailIfThree++;
+                        Debug.Log("You rolled a double! Roll again!");
+                    }
+                    else
+                    {
+                        isDouble = false;
+                        PlayerRoll += Temp1 + Temp2;
+                        break;
+                    }
+                }
             }
-        }
-        if(JailIfThree == 3)
+        
+        if(JailIfThree == 3 /*optional: AND IF player does NOT have get out of jail free, and deincrement if they do(impossible as of right now as the other devs have not done player nor potluck*/) //Jail Check
         {
-           // goToJail(player);
+           JailScript.GoToJail(player); //Calls Function to put the player in jail see JailScript.cs
            Debug.Log("Go to Jail");
-            return 0;
+            return 0;  //Ignore: Int method so this needs to return something, this ensures they dont move and will stay in jail. 
         }
         else
         { 
-            Debug.Log("Player Rolled: " + PlayerRoll);
-            return PlayerRoll;
+            Debug.Log("Player Roll " + PlayerRoll);
+            return PlayerRoll; //Returns Combined value of the dicerolls (including possible extras from doubles)
         }
     }
    

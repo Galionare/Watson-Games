@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FreeParkiingScript : MonoBehaviour
 {
+
     
     public int freeParkingFines = 0;
     void LandedOnFreeParking(Player player)
