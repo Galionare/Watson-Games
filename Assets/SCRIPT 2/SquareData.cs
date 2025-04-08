@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 
 public class SquareData : MonoBehaviour
 {
@@ -13,12 +14,11 @@ public class SquareData : MonoBehaviour
     void Start()
     {
         propertyData = CSVLoader.LoadPropertyData();
-
-
         if (int.TryParse(gameObject.name, out position) && propertyData.TryGetValue(position, out PropertyData data))
         {
             DisplayTileData(data);
         }
+       
     }
     private void DisplayTileData(PropertyData data)
     {
@@ -36,5 +36,4 @@ public class SquareData : MonoBehaviour
             Action.gameObject.SetActive(true);
         }
     }
-
 }

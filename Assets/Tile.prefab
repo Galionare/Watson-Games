@@ -458,7 +458,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: {fileID: 7124802138320209610}
-  Price: {fileID: 831547365271910986}
+  Cost: {fileID: 831547365271910986}
   Action: {fileID: 5128914725981603958}
 --- !u!1 &4375667595492453618
 GameObject:

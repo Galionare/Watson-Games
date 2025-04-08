@@ -3,20 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
 
-public class Character : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
-    public Walking currentRoute;
+    private Walking currentRoute;
     int routePosition;
-
     public int steps;
-
     bool isMoving;
 
+    private void Start()
+    {
+            currentRoute = FindFirstObjectByType<Walking>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-            steps = Random.Range(1, 7);
+            steps = Random.Range(1, 13);
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
 
@@ -29,7 +31,8 @@ public class Character : MonoBehaviour
             yield break;
         }
         isMoving = true;
-        
+
+
         while (steps > 0)
         {
             routePosition++;
@@ -39,14 +42,12 @@ public class Character : MonoBehaviour
 
             yield  return new WaitForSeconds(0.1f);
             steps--;
-
+            
         }
-
         isMoving = false;
     }
     bool moveNext(Vector3 target)
     {
         return target != (transform.position = Vector3.MoveTowards(transform.position,target,8f * Time.deltaTime));
     }
-
 }

@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: {fileID: 582809284647962173}
-  Price: {fileID: 8023238488616756504}
+  Cost: {fileID: 8023238488616756504}
   Action: {fileID: 7065892703439996201}
 --- !u!1 &3459058577639278089
 GameObject:
