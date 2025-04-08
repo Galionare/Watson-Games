@@ -8,7 +8,7 @@ public class FreeParkiingScript : MonoBehaviour
     void LandedOnFreeParking(Player player)
     {
 
-        player.Money += freeParkingFines;
+        player.money += freeParkingFines;
         freeParkingFines = 0;
         Debug.Log("You landed on Free Parking!");
     }

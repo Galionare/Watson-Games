@@ -5,7 +5,9 @@ using System.Threading;
 using UnityEditor;
 public class NewEmptyCSharpScript
 {
+    JailScript jailScript;
     int Dice1,Dice2,PlayerRoll;
+    public Player player;
     //Player = 
 
     static void displayDice(int Dice1, int Dice2)
@@ -14,7 +16,7 @@ public class NewEmptyCSharpScript
 
         Debug.Log("Dice 1: " + Dice1 + " Dice 2: " + Dice2);
     }
-    static int diceRoll(player) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
+    static int diceRoll(Player player, JailScript jailScript) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
     {
      int PlayerRoll = 0; //Initialises their roll as 0 from last turn
      int Temp1 =0 ,Temp2 = 0;
@@ -51,7 +53,7 @@ public class NewEmptyCSharpScript
         
         if(JailIfThree == 3 /*optional: AND IF player does NOT have get out of jail free, and deincrement if they do(impossible as of right now as the other devs have not done player nor potluck*/) //Jail Check
         {
-           JailScript.GoToJail(player); //Calls Function to put the player in jail see JailScript.cs
+            jailScript.GoToJail(player); //Calls Function to put the player in jail see JailScript.cs
            Debug.Log("Go to Jail");
             return 0;  //Ignore: Int method so this needs to return something, this ensures they dont move and will stay in jail. 
         }
