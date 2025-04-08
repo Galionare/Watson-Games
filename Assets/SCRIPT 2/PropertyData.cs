@@ -38,5 +38,6 @@ public class PropertyData
 
         ///
         Owner = 0;
+        NumOfHouses = 0;
     }
 }
