@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pot Luck
       objectReference: {fileID: 0}
+    - target: {fileID: 2307409794075286690, guid: e4d2770d11d90d445b0dc98834a5bcbb, type: 3}
+      propertyPath: Position
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
