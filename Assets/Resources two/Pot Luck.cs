@@ -5,10 +5,8 @@ using TMPro;
 
 public class PotLuck : MonoBehaviour
 {
-    public TextMeshProUGUI Pos;
     public TextMeshProUGUI Type;
     public TextMeshProUGUI Info;
-    public TextMeshProUGUI Action;
 
     public int Position = 10; // Random.Range(4, 22);
     private Dictionary<int, CardData> cardData;
@@ -26,11 +24,8 @@ public class PotLuck : MonoBehaviour
 
         if (cardData.TryGetValue(Position, out CardData data))
         {
-
-            Pos.text = $"{data.Position}";
             Type.text = $"{data.CardType}";
             Info.text = $"{data.Description}";
-            Action.text = $"{data.Action}";
         }
     }
 }
