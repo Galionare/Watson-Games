@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Banker
 {
     private int numOfPlayers = 1; //temp
+    public List<Player> players; // idk where to get the players array from
 
     const int GO_CASH = 200;
     const int STARTING_CASH = 1500;
@@ -83,7 +84,7 @@ public class Banker
 
         while (numOfBidders > 1) {
             numOfBidders = currentNumOfBidders;
-            for (int j = 0; j < numOfBidders; j++) {
+            for (int i = 0; i < numOfBidders; i++) {
                 // 11. all bidding players must've completed one circuit of the board
                 if (bidders[i].passedGo) { // if the player is out of the auction bidders[i] will be the banker who hasn't passed go
                     bool wantsToBid = await InputDisplay.Instance.AskYesOrNo("Would you like to bid on this property?");
@@ -105,11 +106,14 @@ public class Banker
                     else {
                         currentNumOfBidders--;
                         bidders[i] = 0;
+                        if (currentNumOfBidders == 1) { // if there's only one other bidder then the for loop should break
+                            break;
+                        }
                     }
                 }
             }
         }
-        property.Owner = i;
+        property.Owner = players[highestBidder];
     }
 
     public void payRent(Player currentPlayer) {
@@ -121,7 +125,7 @@ public class Banker
         if (!property.CanBeBought && propertyOwner != currentPlayer && propertyOwner.index != 0) { // idk if that'll work
             if (colourPositions.TryGetValue(property.Group, out List<int> positions)) {
                 foreach (int i in positions) {
-                    if (propertyData[positions[i]].Owner != currentPlayer) {
+                    if (propertyData[positions[i]].Owner != propertyOwner) {
                         owned = false;
                         break;
                     }
