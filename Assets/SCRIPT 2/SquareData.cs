@@ -38,7 +38,7 @@ public class SquareData : MonoBehaviour
         Name.text = $"{data.NameProperty}";
         if (data.CanBeBought)
         {
-            Cost.text = $"£{data.Cost}";
+            Cost.text = $"ï¿½{data.Cost}";
             Cost.gameObject.SetActive(true);
             Action.gameObject.SetActive(false);
         }
