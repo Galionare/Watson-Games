@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -9,4 +10,22 @@ public class Player : MonoBehaviour
     public int position;
     public int jailTurn;
     public List<string> cards;
+    public List<Transform> boardPositions;
+
+    public void MoveToPosition(int newPosition)
+    {
+        position = newPosition;
+        if (newPosition >= 0 && newPosition < boardPositions.Count)
+        {
+            // Move the player's actual position in the game world
+            transform.position = boardPositions[newPosition].position;
+        }
+    }
+
+    public void GoToJail()
+    {
+        MoveToPosition(10);  // Move to jail position (position 10)
+        jailTurn = 3;        // Set the number of turns the player will be in jail
+    }
+
 }

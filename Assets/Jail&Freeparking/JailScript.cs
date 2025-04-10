@@ -23,11 +23,8 @@ public class JailScript : MonoBehaviour
     }
     public void GoToJail(Player player)
     {
-        int beforeJailPos = player.position; //wont be needed but is useful to have for debugging purposes. 
-        player.position = 11;
         bool playerPaid = false;
         player.jailTurn = 0;
-        bool playerWantToPay = false;
         //ask them if theyd like to pay 50 to get out, also as a side effect lets them save the get out of jail free if they want to
         if (player.cards.Contains("Get out of Jail Free"))
         {
@@ -36,7 +33,7 @@ public class JailScript : MonoBehaviour
             playerPaid = true;
             Release(player);
         }
-        else if (player.money >= 50 && playerWantToPay)
+        else if (player.money >= 50 && playerPaid)
         {
             player.money -= 50;
             ParkingScript.freeParkingFines += 50;
