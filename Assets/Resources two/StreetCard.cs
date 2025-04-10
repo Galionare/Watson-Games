@@ -29,6 +29,8 @@ public class StreetCard : MonoBehaviour
 
     public GameObject BigCard;
 
+    public bool Owned = false;
+
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
 

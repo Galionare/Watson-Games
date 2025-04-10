@@ -11,6 +11,8 @@ public class StationCard : MonoBehaviour
     public TextMeshProUGUI Info3;
     public TextMeshProUGUI Info4;
 
+    public bool Owned = false;
+
     public GameObject BigCard;
 
     public int Position;

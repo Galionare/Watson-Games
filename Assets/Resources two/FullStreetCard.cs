@@ -29,6 +29,8 @@ public class FullStreetCard : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
+    public bool Owned = false;
+
     public TextMeshProUGUI CostHouse;
     public TextMeshProUGUI CostHotel;
 

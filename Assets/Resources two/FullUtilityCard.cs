@@ -14,6 +14,8 @@ public class FullUtilityCard : MonoBehaviour
     public TextMeshProUGUI Mortgage;
     public TextMeshProUGUI ReturnMortgage;
 
+    public bool Owned = false;
+
     public Transform Front;
     public Transform Back;
 

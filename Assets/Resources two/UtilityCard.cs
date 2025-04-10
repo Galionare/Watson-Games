@@ -9,6 +9,8 @@ public class UtilityCard : MonoBehaviour
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
+    public bool Owned = false;
+
     public GameObject BigCard;
 
     public int Position;
