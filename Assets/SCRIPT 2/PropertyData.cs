@@ -35,9 +35,5 @@ public class PropertyData
         StatRent4 = statRent4;
         UtilRent1 = utilRent1;
         UtilRent2 = utilRent2;
-
-        ///
-        Owner = 0;
-        NumOfHouses = 0;
     }
 }
