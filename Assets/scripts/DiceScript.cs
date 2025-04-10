@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using System.Threading;
 using UnityEditor;
-public class NewEmptyCSharpScript
+public class DiceScript
 {
     JailScript jailScript;
     int Dice1,Dice2,PlayerRoll;
@@ -16,7 +16,7 @@ public class NewEmptyCSharpScript
 
         Debug.Log("Dice 1: " + Dice1 + " Dice 2: " + Dice2);
     }
-    static int diceRoll(Player player, JailScript jailScript) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
+    public static int diceRoll(Player player, JailScript jailScript) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
     {
      int PlayerRoll = 0; //Initialises their roll as 0 from last turn
      int Temp1 =0 ,Temp2 = 0;
