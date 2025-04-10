@@ -15,9 +15,15 @@ public class FullStreetCard : MonoBehaviour
     public TextMeshProUGUI Rent4H;
     public TextMeshProUGUI RentHotel;
 
+    public string Group;
+    public int Cost;
+    public int NumOfHouses;
+
     public TextMeshProUGUI Name2;
     public TextMeshProUGUI Mortgage;
     public TextMeshProUGUI ReturnMortgage;
+
+    public bool Mortgaged = false;
 
     public Image EmptyCard;
     public Sprite BrownProp;
@@ -30,6 +36,7 @@ public class FullStreetCard : MonoBehaviour
     public Sprite DeepBlueProp;
 
     public bool Owned = false;
+    public GameObject Owner;
 
     public TextMeshProUGUI CostHouse;
     public TextMeshProUGUI CostHotel;
@@ -69,6 +76,9 @@ public class FullStreetCard : MonoBehaviour
                 Rent3H.text = $"{data.Houses[2]}";
                 Rent4H.text = $"{data.Houses[3]}";
                 RentHotel.text = $"{data.Houses[4]}";
+
+                Group = $"{data.Group}";
+                Cost = data.Cost;
 
                 CostHouse.text = $"{data.CostHouse}";
                 CostHotel.text = $"{data.CostHotel}";

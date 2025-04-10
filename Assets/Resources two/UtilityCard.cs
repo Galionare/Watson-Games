@@ -9,7 +9,13 @@ public class UtilityCard : MonoBehaviour
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
+    public string Group;
+    public bool Mortgaged = false;
+
+    public int Cost;
+
     public bool Owned = false;
+    public GameObject Owner;
 
     public GameObject BigCard;
 
@@ -31,6 +37,9 @@ public class UtilityCard : MonoBehaviour
                 Name.text = $"{data.NameProperty}";
                 Info1.text = $"{data.UtilRent1}";
                 Info2.text = $"{data.UtilRent2}";
+
+                Cost = data.Cost;
+                Group = $"{data.Group}";
             }
         }
     }

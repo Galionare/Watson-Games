@@ -10,11 +10,17 @@ public class FullUtilityCard : MonoBehaviour
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
+    public string Group;
+    public int Cost;
+
     public TextMeshProUGUI Name2;
     public TextMeshProUGUI Mortgage;
     public TextMeshProUGUI ReturnMortgage;
 
+    public bool Mortgaged = false;
+
     public bool Owned = false;
+    public GameObject Owner;
 
     public Transform Front;
     public Transform Back;
@@ -39,6 +45,9 @@ public class FullUtilityCard : MonoBehaviour
                 Name.text = $"{data.NameProperty}";
                 Info1.text = $"{data.UtilRent1}";
                 Info2.text = $"{data.UtilRent2}";
+
+                Group = $"{data.Group}";
+                Cost = data.Cost;
 
                 Name2.text = $"{data.NameProperty}";
                 Mortgage.text = $"{data.Mortgage}";

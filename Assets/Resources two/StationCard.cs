@@ -11,7 +11,12 @@ public class StationCard : MonoBehaviour
     public TextMeshProUGUI Info3;
     public TextMeshProUGUI Info4;
 
+    public string Group;
+    public bool Mortgaged = false;
+    public int Cost;
+
     public bool Owned = false;
+    public GameObject Owner;
 
     public GameObject BigCard;
 
@@ -35,6 +40,9 @@ public class StationCard : MonoBehaviour
                 Info2.text = $"{data.StatRent2}";
                 Info3.text = $"{data.StatRent3}";
                 Info4.text = $"{data.StatRent4}";
+
+                Group = $"{data.Group}";
+                Cost = data.Cost;
             }
         }
     }

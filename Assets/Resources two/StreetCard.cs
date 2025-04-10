@@ -14,6 +14,12 @@ public class StreetCard : MonoBehaviour
     public TextMeshProUGUI Rent4H;
     public TextMeshProUGUI RentHotel;
 
+    public string Group;
+    public int Cost;
+    public int Rent1;
+    public int FullRent1;
+    public int[] Houses;
+
     public TextMeshProUGUI CostHouse;
     public TextMeshProUGUI CostHotel;
 
@@ -27,9 +33,17 @@ public class StreetCard : MonoBehaviour
     public Sprite GreenProp;
     public Sprite DeepBlueProp;
 
+    public bool Mortgaged = false;
+
+    public int NumOfHouses = 0;
+
+    public int Mortgage;
+    public double ReturnMortgage;
+
     public GameObject BigCard;
 
     public bool Owned = false;
+    public GameObject Owner;
 
     public int Position;
     private Dictionary<int, PropertyData> propertyData;
@@ -58,8 +72,17 @@ public class StreetCard : MonoBehaviour
                 Rent4H.text = $"{data.Houses[3]}";
                 RentHotel.text = $"{data.Houses[4]}";
 
+                Group = $"{data.Group}";
+                Cost = data.Cost;
+                Rent1 = data.Rent;
+                FullRent1 = data.FullRent;
+                Houses = data.Houses;
+
                 CostHouse.text = $"{data.CostHouse}";
                 CostHotel.text = $"{data.CostHotel}";
+
+                Mortgage = data.Mortgage;
+                ReturnMortgage = data.ReturnMotrtgage;
             }
         }
     }

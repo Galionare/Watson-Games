@@ -26,7 +26,7 @@ public static class CSVLoader
             string action = values[4].Trim();
             bool canBeBought = values[5].Trim().ToLower() == "yes";
 
-            int price = 0, rent = 0;
+            int cost = 0, rent = 0;
             int fullRent = 0;
             int mortgage = 0;
             double returnMortgage = 0;
@@ -51,8 +51,8 @@ public static class CSVLoader
 
             if (canBeBought)
             {
-                int.TryParse(values[7], out price);
-                mortgage = price / 2;
+                int.TryParse(values[7], out cost);
+                mortgage = cost / 2;
                 returnMortgage = mortgage * (1.1);
             
                 if (group.Contains("Brown") || group.Contains("Blue") || group.Contains("Purple") || group.Contains("Orange") || group.Contains("Red") || group.Contains("Yellow") || group.Contains("Green") || group.Contains("Deep blue"))
@@ -164,7 +164,7 @@ public static class CSVLoader
                 }
             }
 
-            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2, costHouse, costHotel);
+            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, cost, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2, costHouse, costHotel);
         }
 
         return dataDictionary;

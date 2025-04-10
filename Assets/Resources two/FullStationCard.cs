@@ -12,11 +12,17 @@ public class FullStationCard : MonoBehaviour
     public TextMeshProUGUI Info3;
     public TextMeshProUGUI Info4;
 
+    public string Group;
+    public int Cost;
+
     public TextMeshProUGUI Name2;
     public TextMeshProUGUI Mortgage;
     public TextMeshProUGUI ReturnMortgage;
 
+    public bool Mortgaged = false;
+
     public bool Owned = false;
+    public GameObject Owner;
 
     public Transform Front;
     public Transform Back;
@@ -44,6 +50,9 @@ public class FullStationCard : MonoBehaviour
                 Info2.text = $"{data.StatRent2}";
                 Info3.text = $"{data.StatRent3}";
                 Info4.text = $"{data.StatRent4}";
+
+                Group = $"{data.Group}";
+                Cost = data.Cost;
 
                 Name2.text = $"{data.NameProperty}";
                 Mortgage.text = $"{data.Mortgage}";
