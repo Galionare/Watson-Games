@@ -9,6 +9,8 @@ public class CharacterMovement : MonoBehaviour
     int routePosition;
     public int steps;
     bool isMoving;
+    public DiceScript Dice;
+    public GameObject Player;
 
     private void Start()
     {
@@ -18,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
+
             steps = Random.Range(1, 13);
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());

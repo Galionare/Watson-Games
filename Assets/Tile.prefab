@@ -210,7 +210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.19258577, y: 0.51}
+  m_AnchoredPosition: {x: -0.005, y: 0.51}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5299462074247374681
@@ -421,7 +421,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 23e05a4263d84794ea580ac24250f2be, type: 2}
+  - {fileID: 2100000, guid: cfb5ed44c17bbc046a7d5a5d74a1aca0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -479,6 +479,16 @@ MonoBehaviour:
   Name: {fileID: 7124802138320209610}
   Cost: {fileID: 831547365271910986}
   Action: {fileID: 5128914725981603958}
+  BrownProp: {fileID: 2100000, guid: a50e299d35063044f8be5188815b161f, type: 2}
+  BlueProp: {fileID: 2100000, guid: f1bb818d67ed0e74c850f96f7407e80c, type: 2}
+  RedProp: {fileID: 2100000, guid: 71f7a89d32b87494897b7c25480805a7, type: 2}
+  PurpleProp: {fileID: 2100000, guid: 81742fc427bdbdd4f906acfb5369e8d1, type: 2}
+  OrangeProp: {fileID: 2100000, guid: 713968ed8a14a464c948e4a964b25979, type: 2}
+  YellowProp: {fileID: 2100000, guid: bf2c7d96e2a5bef4da76e6a10ded5c3d, type: 2}
+  GreenProp: {fileID: 2100000, guid: eb3e8c74ddef3a54fb8711eb6e916213, type: 2}
+  DeepBlueProp: {fileID: 2100000, guid: fb87b7f86dcb7b24dac26f2796b177a6, type: 2}
+  StationProp: {fileID: 2100000, guid: 6a591bcd5716e9e45ae873a85abd15e2, type: 2}
+  UtilitiesProp: {fileID: 2100000, guid: 97f7ae19753258944a6921060c668f38, type: 2}
 --- !u!1 &4375667595492453618
 GameObject:
   m_ObjectHideFlags: 0
