@@ -43,13 +43,13 @@ public class Banker
 
         // 3. bank has 50,000 cash at start and assigns all players 1,500 at start of game
         for (int i = 1; i <= numOfPlayers; i++) {
-            players[i].cash = STARTING_CASH;
+            players[i].money = STARTING_CASH;
         }
     }
 
     public void collectGoCash() {
         // 9. when a player pasts Go they collect 200 cash from the bank
-        player.cash += GO_CASH;
+        player.money += GO_CASH;
     }
 
         // - 10. all properties are originally the bank's - to do in property script

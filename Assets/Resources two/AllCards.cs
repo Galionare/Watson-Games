@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -93,6 +93,8 @@ public class AllCards : MonoBehaviour
 
         GameObject Button2 = BackButton;
         Button2.GetComponent<BackButton>().ShowButton();
+
+        Debug.Log(spawnedCards);
     }
     public void Back()
     {
