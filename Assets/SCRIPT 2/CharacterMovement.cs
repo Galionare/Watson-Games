@@ -10,22 +10,31 @@ public class CharacterMovement : MonoBehaviour
     int routePosition;
     public int steps;
     bool isMoving;
+<<<<<<< Updated upstream
     public DiceScript DiceScript;
 <<<<<<< HEAD
     public GameObject player;
 =======
     public Player Player;
 >>>>>>> 1e9adce638834c3128459b15500c0ed8339188e3
+=======
+    public DiceScript dice;
+>>>>>>> Stashed changes
 
     private void Start()
     {
             currentRoute = FindFirstObjectByType<Walking>();
+            dice = FindFirstObjectByType<DiceScript>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.M) && !isMoving)
         {
+<<<<<<< Updated upstream
             steps = DiceScript.diceRoll(player.GetComponent<Player>());
+=======
+            steps = dice.diceRoll();
+>>>>>>> Stashed changes
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
 
