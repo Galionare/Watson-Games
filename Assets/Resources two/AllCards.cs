@@ -14,7 +14,6 @@ public class AllCards : MonoBehaviour
 
     private List<GameObject> spawnedCards = new List<GameObject>();
 
-
     public int position;
     private Dictionary<int, PropertyData> propertyData;
 

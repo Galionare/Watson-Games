@@ -10,7 +10,7 @@ public class ShowPropery : MonoBehaviour
     public void ShowProp()
     {
         position = player.position;
-
+        CreateCard(Position)
     }
 
 }
