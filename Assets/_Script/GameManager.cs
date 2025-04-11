@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameState currentState;
     public GameObject hands;
     public GameObject hands2;
+    public TMP_InputField nameInput;
     void Start()
     {
 
@@ -26,17 +28,17 @@ public class GameManager : MonoBehaviour
     {
         currentState = newState;
 
-        // Handle specific actions based on the new state
+
         switch (newState)
         {
             case GameState.Start:
                 SwitchState(GameState.PlayerTurn);
-                Debug.Log("Start State");// Move to the PlayerTurn state after spawning players
+                Debug.Log("Start State");
                 break;
 
             case GameState.PlayerTurn:
                 StartTurn();
-                Debug.Log("Player turn ");// Start the first player's turn
+                Debug.Log("Player turn ");
                 break;
 
             case GameState.GameOver:
@@ -51,8 +53,9 @@ public class GameManager : MonoBehaviour
         {
             GameObject addPlayer = Instantiate(playerFab);
             playerCount.Add(addPlayer);
-            int playerIndex = playerCount.Count - 1;  // The index will be the position in the list
-            Player playerScript = addPlayer.GetComponent<Player>();  // Get the Player script attached to the player
+
+            int playerIndex = playerCount.Count - 1;
+            Player playerScript = addPlayer.GetComponent<Player>();
             playerScript.playerIndex = playerIndex;
             Debug.Log("Player " + playerIndex + " spawned with index: " + playerScript.playerIndex);
             hands.SetActive(true); // Set the hands GameObject active
@@ -65,17 +68,13 @@ public class GameManager : MonoBehaviour
     public void StartTurn()
     {
         GameObject currentPlayer = playerCount[currentPlayerI];
-        Player playerScript = currentPlayer.GetComponent<Player>();  // Get the Player script attached to the current player
+        Player playerScript = currentPlayer.GetComponent<Player>();
         Debug.Log("It's Player " + playerScript.playerIndex + "'s turn!");
         playerScript.isRolled = false;
-
-        // Logic for the current player's turn goes here (e.g., moving, buying properties, etc.)
-
-        // After the turn ends, switch to the next player
         Debug.Log("Now it's player index: " + currentPlayerI);
     }
 
-    // Method to end the current player's turn and switch to the next player
+
     public void EndTurn()
     {
         GameObject currentPlayer = playerCount[currentPlayerI];
@@ -84,9 +83,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Checking isRolled for player " + playerScript.playerIndex + ": " + playerScript.isRolled);
         if (playerScript.isRolled == true)
         {
-            // Move to the next player
-            currentPlayerI = (currentPlayerI + 1) % playerCount.Count;  // This will loop back to the first player after the last player
-
+            currentPlayerI = (currentPlayerI + 1) % playerCount.Count;
             StartTurn();
         }
         else Debug.Log("FUCK YOU");
