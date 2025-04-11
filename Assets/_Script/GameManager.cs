@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
@@ -7,10 +8,15 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerFab;
     public int maxPlayer = 5;
-    private List<GameObject> playerCount = new List<GameObject>();
+    public List<GameObject> playerCount = new List<GameObject>();
     private int currentPlayerI = 0;
     public GameState currentState;
+
     void Start()
+    {
+    }
+
+    public void StartingGame()
     {
         SwitchState(GameState.Start);
     }
@@ -23,7 +29,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.Start:
-                SpawnPlayers();
+                SpawnPlayers(); 
                 SwitchState(GameState.PlayerTurn);
                 Debug.Log("Start State");// Move to the PlayerTurn state after spawning players
                 break;

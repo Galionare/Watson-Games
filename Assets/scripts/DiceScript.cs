@@ -9,6 +9,11 @@ public class DiceScript : MonoBehaviour
     {
         movementScript = FindFirstObjectByType<CharacterMovement>();
         diceRoller = FindFirstObjectByType<RollDice>();
+        if (diceRoller == null)
+        {
+            Debug.LogError("DiceRoller not found!");
+            return ;  // Or handle it appropriately
+        }
     }
 
     public int DiceRoll()
@@ -17,9 +22,8 @@ public class DiceScript : MonoBehaviour
         int temp1 = 0, temp2 = 0;
         int jailIfThree = 0;
         bool isDouble = false;
-
-        temp1 = diceRoller.Roll();
-        temp2 = diceRoller.Roll();
+        diceRoller.Roll();
+        diceRoller.Roll();
         playerRoll += temp1 + temp2;
 
         Debug.Log("Dice 1: " + temp1 + " Dice 2: " + temp2);
@@ -32,9 +36,8 @@ public class DiceScript : MonoBehaviour
             while (isDouble && jailIfThree < 3)
             {
                 Debug.Log("You rolled a double! Roll again!");
-
-                temp1 = diceRoller.Roll();
-                temp2 = diceRoller.Roll();
+                diceRoller.Roll();
+                diceRoller.Roll();
                 Debug.Log("Dice 1: " + temp1 + " Dice 2: " + temp2);
 
                 playerRoll += temp1 + temp2;

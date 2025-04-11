@@ -14,14 +14,14 @@ public class RollDice : MonoBehaviour
     public GameObject gameDice;
     private int diceCount = 0;
     Player player;
-    public int Roll()
+    public void Roll()
     {
         /*
         Instantiate(gameDice);
         return DiceRolling.diceNumber;
         Destroy(gameDice);
         */
-        diceCount++;
+        // diceCount++;
         GameObject newDice = Instantiate(gameDice);
         DiceRolling roller = newDice.GetComponent<DiceRolling>();
         newDice.name = "Dice" + diceCount;
@@ -29,9 +29,5 @@ public class RollDice : MonoBehaviour
 
         DiceRolling diceRolling = newDice.GetComponent<DiceRolling>();
         int diceNumber = diceRolling.diceNumber;
-
-        Destroy(newDice);
-        return diceNumber;
     }
-
 }

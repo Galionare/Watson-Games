@@ -9,8 +9,7 @@ public class CharacterMovement : MonoBehaviour
     int routePosition;
     public int steps;
     bool isMoving;
-    public DiceScript dice2;
-    public GameObject Player;
+    private GameObject Player;
     private Player playerScript;
     private JailScript jailScript;
     FreeParkiingScript ParkingScript;
@@ -22,12 +21,9 @@ public class CharacterMovement : MonoBehaviour
         playerScript = GetComponent<Player>();
         ParkingScript = FindFirstObjectByType<FreeParkiingScript>();
         jailScript = FindFirstObjectByType<JailScript>();
-
-        dice2 = FindFirstObjectByType<DiceScript>();
-
     }
 
-    public void jailGO(Player player)
+    public void jailGO()
     {
         StartCoroutine(GoToJailMove());
     }
@@ -36,7 +32,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-             steps = dice2.DiceRoll() ; //Random.Range(1, 13);
+            steps = Random.Range(1, 13);
             Debug.Log("Rolled: " + steps);
             StartCoroutine(Move());
         }
@@ -67,7 +63,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         isMoving = false;
-        playerScript.position = routePosition;
+        routePosition = playerScript.position;
     }
 
     bool moveNext(Vector3 target)
