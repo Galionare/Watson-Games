@@ -13,7 +13,8 @@ public class RollDice : MonoBehaviour
 
     public GameObject gameDice;
     private int diceCount = 0;
-    public int Roll(Player player)
+    Player player;
+    public int Roll()
     {
         /*
         Instantiate(gameDice);

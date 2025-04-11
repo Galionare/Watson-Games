@@ -21,7 +21,7 @@ public class JailScript : MonoBehaviour
             //somewhat redundant since turnsToWait will be initialised within the player script and can be checked there, but this is here for clarity
         
     }
-    public void GoToJail(Player player)
+    public void GoToJail(Player player )
     {
         bool playerPaid = false;
         player.jailTurn = 0;

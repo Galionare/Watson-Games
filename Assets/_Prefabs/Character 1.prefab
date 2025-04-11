@@ -66,8 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steps: 0
-  dice1: {fileID: 0}
-  dice2: {fileID: 0}
+  dice2: {fileID: 6116281608999666476, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
   Player: {fileID: 5613237295616066347}
 --- !u!1 &5721219692620770034
 GameObject:

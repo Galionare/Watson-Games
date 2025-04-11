@@ -3,15 +3,23 @@ using UnityEngine;
 public class DiceScript : MonoBehaviour
 {
     CharacterMovement movementScript;
-    public int diceRoll(Player player, JailScript jailScript, CharacterMovement movementScript, RollDice roller)
+    RollDice diceRoller;
+
+    void Start()
+    {
+        movementScript = FindFirstObjectByType<CharacterMovement>();
+        diceRoller = FindFirstObjectByType<RollDice>();
+    }
+
+    public int DiceRoll()
     {
         int playerRoll = 0;
         int temp1 = 0, temp2 = 0;
         int jailIfThree = 0;
         bool isDouble = false;
 
-        temp1 = roller.Roll(player);
-        temp2 = roller.Roll(player);
+        temp1 = diceRoller.Roll();
+        temp2 = diceRoller.Roll();
         playerRoll += temp1 + temp2;
 
         Debug.Log("Dice 1: " + temp1 + " Dice 2: " + temp2);
@@ -25,8 +33,8 @@ public class DiceScript : MonoBehaviour
             {
                 Debug.Log("You rolled a double! Roll again!");
 
-                temp1 = roller.Roll(player);
-                temp2 = roller.Roll(player);
+                temp1 = diceRoller.Roll();
+                temp2 = diceRoller.Roll();
                 Debug.Log("Dice 1: " + temp1 + " Dice 2: " + temp2);
 
                 playerRoll += temp1 + temp2;
@@ -45,7 +53,7 @@ public class DiceScript : MonoBehaviour
         if (jailIfThree == 3)
         {
             Debug.Log("Three doubles! Go to Jail.");
-            StartCoroutine(movementScript.GoToJailMove());
+            movementScript.StartCoroutine(movementScript.GoToJailMove());
             return 0;
         }
 
