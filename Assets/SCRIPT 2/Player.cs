@@ -9,10 +9,19 @@ public class Player : MonoBehaviour
     public int position;
     public int jailTurn;
     public List<string> cards;
+    public List<Transform> boardPositions;
 
-    /* if (position == 21){
-            FreeParkiingScript.LandedOnFreeParking(this.Player); 
-
+    public void MoveToPOsition(int newPosition) 
+    {
+        position = newPosition;
+        if(newPosition >= 0 && newPosition < boardPositions.Count)
+        {
+            transform.position = boardPositions[newPosition].position;
         }
-        */
+    }
+    public void GoToJail()
+    {
+        MoveToPOsition(10);
+        jailTurn = 3;
+    }
 }

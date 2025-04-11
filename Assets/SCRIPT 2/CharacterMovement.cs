@@ -12,8 +12,12 @@ public class CharacterMovement : MonoBehaviour
     public int routePosition;
     public int steps;
     bool isMoving;
+    private GameObject Player;
+    private Player playerScript;
     public DiceScript dice;
     public GameObject player;
+
+    private ShowProperty showProperty;
 
     private void Start()
     {
@@ -54,8 +58,8 @@ public class CharacterMovement : MonoBehaviour
             
         }
         isMoving = false;
-
-        
+        routePosition = playerScript.position;
+        showProperty.ShowProp(playerScript.position);
     }
     bool moveNext(Vector3 target)
     {
