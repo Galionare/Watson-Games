@@ -35,17 +35,5 @@ public class PropertyData
         StatRent4 = statRent4;
         UtilRent1 = utilRent1;
         UtilRent2 = utilRent2;
-<<<<<<< Updated upstream
-=======
-        Mortgage = mortgage;
-        ReturnMotrtgage = returnMortgage;
-        CostHouse = costHouse;
-        CostHotel = costHotel;
-
-        OwnerIndex = 0;
-        NumOfHouses = 0;
-        RentCollect = true;
-        Mortgaged = false;
->>>>>>> Stashed changes
     }
 }
