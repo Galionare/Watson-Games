@@ -11,8 +11,18 @@ public class DiceScript : MonoBehaviour
     public GameObject gameDice;
     public CharacterMovement player;
     int diceCount = 0;
-     
-    
+    Player ps;
+    JailScript jailScript;
+    public Walking currentRoute;
+     public IEnumerator GoToJailMove()
+   { 
+    player.routePosition = 10;
+    Vector3 nextPos = currentRoute.objChildList[player.routePosition].position;
+    while (!player.moveNext(nextPos)) { yield return null; }
+    yield return new WaitForSeconds(0.1f);
+    jailScript.GoToJail(ps);
+    }
+
     public int Roll()
     {
         /*
@@ -57,13 +67,17 @@ public class DiceScript : MonoBehaviour
      Temp2 = Roll();
      PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
      if(Temp1 == Temp2){
-        isDouble = true; 
+        isDouble = false; 
         Debug.Log("FIRST DOUBLE HAS BEEN ROLLED - " + JailIfThree ); //Debug message for now, will be replaced with a function to send the player to jail
         Temp1 = Roll(); //If the player rolls doubles, they get to roll again, this will be a loop until they roll a non double or 3 doubles in a row
         Temp2 = Roll();
         PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
         JailIfThree++;
+        if(Temp1 == Temp2){
+            isDouble = true; //If they roll a double, they get to roll again
+        }
         while(isDouble && JailIfThree < 3){
+            JailIfThree++;
             Debug.Log("ANOTHER DOUBLE HAS BEEN ROLLED - Doubles left until Jail " + (3-JailIfThree) ); //If the player rolls doubles, they get to roll again, this will be a loop until they roll a non double or 3 doubles in a row
             Temp1 = Roll(); //Calls the function within the RollDice Script to roll the board dice visually/physically for the player
             Temp2 = Roll();
@@ -71,11 +85,13 @@ public class DiceScript : MonoBehaviour
             if(Temp1 != Temp2){
                 isDouble = false; //If they roll a non double, they stop rolling again
             }
-            JailIfThree++;
+            
         }
+        
         if(JailIfThree == 3){ //If the player rolls 3 doubles in a row, they go to jail
-            player.routePosition = 11;
-            //goToJail(player)
+        
+            //player.routePosition = 10;
+            GoToJailMove();
             PlayerRoll = 0; //Player goes to jail, so their roll is 0
             Debug.Log("Player goes to Jail"); //Debug message for now, will be replaced with a function to send the player to jail
         }
