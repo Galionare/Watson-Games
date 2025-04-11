@@ -6,7 +6,7 @@ using System;
 public class DiceRolling : MonoBehaviour
 { 
     public Vector3 direction = new Vector3(1, 1, 0); //throws upwards and to the side
-    public Rigidbody rb;
+    private Rigidbody rb;
     public int diceNumber;
     private SphereCollider[] colliders;
     void Awake()
@@ -21,7 +21,7 @@ public class DiceRolling : MonoBehaviour
     }
     void Update()
     {
-        //Debug.Log("1. Update Method is actually running");
+        Debug.Log("1. Update Method is actually running");
         if (rb.linearVelocity == Vector3.zero)
         {
             SphereCollider topCollider = colliders.OrderByDescending(c => c.transform.position.y).FirstOrDefault();
@@ -51,12 +51,8 @@ public class DiceRolling : MonoBehaviour
                      
               }
              */
-             if (rb.IsSleeping())
-             {
-                 Destroy(gameObject); //Wakes the dice up if it is sleeping, this is a temporary fix to get the dice to stop sleeping and allow the update method to run again
-             }
         }
-         //Debug.Log("Dice Number: " + diceNumber);
+         Debug.Log("Dice Number: " + diceNumber);
     }
     
     //Some Method That Returns the top facing number, be it using raycast or having a collision on the opposite side labelled with its number
