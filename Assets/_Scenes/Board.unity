@@ -736,6 +736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162754759}
   - component: {fileID: 162754758}
+  - component: {fileID: 162754760}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -757,6 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFab: {fileID: 5613237295616066347, guid: 7ac7f6ee147603e46830426479741a9d, type: 3}
   maxPlayer: 5
+  currentPlayerI: 0
   currentState: 0
 --- !u!4 &162754759
 Transform:
@@ -773,6 +775,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &162754760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162754757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5675b51b566b0f644bc6f45efffc87b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PropCard: {fileID: 4680501538433068825, guid: be829e89c466c9346821b459e72c3f1b, type: 3}
+  StatCard: {fileID: 2993732869640621493, guid: 9e27fc4f2f05df640b8ec653c70537d4, type: 3}
+  UtilCard: {fileID: 3980792984455164695, guid: 573ae304dd5fb0344ba9632c9e4e841b, type: 3}
+  Canvas: {fileID: 1484520339}
 --- !u!1001 &165703508
 PrefabInstance:
   m_ObjectHideFlags: 0
