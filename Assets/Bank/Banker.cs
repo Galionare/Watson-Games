@@ -55,6 +55,7 @@ public class Banker
     public void collectGoMoney(Player player) {
         // 9. when a player pasts Go they collect 200 money from the bank
         player.money += GO_MONEY;
+        player.passedGo = true;
         InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
 
@@ -62,7 +63,7 @@ public class Banker
     public async void purchaseProperty(Player currentPlayer) {
         // 9. players may not purchase properties until they've made on circuit of the board (pass go once)
         PropertyData property = propertyData[currentPlayer.position];
-        if (currentPlayer.passedGo && property.CanBeBought){ 
+        if (currentPlayer.passedGo && property.CanBeBought && currentPlayer.money >= property.Cost){ 
             // 11. once a player has moved if they land on an a property that isn't yet purchased they have the opportunity to buy it
             bool wantsToBuy = await InputDisplay.Instance.AskYesOrNo("Do you want to purchase this property?");
             if (wantsToBuy) {
