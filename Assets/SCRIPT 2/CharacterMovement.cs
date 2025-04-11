@@ -5,23 +5,24 @@ using UnityEngine.Rendering;
 
 public class CharacterMovement : MonoBehaviour
 {
+
     private Walking currentRoute;
     int routePosition;
     public int steps;
     bool isMoving;
-    public DiceScript Dice;
-    public GameObject Player;
+    public DiceScript dice;
 
     private void Start()
     {
             currentRoute = FindFirstObjectByType<Walking>();
+            dice = FindFirstObjectByType<DiceScript>();
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.M) && !isMoving)
         {
-
-            steps = Random.Range(1, 13);
+            steps = dice.diceRoll();
+            
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
 
