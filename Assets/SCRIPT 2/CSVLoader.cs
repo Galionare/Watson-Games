@@ -32,6 +32,10 @@ public static class CSVLoader
             double returnMortgage = 0;
             int[] houses = new int[5]; // 1 house to 1 hotel
             int position;
+            bool mortgaged = false;
+            bool rentCollect = true;
+            int ownerIndex = 0;
+            int numOfHouses = 0;
 
             //fing the rent of stations only
             string statRent1 = "nothing";
@@ -164,7 +168,7 @@ public static class CSVLoader
                 }
             }
 
-            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2, costHouse, costHotel);
+            dataDictionary[position] = new PropertyData(position,nameproperty, group, action, canBeBought, price, mortgage, returnMortgage, rent, fullRent, houses, statRent1, statRent2, statRent3, statRent4, utilRent1, utilRent2, costHouse, costHotel, mortgaged, rentCollect, ownerIndex, numOfHouses);
         }
 
         return dataDictionary;
