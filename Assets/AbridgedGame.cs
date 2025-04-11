@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,10 +40,9 @@ public class AbridgedGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         timeLeft -= Time.deltaTime;
-         timerText = GetComponent<TMP_Text>(); // Get the TextMeshPro component attached to this GameObject
+         timeLeft -= Time.deltaTime; // Get the TextMeshPro component attached to this GameObject
          float minutes = Mathf.Floor(timeLeft / 60);
-        float seconds = timeLeft%60;
+        double seconds = Math.Round(timeLeft%60, 0);
 
          timerText.SetText(minutes + ":" + seconds); // Update the text with the remaining time
     if ( timeLeft <= 0 )
