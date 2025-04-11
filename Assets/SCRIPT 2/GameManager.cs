@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private List<GameObject> playerCount = new List<GameObject>();
     public int currentPlayerI = 0;
     public GameState currentState;
+    public GameObject hands;
+    public GameObject hands2;
     void Start()
     {
 
@@ -53,6 +55,11 @@ public class GameManager : MonoBehaviour
             Player playerScript = addPlayer.GetComponent<Player>();  // Get the Player script attached to the player
             playerScript.playerIndex = playerIndex;
             Debug.Log("Player " + playerIndex + " spawned with index: " + playerScript.playerIndex);
+            hands.SetActive(true); // Set the hands GameObject active
+            if(playerCount.Count == 2){
+              hands2.SetActive(true); // Set the hands2 GameObject inactive
+            }
+            
         }
     }
     public void StartTurn()
