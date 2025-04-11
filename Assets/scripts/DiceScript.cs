@@ -16,7 +16,7 @@ public class DiceScript : MonoBehaviour
     public Walking currentRoute;
      public IEnumerator GoToJailMove()
    { 
-    player.routePosition = 10;
+    player.routePosition = 11;
     Vector3 nextPos = currentRoute.objChildList[player.routePosition].position;
     while (!player.moveNext(nextPos)) { yield return null; }
     yield return new WaitForSeconds(0.1f);
