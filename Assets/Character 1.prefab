@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3660988646957159588}
   - component: {fileID: 7514296910138823107}
   - component: {fileID: 558444449148824948}
-  - component: {fileID: -1475054845998194028}
   m_Layer: 0
   m_Name: Character 1
   m_TagString: Player
@@ -49,10 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steps: 0
   DiceScript: {fileID: 0}
-<<<<<<< Updated upstream
   player: {fileID: 5613237295616066347}
-=======
->>>>>>> Stashed changes
 --- !u!114 &558444449148824948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,22 +68,6 @@ MonoBehaviour:
   position: 0
   jailTurn: 0
   Owned: []
-<<<<<<< Updated upstream
-=======
---- !u!114 &-1475054845998194028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5613237295616066347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a80f84ead26e56f45974793748838c43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameDice: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
->>>>>>> Stashed changes
 --- !u!1 &8116294092171337597
 GameObject:
   m_ObjectHideFlags: 0
