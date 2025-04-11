@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PotKnock : MonoBehaviour
 {
-    public GameObject PotCard;
+   /* public GameObject PotCard;
     public List<GameObject> PotPile = new List<GameObject>();
     public List<GameObject> KnockPile = new List<GameObject>();
 
@@ -27,6 +27,6 @@ public class PotKnock : MonoBehaviour
             KnockPile.Add(Knock);
         }
     }
-
+    */
 
 }
