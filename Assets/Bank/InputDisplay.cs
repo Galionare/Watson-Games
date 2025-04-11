@@ -35,6 +35,9 @@ public class InputDisplay : MonoBehaviour
         inputButton.gameObject.SetActive(false);
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
+
+        backgroundScore.SetActive(true);
+        scoreText.SetActive(true);
     }
 
     public async Task ShowMessage(string message) {
@@ -126,7 +129,7 @@ public class InputDisplay : MonoBehaviour
 
         string scoreboard = "";
         for (int i = 1; i <= players.Count; i++) {
-            scoreboard += $"Player {player.index}: £{player.cash}\n";
+            scoreboard += $"Player {player.index}: {player.cash}\n";
             if (player.owned.Count > 0) {
                 foreach(var property in player.owned) {
                     scoreboard += $" - {property.NameProperty}, Houses: {property.NumOfHouses}, Mortgaged: {property.mortgaged}\n";
@@ -141,8 +144,7 @@ public class InputDisplay : MonoBehaviour
         scoreText.text = scoreboard;
 
         RectTransform bgRect = backgroundScore.GetComponent<RectTransform>();
-        float baseHeight = 200f; // Base height for the background
-        float extraHeight = 120f * (players.Count - 1);
-        bgRect.sizeDelta = new Vector2(bgRect.sizeDelta.x, baseHeight + extraHeight);
+        float height = 150f * (players.Count - 1);
+        bgRect.sizeDelta = new Vector2(bgRect.sizeDelta.x, height);
     }
 }
