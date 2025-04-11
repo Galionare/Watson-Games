@@ -9,4 +9,10 @@ public class Player : MonoBehaviour
     public int position;
     public int jailTurn;
     public List<string> cards;
+
+    /* if (position == 21){
+            FreeParkiingScript.LandedOnFreeParking(this.Player); 
+
+        }
+        */
 }

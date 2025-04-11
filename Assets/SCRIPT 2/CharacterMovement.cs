@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
 using System.Threading.Tasks;
+using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
 
     private Walking currentRoute;
-    int routePosition;
+    public int routePosition;
     public int steps;
     bool isMoving;
     public DiceScript dice;
+    public GameObject player;
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M) && !isMoving)
         {
             steps = dice.diceRoll();
+
             
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
@@ -31,6 +34,7 @@ public class CharacterMovement : MonoBehaviour
     }
     IEnumerator Move()
     {
+        yield return new WaitForSeconds(5f);
         if (isMoving)
         {
             yield break;
@@ -50,6 +54,8 @@ public class CharacterMovement : MonoBehaviour
             
         }
         isMoving = false;
+
+        
     }
     bool moveNext(Vector3 target)
     {

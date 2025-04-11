@@ -9,6 +9,7 @@ public class DiceScript : MonoBehaviour
 
     //Player = 
     public GameObject gameDice;
+    public CharacterMovement player;
     int diceCount = 0;
      
     
@@ -22,7 +23,7 @@ public class DiceScript : MonoBehaviour
         diceCount++;
         GameObject newDice = Instantiate(gameDice);
         newDice.name = "Dice" + diceCount;
-        newDice.transform.position = new Vector3(2*diceCount, 8, 0);
+        newDice.transform.position = new Vector3(1*diceCount, 4, 0); //make sure they dont spawn inside eachother
 
         DiceRolling diceRolling = newDice.GetComponent<DiceRolling>();
         int diceNumber = diceRolling.diceNumber;
@@ -31,11 +32,16 @@ public class DiceScript : MonoBehaviour
         /// 
    
       
-       Debug.Log("Dice Number: " + diceNumber);
+       //Debug.Log("Dice Number: " + diceNumber);
         // Wait for the dice to stop rolling
         //GameObject.Destroy(newDice);// Sleep for 1 millisecond to avoid busy waiting
 
         diceNumber = UnityEngine.Random.Range(1, 7); // Simulate a dice roll (1-6)
+        if (diceCount == 2)
+        {
+            diceCount = 0;
+        }
+        
         return diceNumber;
     }
 
@@ -46,13 +52,39 @@ public class DiceScript : MonoBehaviour
      bool isDouble = false;
      int JailIfThree = 0;
     
-    
+     Debug.Log("TURN STARTU");
      Temp1 = Roll(); //Calls the function within the RollDice Script to roll the board dice visually/physically for the player
      Temp2 = Roll();
      PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
+     if(Temp1 == Temp2){
+        isDouble = true; 
+        Debug.Log("FIRST DOUBLE HAS BEEN ROLLED - " + JailIfThree ); //Debug message for now, will be replaced with a function to send the player to jail
+        Temp1 = Roll(); //If the player rolls doubles, they get to roll again, this will be a loop until they roll a non double or 3 doubles in a row
+        Temp2 = Roll();
+        PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
+        JailIfThree++;
+        while(isDouble && JailIfThree < 3){
+            Debug.Log("ANOTHER DOUBLE HAS BEEN ROLLED - Doubles left until Jail " + (3-JailIfThree) ); //If the player rolls doubles, they get to roll again, this will be a loop until they roll a non double or 3 doubles in a row
+            Temp1 = Roll(); //Calls the function within the RollDice Script to roll the board dice visually/physically for the player
+            Temp2 = Roll();
+            PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
+            if(Temp1 != Temp2){
+                isDouble = false; //If they roll a non double, they stop rolling again
+            }
+            JailIfThree++;
+        }
+        if(JailIfThree == 3){ //If the player rolls 3 doubles in a row, they go to jail
+            player.routePosition = 11;
+            //goToJail(player)
+            PlayerRoll = 0; //Player goes to jail, so their roll is 0
+            Debug.Log("Player goes to Jail"); //Debug message for now, will be replaced with a function to send the player to jail
+        }
+       
+
+     }
             
             return PlayerRoll; //Returns Combined value of the dicerolls (including possible extras from doubles)
-        }
+    }
     }
 
 
