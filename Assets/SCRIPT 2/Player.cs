@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
     public int money = 1500;
     public int position;
     public int jailTurn;
-    public List<string> cards;
+    public List<PropertyData> owned;
     public bool isRolled = false;
-    public bool PassedGo;
+    public bool passedGo = false;
+    public int index;
 
     /* if (position == 21){
             FreeParkiingScript.LandedOnFreeParking(this.Player); 
