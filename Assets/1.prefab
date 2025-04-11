@@ -300,9 +300,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33c8229153d707468fe91f1f9b54748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: {fileID: 582809284647962173}
-  Cost: {fileID: 8023238488616756504}
-  Action: {fileID: 7065892703439996201}
+  Name: {fileID: 7124802138320209610, guid: 8f178580fbe40eb448046a42011b3bfe, type: 3}
+  Cost: {fileID: 831547365271910986, guid: 8f178580fbe40eb448046a42011b3bfe, type: 3}
+  Action: {fileID: 5128914725981603958, guid: 8f178580fbe40eb448046a42011b3bfe, type: 3}
+  BrownProp: {fileID: 2100000, guid: a50e299d35063044f8be5188815b161f, type: 2}
+  BlueProp: {fileID: 2100000, guid: f1bb818d67ed0e74c850f96f7407e80c, type: 2}
+  RedProp: {fileID: 2100000, guid: 71f7a89d32b87494897b7c25480805a7, type: 2}
+  PurpleProp: {fileID: 2100000, guid: 81742fc427bdbdd4f906acfb5369e8d1, type: 2}
+  OrangeProp: {fileID: 2100000, guid: 713968ed8a14a464c948e4a964b25979, type: 2}
+  YellowProp: {fileID: 2100000, guid: bf2c7d96e2a5bef4da76e6a10ded5c3d, type: 2}
+  GreenProp: {fileID: 2100000, guid: eb3e8c74ddef3a54fb8711eb6e916213, type: 2}
+  DeepBlueProp: {fileID: 2100000, guid: fb87b7f86dcb7b24dac26f2796b177a6, type: 2}
+  StationProp: {fileID: 2100000, guid: 6a591bcd5716e9e45ae873a85abd15e2, type: 2}
+  UtilitiesProp: {fileID: 2100000, guid: 97f7ae19753258944a6921060c668f38, type: 2}
 --- !u!1 &3459058577639278089
 GameObject:
   m_ObjectHideFlags: 0

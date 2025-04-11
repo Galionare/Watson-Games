@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using System.Threading.Tasks;
 using UnityEngine.UIElements;
+using UnityEditor.Build;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -14,15 +15,19 @@ public class CharacterMovement : MonoBehaviour
     bool isMoving;
     public DiceScript dice;
     public GameObject player;
+    public Player playerScript;
+    GameManager gameManager;
 
     private void Start()
     {
             currentRoute = FindFirstObjectByType<Walking>();
             dice = FindFirstObjectByType<DiceScript>();
+            playerScript = FindFirstObjectByType<Player>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
     private async Task Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.M) && !isMoving && playerScript.playerIndex == gameManager.currentPlayerI)
         {
             steps = dice.diceRoll();
 
@@ -54,6 +59,9 @@ public class CharacterMovement : MonoBehaviour
             
         }
         isMoving = false;
+        routePosition = playerScript.position;
+        playerScript.isRolled = true;
+        
 
         
     }
