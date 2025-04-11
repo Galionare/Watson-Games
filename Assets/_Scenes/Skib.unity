@@ -165,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 76316135}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.0527525, y: 6.946167, z: 86.36074}
+  m_LocalPosition: {x: -3.0527525, y: 70.8, z: 86.36074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -813,18 +813,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7612901781016955272, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
   m_PrefabInstance: {fileID: 4384965736253987769}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2080652717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2080652716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7febc41021fcf464fbbd5ba5149ba242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2080652718 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1433169232221675641, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
@@ -926,10 +914,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 76316136}
-    - target: {fileID: 8364312777163759926, guid: ee4436e23ae6d90408ae864a47288237, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ViewCards
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1027,22 +1011,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 76316136}
-    - target: {fileID: 1796477949103964053, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Back
-      objectReference: {fileID: 0}
     - target: {fileID: 7612901781016955272, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
       propertyPath: m_Name
       value: PAnButton
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 113677430044812575, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7612901781016955272, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2080652717}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b670a7af3951f094e8e4c8a0dbd66307, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
