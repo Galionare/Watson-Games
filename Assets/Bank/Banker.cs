@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-public class Banker
+public class Banker : MonoBehaviour
 {
     private int numOfPlayers = 1; //temp
                                   // public List<Player> players; // idk where to get the players array from
@@ -15,13 +15,15 @@ public class Banker
 
     List<GameObject> bidders = new List<GameObject>();
 
+    public GameObject banker;
+    
     List<GameObject> PlayerList;
     List<GameObject> StreetPropertyList;
     List<GameObject> StationPropertyList;
     List<GameObject> UtilityPropertyList;
 
-    private bool passedGo = false;
-    private int index = 0;
+    //private bool passedGo = false;
+    //private int index = 0;
 
     private Dictionary<int, PropertyData> propertyData;
     private Dictionary<string, List<int>> colourPositions;
@@ -35,6 +37,11 @@ public class Banker
         StreetPropertyList = Properties2.AllProperties[0];
         StationPropertyList = Properties2.AllProperties[1];
         UtilityPropertyList = Properties2.AllProperties[2];
+
+      
+
+
+
         PlayerList = Players2.Players;
 
 
@@ -95,6 +102,9 @@ public class Banker
                 Property.GetComponent<StreetCard>().Owned = true;
                 Property.GetComponent<StationCard>().Owned = true;
                 Property.GetComponent<UtilityCard>().Owned = true;
+                currentPlayer.GetComponent<Player>().Owned.Add(Property);/// I addedddddddddddddddddddddddddddddddddddddddddddddddd
+                banker.GetComponent<Player>().Owned.Remove(Property);
+
             }
             else if (!wantsToBuy) {
                 // 11. if the player doesn't buy a property then it's auctioned by the bank
@@ -107,7 +117,7 @@ public class Banker
         int highestBid = 0;
         // 11. if there are no bids then the property remains unsold
         int highestBidder = 0;
-        int bid;
+        int bid = 0;
         //ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
 
         bidders.AddRange(PlayerList); //imagining a player array
@@ -122,14 +132,13 @@ public class Banker
                 if (bidders[i].GetComponent<Player>().passedGO) { // if the player is out of the auction bidders[i] will be the banker who hasn't passed go
                     bool wantsToBid = await InputDisplay.Instance.AskYesOrNo("Would you like to bid on this property?");
                     if (wantsToBid) {
-                        
                         bool validBid = false;
                         while (!validBid) {
                             string bidInput = await InputDisplay.Instance.AskInput("Enter the amount you want to bid");
                             //int bid;
                             if (int.TryParse(bidInput, out bid)) {
                                 validBid = true;
-                            }// else statment to type anther number jjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+                            }
                         }
                         // 11. in auction each player makes a bid to the bank and the bank sells to the highest bidder
                         if (bid > highestBid) {
@@ -139,7 +148,8 @@ public class Banker
                     }
                     else {
                         currentNumOfBidders--;
-                        bidders[i] = 0; // whattttt???
+                        bidders.RemoveAt(i);
+                        //bidders[i] = 0; // whattttt??????????????????????????????????????????????????
                         if (currentNumOfBidders == 1) { // if there's only one other bidder then the for loop should break
                             break;
                         }
@@ -156,37 +166,53 @@ public class Banker
         // 12. if a player lands on a property owned by another they must pay the player who owns the property the value of the rent
         int rent = 0;
         bool owned = true;
-        //property = propertyData[currentPlayer.GetComponent<Player>().position];  i think no need hhhhhhhhhhhhhhhhh
-        GameObject propertyOwner = property.GetComponent<UtilityCard>().Owner;
-        if ((!property.GetComponent<StreetCard>().Owned || !property.GetComponent<StationCard>().Owned || !property.GetComponent<UtilityCard>().Owned) && propertyOwner != currentPlayer && propertyOwner.index != 0) { // idk if that'll work
-            if (colourPositions.TryGetValue(property.GetComponent<StreetCard>().Group, out List<int> positions)) { // where does this go??? jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-                foreach (int i in positions) {
-                    if (propertyData[positions[i]].Owner != propertyOwner) { // I dont understandddddddddddddddddddddddddddddddddd
-                        owned = false;
-                        break;
+        GameObject propertyOwner;
+        //property = propertyData[currentPlayer.GetComponent<Player>().position]; // i think no need hhhhhhhhhhhhhhhhh
+        propertyOwner = property.GetComponent<UtilityCard>().Owner;
+        propertyOwner = property.GetComponent<StreetCard>().Owner;
+        propertyOwner = property.GetComponent<StationCard>().Owner;
+        if ((!property.GetComponent<StreetCard>().Owned || !property.GetComponent<StationCard>().Owned || !property.GetComponent<UtilityCard>().Owned) && propertyOwner != currentPlayer /*&& propertyOwner.index != 0*/) { // idk if that'll work
+            if (colourPositions.TryGetValue(property.GetComponent<StreetCard>().Group, out List<int> positions)) { 
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    foreach (var Street in StreetPropertyList)
+                    {
+                        if (Street.GetComponent<StreetCard>().Position == i)
+                        {
+                            if (Street.GetComponent<StreetCard>().Owner != propertyOwner)
+                            {
+                                owned = false;
+                                break;
+                            }
+                        }
                     }
+
                 }
+
             }
 
-            // 14. if a property is improved with houses or hotels then the rent to be paid is as shown on the card
-            if (property.GetComponent<StreetCard>().NumOfHouses != 0) {
-                rent = property.GetComponent<StreetCard>().Houses[(property.GetComponent<StreetCard>().NumOfHouses - 1)];
-            }
-            // 13. if a player owns all of the properties in a colour coded group but the properties are otherwise not developed further
-            // - with houses and hotels then the rent is doubled
-            else if (owned) {
-                rent = property.GetComponent<StreetCard>().FullRent1;
-            }
-            else {
-                rent = property.GetComponent<StreetCard>().Rent1;
-            }
-
-            if (currentPlayer.GetComponent<Player>().money < rent) {
-                unableToPay(rent, currentPlayer);
-            }
-            currentPlayer.GetComponent<Player>().money -= rent;
-            propertyOwner.GetComponent<Player>().money += rent;
         }
+        
+        // 14. if a property is improved with houses or hotels then the rent to be paid is as shown on the card
+        if (property.GetComponent<StreetCard>().NumOfHouses != 0) {
+            rent = property.GetComponent<StreetCard>().Houses[(property.GetComponent<StreetCard>().NumOfHouses - 1)];
+        }
+        // 13. if a player owns all of the properties in a colour coded group but the properties are otherwise not developed further
+        // - with houses and hotels then the rent is doubled
+        else if (owned) {// i think wronnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnng
+            rent = property.GetComponent<StreetCard>().FullRent1;
+        }
+        else {
+            rent = property.GetComponent<StreetCard>().Rent1;
+        }
+
+        if (currentPlayer.GetComponent<Player>().money < rent) {
+            unableToPay(rent, currentPlayer);
+        }
+        currentPlayer.GetComponent<Player>().money -= rent;
+        propertyOwner.GetComponent<Player>().money += rent;
+            
+        
     }
 
     // - 15. if they are still unable to pay after selling all assests then they are bankrupt and must leave the game
@@ -195,13 +221,14 @@ public class Banker
         // 15. all rents must be paid in cash, if a player is unable to pay the rent then they must sell game assets to make good on the rent
         while (rentToPay > currentPlayer.GetComponent<Player>().money)
         {
+            GameObject property = null;
             bool found = false;
             while (!found) {
                 string propertyConsidered = await InputDisplay.Instance.AskInput("You are unable to pay the rent, which property would you like to sell or mortgage?");
-                for(int i = 0; i < currentPlayer.owned.Length(); i++) {
+                for(int i = 0; i < currentPlayer.GetComponent<Player>().Owned.Count; i++) {
                     // maybe the Player object needs an array of the positions of the properties they own
-                    if (currentPlayer.owned[i].NameProperty == propertyConsidered) {
-                        PropertyData property = currentPlayer.owned[i];
+                    if (currentPlayer.GetComponent<Player>().Owned[i].name == propertyConsidered) { /// double checkkkkkkkkkkkkkkkkkkkkkkkkkkk
+                        property = currentPlayer.GetComponent<Player>().Owned[i];
                         found = true;
                     }
                     else {
@@ -218,11 +245,11 @@ public class Banker
                 sellProperty(currentPlayer, property);
             }
 
-            if (currentPlayer.GetComponent<Player>().money < rentToPay && currentPlayer.owned.Count == 0) {
+            if (currentPlayer.GetComponent<Player>().money < rentToPay && currentPlayer.GetComponent<Player>().Owned.Count == 0) {
                     await InputDisplay.Instance.ShowMessage("You are bankrupt, please leave the game.");
                     // remove player from game
                 }
-            else if (currentPlayer.GetComponent<Player>().money < rentToPay && currentPlayer.owned.Count > 0) {
+            else if (currentPlayer.GetComponent<Player>().money < rentToPay && currentPlayer.GetComponent<Player>().Owned.Count > 0) {
                 await InputDisplay.Instance.ShowMessage("You are still unable to pay the rent, please sell or mortgage another property.");
             }
         }
@@ -248,7 +275,7 @@ public class Banker
         // - a player may also sell houses and hotels back to the bank for the original price
         if (property.GetComponent<StreetCard>().NumOfHouses > 0) {
             bool validInput = false;
-            int housesToSell;
+            int housesToSell = 0;
             while (!validInput) {
                 string playerInput = await InputDisplay.Instance.AskInput("How many houses would you like to sell?");
                 if (int.TryParse(playerInput, out housesToSell)) {
@@ -274,13 +301,17 @@ public class Banker
             if (property.GetComponent<StreetCard>().Mortgaged) {
                 sellPrice = sellPrice/2;
                 property.GetComponent<StreetCard>().Mortgaged = false;
-                property.rentCollect = true;
+                property.GetComponent<StreetCard>().Owned = false;
             }
             // 20. if a player needs to raise funds they can sell a property back to the bank for its original value as shown on the game card
             currentPlayer.GetComponent<Player>().money += sellPrice;
-            currentPlayer.owned.Remove(property);
-            property.CanBeBought = true;
-            property.Owner = 0;// laterrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+            currentPlayer.GetComponent<Player>().Owned.Remove(property);
+            property.GetComponent<StreetCard>().Owned = false;
+            property.GetComponent<StationCard>().Owned = false;
+            property.GetComponent<UtilityCard>().Owned = false;
+            property.GetComponent<StreetCard>().Owner = banker;
+            property.GetComponent<StationCard>().Owner = banker;//wjhbvehrbveirbveihrvberjhvbwejkhbvwejhbvjwehbrvljwehrbvjwehrbvehrbvehrbgphivbpejhrbverbhrhbg
+            property.GetComponent<UtilityCard>().Owner = banker;
         }
     }
 
@@ -295,9 +326,9 @@ public class Banker
             GameObject property = null;
             while (!found) {
                 string propertyConsidered = await InputDisplay.Instance.AskInput("Which property would you like to improve?");
-                for(int i = 0; i < currentPlayer.owned.Length; i++) {
-                    if (currentPlayer.owned[i].NameProperty == propertyConsidered) {
-                        property = currentPlayer.owned[i];
+                for(int i = 0; i < currentPlayer.GetComponent<Player>().Owned.Count; i++) {
+                    if (currentPlayer.GetComponent<Player>().Owned[i].name == propertyConsidered) {/// double checkkkkkkkkkkkkkkkkkkkkkkkkkkk
+                        property = currentPlayer.GetComponent<Player>().Owned[i];
                         found = true;
                     }
                     else {
@@ -315,25 +346,38 @@ public class Banker
 
             if (colourPositions.TryGetValue(property.GetComponent<StreetCard>().Group, out List<int> positions)) {
                 bool owned = true;
-                for (int i = 0; i < positions.Count; i++) {
-                    // 18. houses and hotels may only be purchased where a player owns all of the properties in a colour group
-                    if (propertyData[positions[i]].Owner != currentPlayer) {
-                        owned = false;
-                        await InputDisplay.Instance.ShowMessage("You do not own all of the properties in this colour group, you cannot improve this property.");
-                        return;
-                    }
-                    // 21. where a colour group of properties is owned by a player there can never be a difference of more than 1 house between the
-                    // - properties in that set if a player wishes to buy a hotel, that is the equivalent of 5 houses cost. a player may have 4 houses 
-                    // - on one set and a hotel on another in that set
-                    if (propertyData[positions[i]].NumOfHouses < property.GetComponent<StreetCard>().NumOfHouses) {
-                        await InputDisplay.Instance.ShowMessage("You cannot improve this property to a difference of more than 1 house between each property in a set.");
-                        return;
+                while (owned)
+                {
+                    for (int i = 0; i < positions.Count; i++) {
+
+                        foreach (var Street in StreetPropertyList)
+                        {
+                            if (Street.GetComponent<StreetCard>().Position == i)
+                            {
+                                if (Street.GetComponent<StreetCard>().Owner != currentPlayer)
+                                {
+                                    owned = false;
+                                    await InputDisplay.Instance.ShowMessage("You do not own all of the properties in this colour group, you cannot improve this property.");
+                                    return;
+                                }
+                                // 21. where a colour group of properties is owned by a player there can never be a difference of more than 1 house between the
+                                // - properties in that set if a player wishes to buy a hotel, that is the equivalent of 5 houses cost. a player may have 4 houses 
+                                // - on one set and a hotel on another in that set
+                                if (Street.GetComponent<StreetCard>().NumOfHouses < property.GetComponent<StreetCard>().NumOfHouses) { //not sureeeeeeeeeeeeeeeeeeeeee
+                                    await InputDisplay.Instance.ShowMessage("You cannot improve this property to a difference of more than 1 house between each property in a set.");
+                                    return;
+                                }
+
+                            }
+                        }
+
                     }
                 }
+
             }
 
             // 19. houses and hotels are purchased for the amount shown on the game card
-            int price = property.GetComponent<StreetCard>().Houses[property.GetComponent<StreetCard>().NumOfHouses]];
+            int price = property.GetComponent<StreetCard>().Houses[property.GetComponent<StreetCard>().NumOfHouses];
             currentPlayer.GetComponent<Player>().money -= price;
             property.GetComponent<StreetCard>().NumOfHouses++;
         }

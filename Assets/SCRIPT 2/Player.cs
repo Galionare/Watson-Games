@@ -9,5 +9,5 @@ public class Player : MonoBehaviour
     public int money;
     public int position;
     public int jailTurn;
-    public List<string> cards;
+    public List<GameObject> Owned;
 }
