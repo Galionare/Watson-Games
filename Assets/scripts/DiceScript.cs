@@ -3,12 +3,15 @@ using UnityEngine;
 using System;
 using System.Threading;
 using UnityEditor;
+using System.Collections;
 public class DiceScript : MonoBehaviour
 {
 
     //Player = 
     public GameObject gameDice;
     int diceCount = 0;
+     
+    
     public int Roll()
     {
         /*
@@ -23,12 +26,16 @@ public class DiceScript : MonoBehaviour
 
         DiceRolling diceRolling = newDice.GetComponent<DiceRolling>();
         int diceNumber = diceRolling.diceNumber;
-        while (diceNumber == 0) // Wait for the dice to stop rolling
-        {
-            diceNumber = diceRolling.diceNumber; // Update the dice number
-        }
+        
+        
+        /// 
+   
+      
+       Debug.Log("Dice Number: " + diceNumber);
         // Wait for the dice to stop rolling
-        GameObject.Destroy(newDice);// Sleep for 1 millisecond to avoid busy waiting
+        //GameObject.Destroy(newDice);// Sleep for 1 millisecond to avoid busy waiting
+
+        diceNumber = UnityEngine.Random.Range(1, 7); // Simulate a dice roll (1-6)
         return diceNumber;
     }
 

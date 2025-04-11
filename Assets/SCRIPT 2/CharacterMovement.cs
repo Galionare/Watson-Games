@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using System.Threading.Tasks;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class CharacterMovement : MonoBehaviour
             currentRoute = FindFirstObjectByType<Walking>();
             dice = FindFirstObjectByType<DiceScript>();
     }
-    private void Update()
+    private async Task Update()
     {
         if (Input.GetKeyDown(KeyCode.M) && !isMoving)
         {
