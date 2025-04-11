@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public int money = 1500;
     public int position;
     public int jailTurn;
+    public List<string> cards;
     public List<PropertyData> owned;
     public bool isRolled = false;
     public bool passedGo = false;
