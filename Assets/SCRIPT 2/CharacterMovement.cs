@@ -18,14 +18,15 @@ public class CharacterMovement : MonoBehaviour
     public Player playerScript;
     GameManager gameManager;
     public bool done = false;
-    public ShowProperty showProperty;
+    ShowProperty showProperty;
 
     private void Start()
     {
             currentRoute = FindFirstObjectByType<Walking>();
             dice = FindFirstObjectByType<DiceScript>();
             playerScript = GetComponent<Player>();
-        gameManager = FindFirstObjectByType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>(); 
+        showProperty = FindFirstObjectByType<ShowProperty>();
     }
     private async Task Update()
     {
@@ -67,6 +68,7 @@ public class CharacterMovement : MonoBehaviour
         playerScript.isRolled = true;
         done = false;
 
+        
         showProperty.ShowProp(playerScript.position);
 
     }
