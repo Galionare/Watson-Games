@@ -11,7 +11,11 @@ public class CharacterMovement : MonoBehaviour
     public int steps;
     bool isMoving;
     public DiceScript DiceScript;
-    public GameObject Player;
+<<<<<<< HEAD
+    public GameObject player;
+=======
+    public Player Player;
+>>>>>>> 1e9adce638834c3128459b15500c0ed8339188e3
 
     private void Start()
     {
@@ -21,7 +25,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-            steps = DiceScript.diceRoll(Player);
+            steps = DiceScript.diceRoll(player.GetComponent<Player>());
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
 
