@@ -965,6 +965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFab: {fileID: 5613237295616066347, guid: 7ac7f6ee147603e46830426479741a9d, type: 3}
   maxPlayer: 5
+  currentPlayerI: 0
   currentState: 0
 --- !u!4 &162754759
 Transform:
@@ -4663,7 +4664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1029145583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6432,7 +6433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1489385849
 MonoBehaviour:
   m_ObjectHideFlags: 0

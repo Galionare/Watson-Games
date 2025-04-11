@@ -17,18 +17,20 @@ public class CharacterMovement : MonoBehaviour
     public GameObject player;
     public Player playerScript;
     GameManager gameManager;
+    public bool done = false;
 
     private void Start()
     {
             currentRoute = FindFirstObjectByType<Walking>();
             dice = FindFirstObjectByType<DiceScript>();
-            playerScript = FindFirstObjectByType<Player>();
+            playerScript = GetComponent<Player>();
         gameManager = FindFirstObjectByType<GameManager>();
     }
     private async Task Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && !isMoving && playerScript.playerIndex == gameManager.currentPlayerI)
+        if (Input.GetKeyDown(KeyCode.M) && !isMoving && playerScript.playerIndex == gameManager.currentPlayerI && done != true && !playerScript.isRolled)
         {
+            done = true;
             steps = dice.diceRoll();
 
             
@@ -40,6 +42,7 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator Move()
     {
         yield return new WaitForSeconds(5f);
+
         if (isMoving)
         {
             yield break;
@@ -59,11 +62,11 @@ public class CharacterMovement : MonoBehaviour
             
         }
         isMoving = false;
-        routePosition = playerScript.position;
+        playerScript.position = routePosition;
         playerScript.isRolled = true;
-        
+        done = false;
 
-        
+
     }
     public bool moveNext(Vector3 target)
     {

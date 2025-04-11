@@ -44,9 +44,9 @@ public class PropertyData
         CostHouse = costHouse;
         CostHotel = costHotel;
 
-        Mortgaged = mortgaged;
+      /*  Mortgaged = mortgaged;
         RentCollect = rentCollect;
         OwnerIndex = ownerIndex;
-        NumOfHouses = numOfHouses;
+        NumOfHouses = numOfHouses;*/
     }
 }
