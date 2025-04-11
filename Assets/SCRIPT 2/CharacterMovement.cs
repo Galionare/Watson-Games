@@ -17,6 +17,7 @@ public class CharacterMovement : MonoBehaviour
     public GameObject player;
     public Player playerScript;
     GameManager gameManager;
+    public ShowProperty showProperty;
 
     private void Start()
     {
@@ -61,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
         isMoving = false;
         routePosition = playerScript.position;
         playerScript.isRolled = true;
-        
+        showProperty.ShowProp(playerScript.position);
 
         
     }

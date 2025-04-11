@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public int jailTurn;
     public List<string> cards;
     public bool isRolled = false;
+    public bool PassedGo;
 
     /* if (position == 21){
             FreeParkiingScript.LandedOnFreeParking(this.Player); 
