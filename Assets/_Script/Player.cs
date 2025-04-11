@@ -11,15 +11,20 @@ public class Player : MonoBehaviour
     public int jailTurn;
     public List<string> cards;
     public List<Transform> boardPositions;
+    private ShowPropery showPropery;
 
     public void MoveToPosition(int newPosition)
     {
         position = newPosition;
+        Debug.Log("Working");
         if (newPosition >= 0 && newPosition < boardPositions.Count)
         {
             // Move the player's actual position in the game world
             transform.position = boardPositions[newPosition].position;
         }
+        showPropery.ShowProp(position);
+
+
     }
 
     public void GoToJail()

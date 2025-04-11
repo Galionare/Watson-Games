@@ -19,7 +19,6 @@ public class AllCards : MonoBehaviour
 
     public void ViewCards()
     {
-
         propertyData = CSVLoader.LoadPropertyData();
         int Counter1 = 0;
         int Counter2 = 0;

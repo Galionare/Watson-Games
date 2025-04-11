@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     public GameObject Player;
     private Player playerScript;
     private JailScript jailScript;
+    private ShowPropery ShowProp;
     FreeParkiingScript ParkingScript;
 
 
@@ -25,6 +26,7 @@ public class CharacterMovement : MonoBehaviour
         jailScript = FindFirstObjectByType<JailScript>();
         dice1 = FindFirstObjectByType<RollDice>();
         dice2 = FindFirstObjectByType<DiceScript>();
+        ShowProp = FindFirstObjectByType<ShowPropery>();
 
     }
 
@@ -71,6 +73,8 @@ public class CharacterMovement : MonoBehaviour
 
         isMoving = false;
         playerScript.position = routePosition;
+        Debug.Log("Working");
+        ShowProp.ShowProp(playerScript.position);
     }
 
     bool moveNext(Vector3 target)

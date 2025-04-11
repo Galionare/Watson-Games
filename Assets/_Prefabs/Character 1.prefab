@@ -66,6 +66,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steps: 0
+  dice1: {fileID: 0}
+  dice2: {fileID: 0}
   Player: {fileID: 0}
 --- !u!1 &5721219692620770034
 GameObject:
