@@ -9,14 +9,20 @@ public class UtilityCard : MonoBehaviour
     public TextMeshProUGUI Info1;
     public TextMeshProUGUI Info2;
 
-    private int position = 13;
+    public GameObject BigCard;
+
+    public int Position;
     private Dictionary<int, PropertyData> propertyData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CreateCard(Position);
+    }
+    public void CreateCard(int Position)
+    {
         propertyData = CSVLoader.LoadPropertyData();
 
-        if (propertyData.TryGetValue(position, out PropertyData data))
+        if (propertyData.TryGetValue(Position, out PropertyData data))
         {
             if (data.CanBeBought && (data.Group.Contains("Utilities")))
             {
@@ -25,5 +31,19 @@ public class UtilityCard : MonoBehaviour
                 Info2.text = $"{data.UtilRent2}";
             }
         }
+    }
+
+    public void ShowFullCard()
+    {
+        GameObject Canvas = GameObject.Find("Canvas");
+
+        GameObject CardButton = Instantiate(BigCard, Canvas.transform) as GameObject;
+        int position = Position;
+
+        Transform JustCard = CardButton.transform.GetChild(1);
+        JustCard.GetComponent<FullUtilityCard>().CreateCard(position);
+
+        FullUtilityCard pos = JustCard.GetComponent<FullUtilityCard>();
+        pos.Position = position;
     }
 }

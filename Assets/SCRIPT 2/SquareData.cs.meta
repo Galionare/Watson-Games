@@ -1,2 +1,23 @@
 fileFormatVersion: 2
 guid: a33c8229153d707468fe91f1f9b54748
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Name: {instanceID: 0}
+  - Cost: {instanceID: 0}
+  - Action: {instanceID: 0}
+  - BrownProp: {fileID: 21300000, guid: cc81ba132a8e4cb489f65f705a205b1b, type: 3}
+  - BlueProp: {fileID: 21300000, guid: aae0834cad8894d4fb29be53ce003a4c, type: 3}
+  - RedProp: {instanceID: 0}
+  - PurpleProp: {instanceID: 0}
+  - OrangeProp: {instanceID: 0}
+  - YellowProp: {instanceID: 0}
+  - GreenProp: {instanceID: 0}
+  - DeepBlueProp: {instanceID: 0}
+  - material: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

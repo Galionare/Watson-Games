@@ -11,14 +11,19 @@ public class StationCard : MonoBehaviour
     public TextMeshProUGUI Info3;
     public TextMeshProUGUI Info4;
 
-    private int Position = 6;
+    public GameObject BigCard;
+
+    public int Position;
+
     private Dictionary<int, PropertyData> propertyData;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CreateCard(Position);
+    }
+    public void CreateCard(int Position)
+    {
         propertyData = CSVLoader.LoadPropertyData();
-        Debug.Log(Position+"Station"); 
-        
+
         if (propertyData.TryGetValue(Position, out PropertyData data))
         {
             if (data.CanBeBought && (data.Group.Contains("Station")))
@@ -30,5 +35,18 @@ public class StationCard : MonoBehaviour
                 Info4.text = $"{data.StatRent4}";
             }
         }
+    }
+    public void ShowFullCard()
+    {
+        GameObject Canvas = GameObject.Find("Canvas");
+
+        GameObject CardButton = Instantiate(BigCard, Canvas.transform) as GameObject;
+        int position = Position;
+
+        Transform JustCard = CardButton.transform.GetChild(1);
+        JustCard.GetComponent<FullStationCard>().CreateCard(position);
+
+        FullStationCard pos = JustCard.GetComponent<FullStationCard>();
+        pos.Position = position;
     }
 }

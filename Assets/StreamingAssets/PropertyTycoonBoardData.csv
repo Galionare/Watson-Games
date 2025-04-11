@@ -1,12 +1,12 @@
-Property Tycoon board data,,,,,,,,,,,,,,
+ï»¿Property Tycoon board data,,,,,,,,,,,,,,
 ,,,,,,,If can be bought,,,When improved,,,,
 ,,,,,,,Cost,Rent (unimproved) ,,1 house,2 houses,3 houses,4 houses,1 hotel
-Position,Space/property,,Group,Action,Can be bought?,,£,£,,£,£,£,£,£
-1,Go,,,Collect £200,No,,,,,,,,,
+Position,Space/property,,Group,Action,Can be bought?,,Â£,Â£,,Â£,Â£,Â£,Â£,Â£
+1,Go,,,Collect Â£200,No,,,,,,,,,
 2,The Old Creek,,Brown,,Yes,,60,2,,10,30,90,160,250
 3,Pot Luck,,,Take card,No,,,,,,,,,
 4,Gangsters Paradise,,Brown,,Yes,,60,4,,20,60,180,320,450
-5,Income Tax,,,Pay £200,No,,,,,,,,,
+5,Income Tax,,,Pay Â£200,No,,,,,,,,,
 6,Brighton Station,,Station,,Yes,,200,See notes,,,,,,
 7,The Angels Delight,,Blue,,Yes,,100,6,,30,90,270,400,550
 8,Opportunity Knocks,,,Take card,No,,,,,,,,,
@@ -40,16 +40,14 @@ Position,Space/property,,Group,Action,Can be bought?,,£,£,,£,£,£,£,£
 36,Portslade Station,,Station,,Yes,,200,See notes,,,,,,
 37,Opportunity Knocks,,Take card,,No,,,,,,,,,
 38,James Webb Way,,Deep blue,,Yes,,350,35,,175,500,1100,1300,1500
-39,Super Tax,,,Pay £100,No,,,,,,,,,
+39,Super Tax,,,Pay Â£100,No,,,,,,,,,
 40,Turing Heights,,Deep blue,,Yes,,400,50,,200,600,1400,1700,2000
 ,,,,,,,,,,,,,,
 Notes,,,,,,,House and hotel costs,,,,,,,
 "If one utility is owned by a player, rent is 4 times value shown on dice.",,,,,,,Set,,House,Hotel,,,,
-"If both utilities are owned by a player, rent is 10 time value shown on dice.",,,,,,,"Brown, Blue",,£50,£50 + 4 houses,,,,
-"If player owns 1 station, rent is £25",,,,,,,"Purple, Orange",,£100,£100 + 4 houses,,,,
-"If player owns 2 stations, rent is £50",,,,,,,"Red, Yellow",,£150,£150 + 4 houses,,,,
-"If player owns 3 stations, rent is £100",,,,,,,"Green, Deep blue",,£200,£200 + 4 houses,,,,
-"If player owns 4 stations, rent is £200",,,,,,,,,,,,,,
+"If both utilities are owned by a player, rent is 10 time value shown on dice.",,,,,,,"Brown, Blue",,Â£50,Â£50 + 4 houses,,,,
+"If player owns 1 station, rent is Â£25",,,,,,,"Purple, Orange",,Â£100,Â£100 + 4 houses,,,,
+"If player owns 2 stations, rent is Â£50",,,,,,,"Red, Yellow",,Â£150,Â£150 + 4 houses,,,,
+"If player owns 3 stations, rent is Â£100",,,,,,,"Green, Deep blue",,Â£200,Â£200 + 4 houses,,,,
+"If player owns 4 stations, rent is Â£200",,,,,,,,,,,,,,
 Income Tax and Super Tax fines are paid to the bank,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,

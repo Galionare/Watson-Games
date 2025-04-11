@@ -20,7 +20,7 @@ public class Walking : MonoBehaviour
 
         foreach(Transform child in objChild)
         {
-            if(child != this.transform)
+            if(child != this.transform && child.parent == this.transform)
             {
                 objChildList.Add(child);
             }

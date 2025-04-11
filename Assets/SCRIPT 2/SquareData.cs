@@ -1,29 +1,101 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 
 public class SquareData : MonoBehaviour
 {
     private int position;
     private Dictionary<int, PropertyData> propertyData;
+    [SerializeField] private TextMeshPro Name;
+    [SerializeField] private TextMeshPro Cost;
+    [SerializeField] private TextMeshPro Action;
+
+    public Material BrownProp;
+    public Material BlueProp;
+    public Material RedProp;
+    public Material PurpleProp;
+    public Material OrangeProp;
+    public Material YellowProp;
+    public Material GreenProp;
+    public Material DeepBlueProp;
+    public Material StationProp;
+    public Material UtilitiesProp;
+
 
     void Start()
     {
-        if (int.TryParse(gameObject.name, out position))
+        propertyData = CSVLoader.LoadPropertyData();
+        if (int.TryParse(gameObject.name, out position) && propertyData.TryGetValue(position, out PropertyData data))
         {
-            propertyData = CSVLoader.LoadPropertyData();
+            DisplayTileData(data);
+            SpriteChanger(position);
         }
-        foreach (var entry in propertyData)
+       
+    }
+    private void DisplayTileData(PropertyData data)
+    {
+        Name.text = $"{data.NameProperty}";
+        if (data.CanBeBought)
         {
-            PropertyData data = entry.Value;
+            Cost.text = $"£{data.Cost}";
+            Cost.gameObject.SetActive(true);
+            Action.gameObject.SetActive(false);
+        }
+        else
+        {
+            Action.text = $"{data.Action}";
+            Cost.gameObject.SetActive(false);
+            Action.gameObject.SetActive(true);
+        }
+    }
+    public void SpriteChanger(int Position)
+    {
+        propertyData = CSVLoader.LoadPropertyData();
 
-            // if (data.CanBeBought)
-            // {
-            //     Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Group: {data.Group}, Price: {data.Price}, Rent: {data.Rent}, Rent with houses: {string.Join(", ", data.Houses)}");
-            // }
-            // else
-            // {
-            //     Debug.Log($"ID: {data.Position}, Name: {data.NameProperty}, Action: {data.Action} (Not Buyable)");
-            // }
+        if (propertyData.TryGetValue(Position, out PropertyData data))
+        {
+            Renderer renderer = GetComponent<Renderer>();
+            if (data.Group.Contains("Brown"))
+            {
+                renderer.material = BrownProp;
+            }
+            else if (data.Group.Contains("Red"))
+            {
+                renderer.material = RedProp;
+            }
+            else if (data.Group.Contains("Blue"))
+            {
+                renderer.material = BlueProp;
+            }
+            else if (data.Group.Contains("Purple"))
+            {
+                renderer.material = PurpleProp;
+            }
+            else if (data.Group.Contains("Orange"))
+            {
+                renderer.material = OrangeProp;
+            }
+            else if (data.Group.Contains("Yellow"))
+            {
+                renderer.material = YellowProp;
+            }
+            else if (data.Group.Contains("Green"))
+            {
+                renderer.material = GreenProp;
+            }
+            else if (data.Group.Contains("Deep blue"))
+            {
+                renderer.material = DeepBlueProp;
+            }
+            else if (data.Group.Contains("Station"))
+            {
+                renderer.material = StationProp;
+            }
+            else if (data.Group.Contains("Utilities"))
+            {
+                renderer.material = UtilitiesProp;
+            }
         }
     }
 }
