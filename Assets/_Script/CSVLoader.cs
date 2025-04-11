@@ -80,8 +80,6 @@ public static class CSVLoader
 
                                 costHouse = values1[11];
                                 costHotel = values1[12];
-                                //   int.TryParse(values[p+1], out CostHouse);
-                                //   int.TryParse(values[p + 1], out CostHotel);
                             }
                         }
                     }
@@ -95,8 +93,6 @@ public static class CSVLoader
 
                                 costHouse = values1[11];
                                 costHotel = values1[12];
-                                //   int.TryParse(values[p+1], out CostHouse);
-                                //   int.TryParse(values[p + 1], out CostHotel);
                             }
                         }
                     }
@@ -110,8 +106,6 @@ public static class CSVLoader
 
                                 costHouse = values1[11];
                                 costHotel = values1[12];
-                                //   int.TryParse(values[p+1], out CostHouse);
-                                //   int.TryParse(values[p + 1], out CostHotel);
                             }
                         }
                     }
@@ -125,8 +119,7 @@ public static class CSVLoader
 
                                 costHouse = values1[11];
                                 costHotel = values1[12];
-                                //   int.TryParse(values[p+1], out CostHouse);
-                                //   int.TryParse(values[p + 1], out CostHotel);
+
                             }
                         }
                     }
