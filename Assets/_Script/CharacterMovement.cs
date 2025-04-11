@@ -39,7 +39,7 @@ public class CharacterMovement : MonoBehaviour
         {
             // steps = dice2.diceRoll(playerScript, jailScript,this, dice1) ; //Random.Range(1, 13);
 
-            steps = 30;
+            steps = Random.Range(1, 13); ;
             Debug.Log("Rolled: " + steps);
             StartCoroutine(Move());
         }

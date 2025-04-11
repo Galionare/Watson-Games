@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788cef7285fb5b04589932ef8c91912e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PropCard: {fileID: 7359997130420646610, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
+  PropCard: {fileID: 7359997130420646610, guid: 6818b4a03e1538649a15c5f3627c41a5, type: 3}
   StatCard: {fileID: 5359949182981585827, guid: 279412ba7c751054c81502da2ebcb59e, type: 3}
   UtilCard: {fileID: 113538590801912500, guid: fa422e57744cfe7499f933308c5f565e, type: 3}
   Canvas: {fileID: 1999732178}
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHandSize: 10
-  CardPrefab: {fileID: 7359997130420646610, guid: 2cbfbb069323da84e8a2d2570a7bc820, type: 3}
+  CardPrefab: {fileID: 7359997130420646610, guid: 6818b4a03e1538649a15c5f3627c41a5, type: 3}
   splineContainer: {fileID: 1385104749}
   spawnPoint: {fileID: 1615917699}
   canvas: {fileID: 1999732181}
@@ -220,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 1385104747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 619, z: 0}
+  m_LocalPosition: {x: 0, y: -300, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

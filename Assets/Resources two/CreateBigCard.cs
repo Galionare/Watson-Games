@@ -13,23 +13,6 @@ public class CreateBigCard : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            // Skip if clicking over another UI element (like a button)
-            /*if (EventSystem.current.IsPointerOverGameObject())
-            {
-                    // Check if the click is inside this UI element
-                Vector2 mousePos = Input.mousePosition;
-                if (RectTransformUtility.RectangleContainsScreenPoint(ThisCard, mousePos, null))
-                {
-                        // Clicked inside the UI element — do nothing
-                    return;
-                }
-            }
-
-            else // Clicked outside — destroy the UI prefab
-            {
-                Destroy(gameObject);
-            }*/
-
         }
     }
     bool IsPointerOverUIObject(GameObject target)
