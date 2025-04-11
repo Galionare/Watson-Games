@@ -5,11 +5,12 @@ using UnityEngine.Rendering;
 
 public class CharacterMovement : MonoBehaviour
 {
+    JailScript JailScript;
     private Walking currentRoute;
     int routePosition;
     public int steps;
     bool isMoving;
-    public DiceScript Dice;
+    public DiceScript DiceScript;
     public GameObject Player;
 
     private void Start()
@@ -20,8 +21,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-
-            steps = Random.Range(1, 13);
+            steps = DiceScript.diceRoll(Player);
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
 

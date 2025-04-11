@@ -4,7 +4,7 @@ public class JailScript : MonoBehaviour
 {
     //This script has a million errors because the script this script RELIES on in the timeline is not done (looking at you emil) but its been so long i just gotta get this done 
 
-    
+    public GameObject GetOutJail;
 
     // OBSTACLE: Should JustVisiting be a seperate tile ontop of tile 11(jail) eg 11.5 or should it just be a playerstate when the player is in jail? honestly having Jail be its own tile not within the standard array of movement for the player is infinitely easier to implement.
     // Solution, without the calling of the jail script a player should be able to sit on the jail square just fine without anything negative, this can act as JustVisiting
@@ -12,7 +12,7 @@ public class JailScript : MonoBehaviour
     private Player player;
     void Release(Player player)
     {
-        player.position = 10;
+        player.GetComponent<Player>().position = 10;
     }
     int checkTurnsToWait(Player player)
     {
@@ -21,7 +21,7 @@ public class JailScript : MonoBehaviour
             //somewhat redundant since turnsToWait will be initialised within the player script and can be checked there, but this is here for clarity
         
     }
-    public void GoToJail(GameObject player)
+    public void GoToJail(Player player)
     {
         int beforeJailPos = player.GetComponent<Player>().position; //wont be needed but is useful to have for debugging purposes. 
         player.GetComponent<Player>().position = 11;
@@ -29,9 +29,9 @@ public class JailScript : MonoBehaviour
         player.GetComponent<Player>().jailTurn = 0;
         bool playerWantToPay = false;
         //ask them if theyd like to pay 50 to get out, also as a side effect lets them save the get out of jail free if they want to
-        if (player.GetComponent<Player>().Owned.Contains("Get out of Jail Free"))
+        if (player.GetComponent<Player>().Owned.Contains(GetOutJail))
         {
-            player.GetComponent<Player>().Owned.Contains("Get out of Jail Free");
+            player.GetComponent<Player>().Owned.Contains(GetOutJail);
             //make sure this is placed at the bottom of the card pile, the card developer will have to make sure this is the case
             playerPaid = true;
             Release(player);
