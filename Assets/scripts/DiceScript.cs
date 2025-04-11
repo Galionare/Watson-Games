@@ -1,70 +1,55 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using System;
-using System.Threading;
-using UnityEditor;
-public class DiceScript
 
+public class DiceScript : MonoBehaviour
 {
-    JailScript jailScript;
-    int Dice1,Dice2,PlayerRoll;
-    public Player player;
-    public CharacterMovement characterMovement;
-    //Player = 
-
-    static void displayDice(int Dice1, int Dice2)
+    CharacterMovement movementScript;
+    public int diceRoll(Player player, JailScript jailScript, CharacterMovement movementScript, RollDice roller)
     {
-        //optional method to display the dice rolls onscreen, for now is being used to test the method. 
+        int playerRoll = 0;
+        int temp1 = 0, temp2 = 0;
+        int jailIfThree = 0;
+        bool isDouble = false;
 
-        Debug.Log("Dice 1: " + Dice1 + " Dice 2: " + Dice2);
-    }
-    public int diceRoll(Player player, JailScript jailScript, CharacterMovement movementScript, RollDice dice) //This will take a player variable as a parameter possibly, empty for now as itll probably just be called to return values within a player script during a turn, the method of invoking the dicerolling will be determined in there too, "space to roll" etc, itll then continue to roll automatically with sleeps between if there are doubles
-    {
-     int PlayerRoll = 0; //Initialises their roll as 0 from last turn
-     int Temp1 =0 ,Temp2 = 0;
-     bool isDouble = false;
-     int JailIfThree = 0;
-     RollDice dice = new RollDice();
-    
-     Temp1 = dice.Roll(); //Calls the function within the RollDice Script to roll the board dice visually/physically for the player
-     Temp2 = dice.Roll();
-     PlayerRoll += Temp1 + Temp2; //Adds the two dice rolls together to get the total roll for the player
-            if(Temp1 == Temp2)
+        temp1 = roller.Roll(player);
+        temp2 = roller.Roll(player);
+        playerRoll += temp1 + temp2;
+
+        Debug.Log("Dice 1: " + temp1 + " Dice 2: " + temp2);
+
+        if (temp1 == temp2)
+        {
+            isDouble = true;
+            jailIfThree++;
+
+            while (isDouble && jailIfThree < 3)
             {
-                isDouble = true;
-                JailIfThree++;
-                while(isDouble == true && JailIfThree != 3) //Rolls Again if user rolled a double, will do this until 3 doubles have been reached OR a double is not rolled
+                Debug.Log("You rolled a double! Roll again!");
+
+                temp1 = roller.Roll(player);
+                temp2 = roller.Roll(player);
+                Debug.Log("Dice 1: " + temp1 + " Dice 2: " + temp2);
+
+                playerRoll += temp1 + temp2;
+
+                if (temp1 == temp2)
                 {
-                    Debug.Log("You rolled a double! Roll again!");
-                    Temp1 = dice.Roll();
-                    Temp2 = dice.Roll();
-                    PlayerRoll += Temp1 + Temp2;
-                    if(Temp1 == Temp2)
-                    {
-                        JailIfThree++;
-                        Debug.Log("You rolled a double! Roll again!");
-                    }
-                    else
-                    {
-                        isDouble = false;
-                        PlayerRoll += Temp1 + Temp2;
-                        break;
-                    }
+                    jailIfThree++;
+                }
+                else
+                {
+                    isDouble = false;
                 }
             }
-        
-        if(JailIfThree == 3 /*optional: AND IF player does NOT have get out of jail free, and deincrement if they do(impossible as of right now as the other devs have not done player nor potluck*/) //Jail Check
-        {
-           movementScript.jailGO(player); //Calls Function to put the player in jail see JailScript.cs
-           Debug.Log("Go to Jail");
-            return 0;  //Ignore: Int method so this needs to return something, this ensures they dont move and will stay in jail. 
         }
-        else
-        { 
-            Debug.Log("Player Roll " + PlayerRoll);
-            return PlayerRoll; //Returns Combined value of the dicerolls (including possible extras from doubles)
-        }
-    }
-   
-}
 
+        if (jailIfThree == 3)
+        {
+            Debug.Log("Three doubles! Go to Jail.");
+            StartCoroutine(movementScript.GoToJailMove());
+            return 0;
+        }
+
+        Debug.Log("Total Player Roll: " + playerRoll);
+        return playerRoll;
+    }
+}

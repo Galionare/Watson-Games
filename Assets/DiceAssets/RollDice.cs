@@ -8,12 +8,12 @@ using System.Threading;
 using UnityEditor;
 using JetBrains.Annotations;
 
-
 public class RollDice : MonoBehaviour
 {
+
     public GameObject gameDice;
-    int diceCount = 0;
-    public static int Roll()
+    private int diceCount = 0;
+    public int Roll(Player player)
     {
         /*
         Instantiate(gameDice);
@@ -22,6 +22,7 @@ public class RollDice : MonoBehaviour
         */
         diceCount++;
         GameObject newDice = Instantiate(gameDice);
+        DiceRolling roller = newDice.GetComponent<DiceRolling>();
         newDice.name = "Dice" + diceCount;
         newDice.transform.position = new Vector3(2*diceCount, 8, 0);
 

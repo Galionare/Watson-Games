@@ -9,19 +9,22 @@ public class CharacterMovement : MonoBehaviour
     int routePosition;
     public int steps;
     bool isMoving;
-    public DiceScript dice;
+    public RollDice dice1;
+    public DiceScript dice2;
     public GameObject Player;
     private Player playerScript;
     private JailScript jailScript;
     FreeParkiingScript ParkingScript;
-    CharacterMovement characterMovement;
+
 
     private void Start()
     {
         currentRoute = FindFirstObjectByType<Walking>();
         playerScript = GetComponent<Player>();
-        jailScript = GetComponent<JailScript>();
         ParkingScript = FindFirstObjectByType<FreeParkiingScript>();
+        jailScript = FindFirstObjectByType<JailScript>();
+        dice1 = FindFirstObjectByType<RollDice>();
+        dice2 = FindFirstObjectByType<DiceScript>();
 
     }
 
@@ -34,7 +37,9 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-            steps = dice.diceRoll(playerScript,jailScript,characterMovement, dice) ; //Random.Range(1, 13);
+            // steps = dice2.diceRoll(playerScript, jailScript,this, dice1) ; //Random.Range(1, 13);
+
+            steps = 30;
             Debug.Log("Rolled: " + steps);
             StartCoroutine(Move());
         }
@@ -74,7 +79,7 @@ public class CharacterMovement : MonoBehaviour
         return transform.position == target;
     }
     
-    IEnumerator GoToJailMove()
+    public IEnumerator GoToJailMove()
     { 
         routePosition = 10;
         Vector3 nextPos = currentRoute.objChildList[routePosition].position;

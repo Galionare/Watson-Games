@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3660988646957159588}
   - component: {fileID: 558444449148824948}
   - component: {fileID: 9179563848573933557}
-  - component: {fileID: 5455740343647021061}
   m_Layer: 0
   m_Name: Character 1
   m_TagString: Player
@@ -68,19 +67,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steps: 0
   Player: {fileID: 0}
-  jailScript: {fileID: 0}
---- !u!114 &5455740343647021061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5613237295616066347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcceab65ae2c9e941bb3bd7569d81222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5721219692620770034
 GameObject:
   m_ObjectHideFlags: 0
