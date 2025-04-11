@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7514296910138823107}
   - component: {fileID: 558444449148824948}
   - component: {fileID: 5258094476886307256}
+  - component: {fileID: -4549117874609543741}
+  - component: {fileID: -5033256970794133801}
   m_Layer: 0
   m_Name: Character 1
   m_TagString: Player
@@ -29,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8, y: 0, z: -8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4157343337192569473}
@@ -47,9 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a68b6785e397cf47bf456f2b996daff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  routePosition: 0
   steps: 0
-  Dice: {fileID: 0}
-  Player: {fileID: 0}
+  dice: {fileID: 0}
+  player: {fileID: 0}
+  playerScript: {fileID: 0}
+  done: 0
 --- !u!114 &558444449148824948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +73,9 @@ MonoBehaviour:
   position: 0
   jailTurn: 0
   cards: []
+  isRolled: 0
+  passedGo: 0
+  index: 0
 --- !u!114 &5258094476886307256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +89,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDice: {fileID: 699594502495038592, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
+  player: {fileID: 0}
+  currentRoute: {fileID: 0}
+--- !u!23 &-4549117874609543741
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613237295616066347}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-5033256970794133801
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613237295616066347}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3669258589346456565, guid: 9b574434f73c46a4eb333235dd556599, type: 3}
 --- !u!1 &8116294092171337597
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 8116294092171337597}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.075, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -122,7 +199,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8116294092171337597}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 42b46fb6a1fb8c94d9917610c4636fd2, type: 2}
 --- !u!23 &2132186301946874404
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -146,7 +223,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 748231bbd3e934c4f885e75894f89258, type: 2}
+  - {fileID: 2100000, guid: 513f3c2ed2034c947a22e0b49d2a29d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
