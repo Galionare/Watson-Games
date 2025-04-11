@@ -67,7 +67,7 @@ public class Banker
             bool wantsToBuy = await InputDisplay.Instance.AskYesOrNo("Do you want to purchase this property?");
             if (wantsToBuy) {
                 // 10. when property is bought the property is transferred from the bank to player and the money paid from player to bank
-                property.Owner = currentPlayer;
+                property.OwnerIndex = currentPlayer.playerIndex;
                 currentPlayer.cash -= property.Price;
                 property.CanBeBought = false;
 
@@ -121,7 +121,7 @@ public class Banker
                 }
             }
         }
-        property.Owner = players[highestBidderIndex];
+        property.OwnerIndex = highestBidderIndex;
         InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
@@ -130,9 +130,8 @@ public class Banker
         int rent = 0;
         bool owned = true;
         PropertyData property = propertyData[currentPlayer.position];
-        GameObject propertyOwner = players[currentProperty.Owner];
 
-        if (propertyOwner != currentPlayer && propertyOwner.index != 0) { // all unsold properties are owned by the bank, so if the property landed on is owned by another player then pay rent 
+        if (property.OwnerIndex != currentPlayer.playerIndex && property.OwnerIndex != 0 && property.RentCollect) { // all unsold properties are owned by the bank, so if the property landed on is owned by another player then pay rent 
             if (colourPositions.TryGetValue(property.Group, out List<int> positions)) { // get the list of property positions for the current property's colour group
                 foreach (int pos in positions) {
                     if (propertyData[pos].Owner != propertyOwner) {
@@ -149,7 +148,7 @@ public class Banker
             // 13. if a player owns all of the properties in a colour coded group but the properties are otherwise not developed further
             // - with houses and hotels then the rent is doubled
             else if (owned) {
-                rent = rent * 2;
+                rent = property.Rent * 2;
             }
             else {
                 rent = property.Rent;
@@ -160,8 +159,9 @@ public class Banker
             }
             currentPlayer.cash -= rent;
             propertyOwner.cash += rent;
+
+            InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
         }
-        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
     // - 15. if they are still unable to pay after selling all assests then they are bankrupt and must leave the game
@@ -195,6 +195,7 @@ public class Banker
             if (currentPlayer.cash < rentToPay && currentPlayer.owned.Count == 0) {
                     await InputDisplay.Instance.ShowMessage("You are bankrupt, please leave the game.");
                     // remove player from game
+                    currentPlayer.SetActive(false);
                     players[currentPlayer.index] = null;
                     InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
                 }
@@ -207,16 +208,16 @@ public class Banker
     public void mortgageProperty(Player currentPlayer, PropertyData property) {
         // 23. if a player needs to raise funds, they may mortgage a property with the bank. the bank will pay the player one half of the value
         // - of the property. no rents may be collected for that property whilst it is under mortgage
-        currentPlayer.cash += (property.Price/2);
-        property.rentCollect = false;
-        property.mortgaged = true;
+        currentPlayer.cash += (property.Cost/2);
+        property.RentCollect = false;
+        property.Mortgaged = true;
         InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
     
     public void unMortgageProperty(Player currentPlayer, PropertyData property) {
         currentPlayer.cash -= (property.Price/2);
-        property.rentCollect = true;
-        property.mortgaged = false;
+        property.RentCollect = true;
+        property.Mortgaged = false;
         InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
@@ -247,12 +248,12 @@ public class Banker
             property.NumOfHouses -= housesToSell;
         }
         else {
-            int sellPrice = property.Price;
+            int sellPrice = property.Cost;
             // 24. if a mortgaged property is then sold back to the bank it is sold for one half of the property price as shown on the card
-            if (property.mortgaged) {
+            if (property.Mortgaged) {
                 sellPrice = sellPrice/2;
-                property.mortgaged = false;
-                property.rentCollect = true;
+                property.Mortgaged = false;
+                property.RentCollect = true;
             }
             // 20. if a player needs to raise funds they can sell a property back to the bank for its original value as shown on the game card
             currentPlayer.cash += sellPrice;
