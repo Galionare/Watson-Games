@@ -42,6 +42,10 @@ public class ShowProperty : MonoBehaviour
                  pos.Position = Position;
 
              }
+             if (data.NameProperty.Contains("Pot Luck"))
+            {
+
+            }
          }
      }
  
