@@ -5,9 +5,9 @@ using System.Threading;
 using UnityEditor;
 public class DiceScript : MonoBehaviour
 {
-    public JailScript JailScript;
+    public JailScript Jail;
     public Player player;
-    //Player = 
+    
 
     static void displayDice(int Dice1, int Dice2)
     {
@@ -52,7 +52,7 @@ public class DiceScript : MonoBehaviour
         
         if(JailIfThree == 3 /*optional: AND IF player does NOT have get out of jail free, and deincrement if they do(impossible as of right now as the other devs have not done player nor potluck*/) //Jail Check
         {
-           JailScript.GoToJail(player); //Calls Function to put the player in jail see JailScript.cs
+           //Jail.GoToJail(player); //Calls Function to put the player in jail see JailScript.cs
            Debug.Log("Go to Jail");
             return 0;  //Ignore: Int method so this needs to return something, this ensures they dont move and will stay in jail. 
         }

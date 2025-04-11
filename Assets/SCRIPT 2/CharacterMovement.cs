@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public int steps;
     bool isMoving;
     public DiceScript DiceScript;
-    public GameObject Player;
+    public Player Player;
 
     private void Start()
     {
