@@ -2,67 +2,94 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
-using System.Threading.Tasks;
-using UnityEngine.UIElements;
 
 public class CharacterMovement : MonoBehaviour
 {
-
     private Walking currentRoute;
-    public int routePosition;
+    int routePosition;
     public int steps;
     bool isMoving;
-    private GameObject Player;
+    //public RollDice dice1;
+    public DiceScript dice2;
+    public GameObject Player;
     private Player playerScript;
-    public DiceScript dice;
-    public GameObject player;
+    private JailScript jailScript;
+    private ShowProperty ShowProp;
+    FreeParkiingScript ParkingScript;
 
-    private ShowProperty showProperty;
 
     private void Start()
     {
-            currentRoute = FindFirstObjectByType<Walking>();
-            dice = FindFirstObjectByType<DiceScript>();
+        currentRoute = FindFirstObjectByType<Walking>();
+        playerScript = GetComponent<Player>();
+        ParkingScript = FindFirstObjectByType<FreeParkiingScript>();
+        jailScript = FindFirstObjectByType<JailScript>();
+        //dice1 = FindFirstObjectByType<RollDice>();
+        dice2 = FindFirstObjectByType<DiceScript>();
+        ShowProp = FindFirstObjectByType<ShowProperty>();
+
     }
-    private async Task Update()
+
+    public void jailGO(Player player)
     {
-        if (Input.GetKeyDown(KeyCode.M) && !isMoving)
+        StartCoroutine(GoToJailMove());
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-            steps = dice.diceRoll();
+            // steps = dice2.diceRoll(playerScript, jailScript,this, dice1) ; //Random.Range(1, 13);
 
-            
-            Debug.Log("Rolled" + steps);
+            steps = Random.Range(1, 13); ;
+            Debug.Log("Rolled: " + steps);
             StartCoroutine(Move());
+        }
 
+        if (!isMoving && playerScript.position == 30)
+        {
+            StartCoroutine(GoToJailMove());
         }
     }
+
     IEnumerator Move()
     {
-        yield return new WaitForSeconds(5f);
         if (isMoving)
         {
             yield break;
         }
         isMoving = true;
 
-
         while (steps > 0)
         {
             routePosition++;
-            routePosition%= currentRoute.objChildList.Count;
+            routePosition %= currentRoute.objChildList.Count;
             Vector3 nextPos = currentRoute.objChildList[routePosition].position;
-            while (moveNext(nextPos)) { yield return null;}
+            while (!moveNext(nextPos)) { yield return null; }
 
-            yield  return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.1f);
             steps--;
-            
         }
+
         isMoving = false;
-        routePosition = playerScript.position;
-        showProperty.ShowProp(playerScript.position);
+        playerScript.position = routePosition;
+        ShowProp.ShowProp(playerScript.position);
     }
+
     bool moveNext(Vector3 target)
     {
-        return target != (transform.position = Vector3.MoveTowards(transform.position,target,8f * Time.deltaTime));
+        transform.position = Vector3.MoveTowards(transform.position, target, 12f * Time.deltaTime);
+        return transform.position == target;
     }
+
+    public IEnumerator GoToJailMove()
+    {
+        routePosition = 10;
+        Vector3 nextPos = currentRoute.objChildList[routePosition].position;
+        while (!moveNext(nextPos)) { yield return null; }
+        yield return new WaitForSeconds(0.1f);
+        jailScript.GoToJail(playerScript);
+    }
+
+
 }
