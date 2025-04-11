@@ -15,13 +15,14 @@ public class CharacterMovement : MonoBehaviour
 
     private void Start()
     {
-            currentRoute = FindFirstObjectByType<Walking>();
+        currentRoute = FindFirstObjectByType<Walking>();
+        DiceScript = FindFirstObjectByType<DiceScript>();
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-            steps = DiceScript.diceRoll(Player);
+            steps = DiceScript.diceRoll();
             Debug.Log("Rolled" + steps);
             StartCoroutine(Move());
 
@@ -48,6 +49,7 @@ public class CharacterMovement : MonoBehaviour
             
         }
         isMoving = false;
+        Player.position = routePosition;
     }
     bool moveNext(Vector3 target)
     {

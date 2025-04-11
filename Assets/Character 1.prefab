@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steps: 0
+  DiceScript: {fileID: 1622371343815947164, guid: 91c021b841849694ab530ad282fd2d85, type: 3}
+  Player: {fileID: 558444449148824948}
 --- !u!114 &558444449148824948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +63,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerIndex: 0
   playerName: 
+  passedGO: 0
+  money: 0
+  position: 0
+  jailTurn: 0
+  Owned: []
 --- !u!1 &8116294092171337597
 GameObject:
   m_ObjectHideFlags: 0
