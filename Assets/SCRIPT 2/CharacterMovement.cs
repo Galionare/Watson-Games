@@ -57,7 +57,7 @@ public class CharacterMovement : MonoBehaviour
 
         
     }
-    bool moveNext(Vector3 target)
+    public bool moveNext(Vector3 target)
     {
         return target != (transform.position = Vector3.MoveTowards(transform.position,target,8f * Time.deltaTime));
     }
