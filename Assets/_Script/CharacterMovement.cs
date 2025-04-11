@@ -73,7 +73,6 @@ public class CharacterMovement : MonoBehaviour
 
         isMoving = false;
         playerScript.position = routePosition;
-        Debug.Log("Working");
         ShowProp.ShowProp(playerScript.position);
     }
 

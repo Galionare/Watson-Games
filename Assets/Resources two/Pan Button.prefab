@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433169232221675641}
+  - component: {fileID: 4026195016690192620}
   m_Layer: 5
   m_Name: Pan Button
   m_TagString: Untagged
@@ -37,6 +38,18 @@ RectTransform:
   m_AnchoredPosition: {x: -464, y: 236.5}
   m_SizeDelta: {x: 928, y: 473}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4026195016690192620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7612901781016955272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7febc41021fcf464fbbd5ba5149ba242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4724493786220264734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,7 +142,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4612560216540452865, guid: 424d5c0ac86f64e4f9b10b39cf137427, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8790340915138654352, guid: 424d5c0ac86f64e4f9b10b39cf137427, type: 3}
     m_AddedGameObjects: []
