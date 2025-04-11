@@ -1,10 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PotKnock : MonoBehaviour
 {
     public GameObject PotCard;
-    public List<GameObject> PotPile;
-    public List<GameObject> KnockPile;
+    public List<GameObject> PotPile = new List<GameObject>();
+    public List<GameObject> KnockPile = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

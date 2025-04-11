@@ -8,9 +8,18 @@ public class ShowProperty : MonoBehaviour
      public GameObject UtilCard;
      public GameObject Canvas;
 
+     //public GameObject PotKNokss;
+
+     //PotKnock potKnock;
+
      private Dictionary<int, PropertyData> propertyData;
 
-     public void ShowProp(int position)
+    private void Start()
+    {
+        //potKnock = FindFirstObjectByType<PotKnock>();
+    }
+
+    public void ShowProp(int position)
      {
          int Position = position + 1;
          Debug.Log(Position);
@@ -42,11 +51,18 @@ public class ShowProperty : MonoBehaviour
                  pos.Position = Position;
 
              }
-             if (data.NameProperty.Contains("Pot Luck"))
-            {
+            /* if (data.NameProperty.Contains("Pot Luck"))
+             {
+                GameObject POT = Instantiate(PotKNokss, Canvas.transform) as GameObject;
+                POT.GetComponentInChildren<FullUtilityCard>().CreateCard(Position);
 
             }
-         }
+            if (data.NameProperty.Contains("Opportunity Knocks"))
+            {
+                GameObject KNO = potKnock.KnockPile[Random.Range(0, 16)];
+                Instantiate(KNO, Canvas.transform);
+            }*/
+        }
      }
  
 }

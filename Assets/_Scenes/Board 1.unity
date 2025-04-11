@@ -959,8 +959,8 @@ MonoBehaviour:
   maxPlayer: 5
   currentPlayerI: 0
   currentState: 0
-  hands: {fileID: 1913636461}
-  hands2: {fileID: 1813763227}
+  hands: {fileID: 0}
+  hands2: {fileID: 0}
 --- !u!4 &162754759
 Transform:
   m_ObjectHideFlags: 0
@@ -1826,6 +1826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 359568568}
+  - component: {fileID: 359568569}
   m_Layer: 0
   m_Name: Pot Luck
   m_TagString: Untagged
@@ -1855,6 +1856,21 @@ Transform:
   - {fileID: 623141247}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &359568569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359568567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31b41cd399eadeb47bc6245b2670549e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PotCard: {fileID: 1792871878024282336, guid: e4d2770d11d90d445b0dc98834a5bcbb, type: 3}
+  PotPile: []
+  KnockPile: []
 --- !u!1001 &402367488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7494,11 +7510,6 @@ PrefabInstance:
       addedObject: {fileID: 1947055169}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 930b7a19d446f4b4c9c810e37e84e625, type: 3}
---- !u!1 &1813763227 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 180557533655662575, guid: 930b7a19d446f4b4c9c810e37e84e625, type: 3}
-  m_PrefabInstance: {fileID: 1813763226}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1813763228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 705561775665358165, guid: 930b7a19d446f4b4c9c810e37e84e625, type: 3}
@@ -8275,11 +8286,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8f178580fbe40eb448046a42011b3bfe, type: 3}
---- !u!1 &1913636461 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 180557533655662575, guid: 930b7a19d446f4b4c9c810e37e84e625, type: 3}
-  m_PrefabInstance: {fileID: 752596656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1913636463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 705561775665358165, guid: 930b7a19d446f4b4c9c810e37e84e625, type: 3}
