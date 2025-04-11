@@ -4,14 +4,11 @@ using System.Collections.Generic;
 
 public class Banker
 {
-    private int numOfPlayers = 1; //temp
-    public List<Player> players; // idk where to get the players array from
+    private int numOfPlayers = 1;
+    public List<Player> players;
 
     const int GO_MONEY = 200;
     const int STARTING_MONEY = 1500;
-
-    private bool passedGo = false;
-    private int index = 0;
 
     private Dictionary<int, PropertyData> propertyData;
     private Dictionary<string, List<int>> colourPositions;
@@ -59,7 +56,7 @@ public class Banker
         InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
 
-        // - 10. all properties are originally the bank's - to do in property script
+    // - 10. all properties are originally the bank's
     public async void purchaseProperty(Player currentPlayer) {
         // 9. players may not purchase properties until they've made on circuit of the board (pass go once)
         PropertyData property = propertyData[currentPlayer.position];
@@ -174,7 +171,7 @@ public class Banker
             bool found = false;
             while (!found) {
                 string propertyConsidered = await InputDisplay.Instance.AskInput("You are unable to pay the rent, which property would you like to sell or mortgage?");
-                for(int i = 0; i < currentPlayer.owned.Count(); i++) {
+                for(int i = 0; i < currentPlayer.owned.Count; i++) {
                     // maybe the Player object needs an array of the positions of the properties they own
                     if (currentPlayer.owned[i].NameProperty == propertyConsidered) {
                         property = currentPlayer.owned[i];
@@ -295,11 +292,9 @@ public class Banker
 
 
             if (colourPositions.TryGetValue(property.Group, out List<int> positions)) {
-                bool owned = true;
                 for (int i = 0; i < positions.Count; i++) {
                     // 18. houses and hotels may only be purchased where a player owns all of the properties in a colour group
                     if (propertyData[positions[i]].OwnerIndex != currentPlayer.playerIndex) {
-                        owned = false;
                         await InputDisplay.Instance.ShowMessage("You do not own all of the properties in this colour group, you cannot improve this property.");
                         return;
                     }

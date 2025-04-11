@@ -137,7 +137,7 @@ public class InputDisplay : MonoBehaviour
             scoreboard += $"Player {i}: {player.money}\n";
             if (player.owned.Count > 0) {
                 foreach(var property in player.owned) {
-                    scoreboard += $" - {property.NameProperty}, Houses: {property.NumOfHouses}, Mortgaged: {property.mortgaged}\n";
+                    scoreboard += $" - {property.NameProperty}, Houses: {property.NumOfHouses}, Mortgaged: {property.Mortgaged}\n";
                 }
             }
             else {
