@@ -18,6 +18,7 @@ public class CharacterMovement : MonoBehaviour
     public Player playerScript;
     GameManager gameManager;
     public bool done = false;
+    public ShowProperty showProperty;
 
     private void Start()
     {
@@ -66,6 +67,7 @@ public class CharacterMovement : MonoBehaviour
         playerScript.isRolled = true;
         done = false;
 
+        showProperty.ShowProp(playerScript.position);
 
     }
     public bool moveNext(Vector3 target)

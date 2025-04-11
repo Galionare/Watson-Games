@@ -4,14 +4,11 @@ using System.Collections.Generic;
 
 public class Banker
 {
-    private int numOfPlayers = 1; //temp
-    public List<Player> players; // idk where to get the players array from
+    private int numOfPlayers = 1;
+    public List<Player> players;
 
-    const int GO_CASH = 200;
-    const int STARTING_CASH = 1500;
-
-    private bool passedGo = false;
-    private int index = 0;
+    const int GO_MONEY = 200;
+    const int STARTING_MONEY = 1500;
 
     private Dictionary<int, PropertyData> propertyData;
     private Dictionary<string, List<int>> colourPositions;
@@ -39,39 +36,40 @@ public class Banker
 
         // loop through the board to add the property positions to their respective colour groups in the dictionary
         foreach(var property in propertyData) {
-            if (colourPositions.ContainsKey(property.Group)) {
-                colourPositions[property.Group].Add(property.Position);
+            if (colourPositions.ContainsKey(property.Value.Group)) {
+                colourPositions[property.Value.Group].Add(property.Value.Position);
             }
         }
 
-        // 3. bank has 50,000 cash at start and assigns all players 1,500 at start of game
+        // 3. bank has 50,000 money at start and assigns all players 1,500 at start of game
         for (int i = 1; i <= numOfPlayers; i++) {
-            players[i].cash = STARTING_CASH;
+            players[i].money = STARTING_MONEY;
         }
 
-        InputDisplay.Instance.UpdateScoreboard(players); // update the scoreboard with the starting cash for each player
+        InputDisplay.Instance.UpdateScoreboard(); // update the scoreboard with the starting money for each player
     }
 
-    public void collectGoCash(Player player) {
-        // 9. when a player pasts Go they collect 200 cash from the bank
-        player.cash += GO_CASH;
-        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+    public void collectGoMoney(Player player) {
+        // 9. when a player pasts Go they collect 200 money from the bank
+        player.money += GO_MONEY;
+        player.passedGo = true;
+        InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
 
-        // - 10. all properties are originally the bank's - to do in property script
+    // - 10. all properties are originally the bank's
     public async void purchaseProperty(Player currentPlayer) {
         // 9. players may not purchase properties until they've made on circuit of the board (pass go once)
         PropertyData property = propertyData[currentPlayer.position];
-        if (currentPlayer.passedGo && property.CanBeBought){ 
+        if (currentPlayer.passedGo && property.CanBeBought && currentPlayer.money >= property.Cost){ 
             // 11. once a player has moved if they land on an a property that isn't yet purchased they have the opportunity to buy it
             bool wantsToBuy = await InputDisplay.Instance.AskYesOrNo("Do you want to purchase this property?");
             if (wantsToBuy) {
                 // 10. when property is bought the property is transferred from the bank to player and the money paid from player to bank
                 property.OwnerIndex = currentPlayer.playerIndex;
-                currentPlayer.cash -= property.Price;
+                currentPlayer.money -= property.Cost;
                 property.CanBeBought = false;
 
-                InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard 
+                InputDisplay.Instance.UpdateScoreboard(); // update scoreboard 
             }
             else if (!wantsToBuy) {
                 // 11. if the player doesn't buy a property then it's auctioned by the bank
@@ -89,6 +87,7 @@ public class Banker
         bidders[(refusedPlayer.index)] = null;
         int numOfBidders = numOfPlayers - 1;
         int currentNumOfBidders = numOfBidders;
+        int bid = 0;
 
         while (numOfBidders > 1) {
             numOfBidders = currentNumOfBidders;
@@ -100,7 +99,6 @@ public class Banker
                         bool validBid = false;
                         while (!validBid) {
                             string bidInput = await InputDisplay.Instance.AskInput("Enter the amount you want to bid");
-                            int bid;
                             if (int.TryParse(bidInput, out bid)) {
                                 validBid = true;
                             }
@@ -122,7 +120,7 @@ public class Banker
             }
         }
         property.OwnerIndex = highestBidderIndex;
-        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+        InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
 
     public void payRent(Player currentPlayer) {
@@ -134,7 +132,7 @@ public class Banker
         if (property.OwnerIndex != currentPlayer.playerIndex && property.OwnerIndex != 0 && property.RentCollect) { // all unsold properties are owned by the bank, so if the property landed on is owned by another player then pay rent 
             if (colourPositions.TryGetValue(property.Group, out List<int> positions)) { // get the list of property positions for the current property's colour group
                 foreach (int pos in positions) {
-                    if (propertyData[pos].Owner != propertyOwner) {
+                    if (propertyData[pos].OwnerIndex != property.OwnerIndex) {
                         owned = false;
                         break;
                     }
@@ -143,7 +141,7 @@ public class Banker
 
             // 14. if a property is improved with houses or hotels then the rent to be paid is as shown on the card
             if (property.NumOfHouses > 0) {
-                rent = property.Houses[(NumOfHouses - 1)];
+                rent = property.Houses[(property.NumOfHouses - 1)];
             }
             // 13. if a player owns all of the properties in a colour coded group but the properties are otherwise not developed further
             // - with houses and hotels then the rent is doubled
@@ -154,28 +152,29 @@ public class Banker
                 rent = property.Rent;
             }
 
-            if (currentPlayer.cash < rent) {
+            if (currentPlayer.money < rent) {
                 unableToPay(rent, currentPlayer);
             }
-            currentPlayer.cash -= rent;
-            propertyOwner.cash += rent;
+            currentPlayer.money -= rent;
+            players[property.OwnerIndex].money += rent;
 
-            InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+            InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
         }
     }
 
     // - 15. if they are still unable to pay after selling all assests then they are bankrupt and must leave the game
     // - their game token is removed from the board
     public async void unableToPay(int rentToPay, Player currentPlayer) {
-        // 15. all rents must be paid in cash, if a player is unable to pay the rent then they must sell game assets to make good on the rent
-        while (rentToPay > currentPlayer.cash){
+        PropertyData property = null;
+        // 15. all rents must be paid in money, if a player is unable to pay the rent then they must sell game assets to make good on the rent
+        while (rentToPay > currentPlayer.money){
             bool found = false;
             while (!found) {
                 string propertyConsidered = await InputDisplay.Instance.AskInput("You are unable to pay the rent, which property would you like to sell or mortgage?");
-                for(int i = 0; i < currentPlayer.owned.Count(); i++) {
+                for(int i = 0; i < currentPlayer.owned.Count; i++) {
                     // maybe the Player object needs an array of the positions of the properties they own
                     if (currentPlayer.owned[i].NameProperty == propertyConsidered) {
-                        PropertyData property = currentPlayer.owned[i];
+                        property = currentPlayer.owned[i];
                         found = true;
                     }
                     else {
@@ -192,14 +191,13 @@ public class Banker
                 sellProperty(currentPlayer, property);
             }
 
-            if (currentPlayer.cash < rentToPay && currentPlayer.owned.Count == 0) {
+            if (currentPlayer.money < rentToPay && currentPlayer.owned.Count == 0) {
                     await InputDisplay.Instance.ShowMessage("You are bankrupt, please leave the game.");
                     // remove player from game
-                    currentPlayer.SetActive(false);
                     players[currentPlayer.index] = null;
-                    InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+                    InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
                 }
-            else if (currentPlayer.cash < rentToPay && currentPlayer.owned.Count > 0) {
+            else if (currentPlayer.money < rentToPay && currentPlayer.owned.Count > 0) {
                 await InputDisplay.Instance.ShowMessage("You are still unable to pay the rent, please sell or mortgage another property.");
             }
         }
@@ -208,17 +206,17 @@ public class Banker
     public void mortgageProperty(Player currentPlayer, PropertyData property) {
         // 23. if a player needs to raise funds, they may mortgage a property with the bank. the bank will pay the player one half of the value
         // - of the property. no rents may be collected for that property whilst it is under mortgage
-        currentPlayer.cash += (property.Cost/2);
+        currentPlayer.money += (property.Cost/2);
         property.RentCollect = false;
         property.Mortgaged = true;
-        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+        InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
     
     public void unMortgageProperty(Player currentPlayer, PropertyData property) {
-        currentPlayer.cash -= (property.Price/2);
+        currentPlayer.money -= (property.Cost/2);
         property.RentCollect = true;
         property.Mortgaged = false;
-        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+        InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
 
     
@@ -227,7 +225,7 @@ public class Banker
         // - a player may also sell houses and hotels back to the bank for the original price
         if (property.NumOfHouses > 0) {
             bool validInput = false;
-            int housesToSell;
+            int housesToSell = 0;
             while (!validInput) {
                 string playerInput = await InputDisplay.Instance.AskInput("How many houses would you like to sell?");
                 if (int.TryParse(playerInput, out housesToSell)) {
@@ -240,11 +238,11 @@ public class Banker
             if (housesToSell > property.NumOfHouses) {
                 housesToSell = property.NumOfHouses;
             }
-            int cash = 0;
+            int money = 0;
             for (int i = 0; i < housesToSell; i++) {
-                cash = cash + property.Houses[i];
+                money = money + property.Houses[i];
             }
-            currentPlayer.cash += cash;
+            currentPlayer.money += money;
             property.NumOfHouses -= housesToSell;
         }
         else {
@@ -256,12 +254,12 @@ public class Banker
                 property.RentCollect = true;
             }
             // 20. if a player needs to raise funds they can sell a property back to the bank for its original value as shown on the game card
-            currentPlayer.cash += sellPrice;
+            currentPlayer.money += sellPrice;
             currentPlayer.owned.Remove(property);
             property.CanBeBought = true;
-            property.Owner = 0;
+            property.OwnerIndex = 0;
         }
-        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+        InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
     }
 
 
@@ -294,11 +292,9 @@ public class Banker
 
 
             if (colourPositions.TryGetValue(property.Group, out List<int> positions)) {
-                bool owned = true;
                 for (int i = 0; i < positions.Count; i++) {
                     // 18. houses and hotels may only be purchased where a player owns all of the properties in a colour group
-                    if (propertyData[positions[i]].Owner != currentPlayer) {
-                        owned = false;
+                    if (propertyData[positions[i]].OwnerIndex != currentPlayer.playerIndex) {
                         await InputDisplay.Instance.ShowMessage("You do not own all of the properties in this colour group, you cannot improve this property.");
                         return;
                     }
@@ -314,10 +310,10 @@ public class Banker
 
             // 19. houses and hotels are purchased for the amount shown on the game card
             int price = property.Houses[property.NumOfHouses];
-            currentPlayer.cash -= price;
+            currentPlayer.money -= price;
             property.NumOfHouses ++;
 
-            InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
+            InputDisplay.Instance.UpdateScoreboard(); // update scoreboard
         }
     }
 }*/

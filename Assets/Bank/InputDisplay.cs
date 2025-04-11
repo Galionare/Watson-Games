@@ -3,10 +3,13 @@ using UnityEngine.UI;
 using System;
 using System.Threading.Tasks;
 using TMPro;
+using System.Collections.Generic;
 
 public class InputDisplay : MonoBehaviour
 {
     public static InputDisplay Instance;
+
+    public List<Player> players;
 
     public GameObject backgroundText;
     public TMP_Text displayText;
@@ -37,7 +40,7 @@ public class InputDisplay : MonoBehaviour
         noButton.gameObject.SetActive(false);
 
         backgroundScore.SetActive(true);
-        scoreText.SetActive(true);
+        scoreText.gameObject.SetActive(true);
     }
 
     public async Task ShowMessage(string message) {
@@ -124,15 +127,17 @@ public class InputDisplay : MonoBehaviour
         return _taskCompletionSourceBool.Task;
     }
 
-    public void UpdateScoreboard(List<Player> players) {
+    public void UpdateScoreboard() {
         backgroundScore.SetActive(true);
+        Player player = players[0];
 
         string scoreboard = "";
         for (int i = 1; i <= players.Count; i++) {
-            scoreboard += $"Player {player.index}: {player.cash}\n";
+            player = players[i];
+            scoreboard += $"Player {i}: {player.money}\n";
             if (player.owned.Count > 0) {
                 foreach(var property in player.owned) {
-                    scoreboard += $" - {property.NameProperty}, Houses: {property.NumOfHouses}, Mortgaged: {property.mortgaged}\n";
+                    scoreboard += $" - {property.NameProperty}, Houses: {property.NumOfHouses}, Mortgaged: {property.Mortgaged}\n";
                 }
             }
             else {
