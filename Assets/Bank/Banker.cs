@@ -17,6 +17,7 @@ public class Banker
     private Dictionary<string, List<int>> colourPositions;
 
     private void Start() {
+        // load the property data dictionary
         propertyData = CSVLoader.LoadPropertyData();
         if (propertyData == null || propertyData.Count == 0)
         {
@@ -24,6 +25,7 @@ public class Banker
             return;
         }
 
+        // create a dictionary where the key is the property colour groups and the values are integer lists for property positions
         colourPositions = new Dictionary<string, List<int>> {
             {"Brown", new List<int>()},
             {"Blue", new List<int>()},
@@ -34,7 +36,8 @@ public class Banker
             {"Green", new List<int>()},
             {"Deep blue", new List<int>()}
         };
-        
+
+        // loop through the board to add the property positions to their respective colour groups in the dictionary
         foreach(var property in propertyData) {
             if (colourPositions.ContainsKey(property.Group)) {
                 colourPositions[property.Group].Add(property.Position);
@@ -45,11 +48,14 @@ public class Banker
         for (int i = 1; i <= numOfPlayers; i++) {
             players[i].cash = STARTING_CASH;
         }
+
+        InputDisplay.Instance.UpdateScoreboard(players); // update the scoreboard with the starting cash for each player
     }
 
-    public void collectGoCash() {
+    public void collectGoCash(Player player) {
         // 9. when a player pasts Go they collect 200 cash from the bank
         player.cash += GO_CASH;
+        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
         // - 10. all properties are originally the bank's - to do in property script
@@ -63,7 +69,9 @@ public class Banker
                 // 10. when property is bought the property is transferred from the bank to player and the money paid from player to bank
                 property.Owner = currentPlayer;
                 currentPlayer.cash -= property.Price;
-                property.CanBeBought = false; 
+                property.CanBeBought = false;
+
+                InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard 
             }
             else if (!wantsToBuy) {
                 // 11. if the player doesn't buy a property then it's auctioned by the bank
@@ -75,10 +83,10 @@ public class Banker
     public async void auctionProperty(Player refusedPlayer, PropertyData property) {
         int highestBid = 0;
         // 11. if there are no bids then the property remains unsold
-        int highestBidder = 0;
+        int highestBidderIndex = 0; // players[0] is an inactive player that acts as the bank
 
-        List bidders = players; //imagining a player array
-        bidders[(refusedPlayer.index)] = 0;
+        List<Player> bidders = players; //imagining a player array
+        bidders[(refusedPlayer.index)] = null;
         int numOfBidders = numOfPlayers - 1;
         int currentNumOfBidders = numOfBidders;
 
@@ -86,7 +94,7 @@ public class Banker
             numOfBidders = currentNumOfBidders;
             for (int i = 0; i < numOfBidders; i++) {
                 // 11. all bidding players must've completed one circuit of the board
-                if (bidders[i].passedGo) { // if the player is out of the auction bidders[i] will be the banker who hasn't passed go
+                if (bidders[i] != null && bidders[i].passedGo) { 
                     bool wantsToBid = await InputDisplay.Instance.AskYesOrNo("Would you like to bid on this property?");
                     if (wantsToBid) {
                         bool validBid = false;
@@ -100,12 +108,12 @@ public class Banker
                         // 11. in auction each player makes a bid to the bank and the bank sells to the highest bidder
                         if (bid > highestBid) {
                             highestBid = bid;
-                            highestBidder = i;
+                            highestBidderIndex = i;
                         }
                     }
                     else {
                         currentNumOfBidders--;
-                        bidders[i] = 0;
+                        bidders[i] = null;
                         if (currentNumOfBidders == 1) { // if there's only one other bidder then the for loop should break
                             break;
                         }
@@ -113,7 +121,8 @@ public class Banker
                 }
             }
         }
-        property.Owner = players[highestBidder];
+        property.Owner = players[highestBidderIndex];
+        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
     public void payRent(Player currentPlayer) {
@@ -122,10 +131,11 @@ public class Banker
         bool owned = true;
         PropertyData property = propertyData[currentPlayer.position];
         GameObject propertyOwner = players[currentProperty.Owner];
-        if (!property.CanBeBought && propertyOwner != currentPlayer && propertyOwner.index != 0) { // idk if that'll work
-            if (colourPositions.TryGetValue(property.Group, out List<int> positions)) {
-                foreach (int i in positions) {
-                    if (propertyData[positions[i]].Owner != propertyOwner) {
+
+        if (propertyOwner != currentPlayer && propertyOwner.index != 0) { // all unsold properties are owned by the bank, so if the property landed on is owned by another player then pay rent 
+            if (colourPositions.TryGetValue(property.Group, out List<int> positions)) { // get the list of property positions for the current property's colour group
+                foreach (int pos in positions) {
+                    if (propertyData[pos].Owner != propertyOwner) {
                         owned = false;
                         break;
                     }
@@ -133,7 +143,7 @@ public class Banker
             }
 
             // 14. if a property is improved with houses or hotels then the rent to be paid is as shown on the card
-            if (property.NumOfHouses != 0) {
+            if (property.NumOfHouses > 0) {
                 rent = property.Houses[(NumOfHouses - 1)];
             }
             // 13. if a player owns all of the properties in a colour coded group but the properties are otherwise not developed further
@@ -151,6 +161,7 @@ public class Banker
             currentPlayer.cash -= rent;
             propertyOwner.cash += rent;
         }
+        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
     // - 15. if they are still unable to pay after selling all assests then they are bankrupt and must leave the game
@@ -161,7 +172,7 @@ public class Banker
             bool found = false;
             while (!found) {
                 string propertyConsidered = await InputDisplay.Instance.AskInput("You are unable to pay the rent, which property would you like to sell or mortgage?");
-                for(int i = 0; i < currentPlayer.owned.Length(); i++) {
+                for(int i = 0; i < currentPlayer.owned.Count(); i++) {
                     // maybe the Player object needs an array of the positions of the properties they own
                     if (currentPlayer.owned[i].NameProperty == propertyConsidered) {
                         PropertyData property = currentPlayer.owned[i];
@@ -184,6 +195,8 @@ public class Banker
             if (currentPlayer.cash < rentToPay && currentPlayer.owned.Count == 0) {
                     await InputDisplay.Instance.ShowMessage("You are bankrupt, please leave the game.");
                     // remove player from game
+                    players[currentPlayer.index] = null;
+                    InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
                 }
             else if (currentPlayer.cash < rentToPay && currentPlayer.owned.Count > 0) {
                 await InputDisplay.Instance.ShowMessage("You are still unable to pay the rent, please sell or mortgage another property.");
@@ -197,12 +210,14 @@ public class Banker
         currentPlayer.cash += (property.Price/2);
         property.rentCollect = false;
         property.mortgaged = true;
+        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
     
     public void unMortgageProperty(Player currentPlayer, PropertyData property) {
         currentPlayer.cash -= (property.Price/2);
         property.rentCollect = true;
         property.mortgaged = false;
+        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
     
@@ -245,6 +260,7 @@ public class Banker
             property.CanBeBought = true;
             property.Owner = 0;
         }
+        InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
     }
 
 
@@ -258,7 +274,7 @@ public class Banker
             PropertyData property = null;
             while (!found) {
                 string propertyConsidered = await InputDisplay.Instance.AskInput("Which property would you like to improve?");
-                for(int i = 0; i < currentPlayer.owned.Length; i++) {
+                for(int i = 0; i < currentPlayer.owned.Count; i++) {
                     if (currentPlayer.owned[i].NameProperty == propertyConsidered) {
                         property = currentPlayer.owned[i];
                         found = true;
@@ -299,6 +315,8 @@ public class Banker
             int price = property.Houses[property.NumOfHouses];
             currentPlayer.cash -= price;
             property.NumOfHouses ++;
+
+            InputDisplay.Instance.UpdateScoreboard(players); // update scoreboard
         }
     }
 }

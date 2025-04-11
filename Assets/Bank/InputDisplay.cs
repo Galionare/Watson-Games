@@ -15,6 +15,9 @@ public class InputDisplay : MonoBehaviour
     public TMP_InputField inputField;
     public Button inputButton;
 
+    public GameObject backgroundScore;
+    public TMP_Text scoreText;
+
     private TaskCompletionSource<bool> _taskCompletionSourceBool;
     private TaskCompletionSource<string> _taskCompletionSourceString;
 
@@ -116,5 +119,30 @@ public class InputDisplay : MonoBehaviour
         noButton.GetComponentInChildren<TMP_Text>().text = "No";
 
         return _taskCompletionSourceBool.Task;
+    }
+
+    public void UpdateScoreboard(List<Player> players) {
+        backgroundScore.SetActive(true);
+
+        string scoreboard = "";
+        for (int i = 1; i <= players.Count; i++) {
+            scoreboard += $"Player {player.index}: £{player.cash}\n";
+            if (player.owned.Count > 0) {
+                foreach(var property in player.owned) {
+                    scoreboard += $" - {property.NameProperty}, Houses: {property.NumOfHouses}, Mortgaged: {property.mortgaged}\n";
+                }
+            }
+            else {
+                scoreboard += " - No properties\n";
+            }
+            scoreboard += "\n";
+        }
+
+        scoreText.text = scoreboard;
+
+        RectTransform bgRect = backgroundScore.GetComponent<RectTransform>();
+        float baseHeight = 200f; // Base height for the background
+        float extraHeight = 120f * (players.Count - 1);
+        bgRect.sizeDelta = new Vector2(bgRect.sizeDelta.x, baseHeight + extraHeight);
     }
 }
