@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using System.Threading.Tasks;
 using UnityEngine.UIElements;
+using UnityEditor.Build;
 
 public class CharacterMovement : MonoBehaviour
 {
@@ -14,23 +15,23 @@ public class CharacterMovement : MonoBehaviour
     bool isMoving;
     public DiceScript dice;
     public GameObject player;
+    public Player playerScript;
+    GameManager gameManager;
     public bool done = false;
+    public ShowProperty showProperty;
 
     private void Start()
     {
             currentRoute = FindFirstObjectByType<Walking>();
             dice = FindFirstObjectByType<DiceScript>();
+            playerScript = GetComponent<Player>();
+        gameManager = FindFirstObjectByType<GameManager>();
     }
     private async Task Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && !isMoving && done != true)
+        if (Input.GetKeyDown(KeyCode.M) && !isMoving && playerScript.playerIndex == gameManager.currentPlayerI && done != true && !playerScript.isRolled)
         {
             done = true;
-            steps = dice.diceRoll();
-            Debug.Log("Rolled" + steps);
-            StartCoroutine(Move());
-        }
-        {
             steps = dice.diceRoll();
 
             
@@ -42,7 +43,7 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator Move()
     {
         yield return new WaitForSeconds(5f);
-        done = false;
+
         if (isMoving)
         {
             yield break;
@@ -62,8 +63,12 @@ public class CharacterMovement : MonoBehaviour
             
         }
         isMoving = false;
+        playerScript.position = routePosition;
+        playerScript.isRolled = true;
+        done = false;
 
-        
+        showProperty.ShowProp(playerScript.position);
+
     }
     public bool moveNext(Vector3 target)
     {

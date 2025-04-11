@@ -21,8 +21,12 @@ public class PropertyData
     public double ReturnMotrtgage;
     public string CostHouse;
     public string CostHotel;
+    public bool Mortgaged;
+    public bool RentCollect;
+    public int OwnerIndex;
+    public int NumOfHouses;
 
-    public PropertyData(int position, string nameproperty, string group, string action, bool canBeBought, int cost, int mortgage, double returnMortgage, int rent, int fullRent,  int[] houses, string statRent1, string statRent2, string statRent3, string statRent4, string utilRent1, string utilRent2, string costHouse, string costHotel)
+    public PropertyData(int position, string nameproperty, string group, string action, bool canBeBought, int cost, int mortgage, double returnMortgage, int rent, int fullRent,  int[] houses, string statRent1, string statRent2, string statRent3, string statRent4, string utilRent1, string utilRent2, string costHouse, string costHotel, bool mortgaged, bool rentCollect, int ownerIndex, int numOfHouses)
     {
         Position = position;
         NameProperty = nameproperty;
@@ -43,5 +47,10 @@ public class PropertyData
         ReturnMotrtgage = returnMortgage;
         CostHouse = costHouse;
         CostHotel = costHotel;
+
+      /*  Mortgaged = mortgaged;
+        RentCollect = rentCollect;
+        OwnerIndex = ownerIndex;
+        NumOfHouses = numOfHouses;*/
     }
 }
