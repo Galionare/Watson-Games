@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     bool isMoving;
     public DiceScript dice;
     public GameObject player;
+    public bool done = false;
 
     private void Start()
     {
@@ -22,7 +23,13 @@ public class CharacterMovement : MonoBehaviour
     }
     private async Task Update()
     {
-        if (Input.GetKeyDown(KeyCode.M) && !isMoving)
+        if (Input.GetKeyDown(KeyCode.M) && !isMoving && done != true)
+        {
+            done = true;
+            steps = dice.diceRoll();
+            Debug.Log("Rolled" + steps);
+            StartCoroutine(Move());
+        }
         {
             steps = dice.diceRoll();
 
@@ -35,6 +42,7 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator Move()
     {
         yield return new WaitForSeconds(5f);
+        done = false;
         if (isMoving)
         {
             yield break;
