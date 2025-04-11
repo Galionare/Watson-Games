@@ -34,7 +34,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
-            steps = dice.diceRoll(playerScript,jailScript,characterMovement) ; //Random.Range(1, 13);
+            steps = dice.diceRoll(playerScript,jailScript,characterMovement, dice) ; //Random.Range(1, 13);
             Debug.Log("Rolled: " + steps);
             StartCoroutine(Move());
         }
