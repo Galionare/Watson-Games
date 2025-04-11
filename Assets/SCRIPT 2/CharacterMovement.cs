@@ -9,12 +9,12 @@ public class CharacterMovement : MonoBehaviour
     int routePosition;
     public int steps;
     bool isMoving;
-    //public RollDice dice1;
+    public RollDice dice1;
     public DiceScript dice2;
     public GameObject Player;
     private Player playerScript;
     private JailScript jailScript;
-    private ShowProperty ShowProp;
+    private ShowPropery ShowProp;
     FreeParkiingScript ParkingScript;
 
 
@@ -24,9 +24,9 @@ public class CharacterMovement : MonoBehaviour
         playerScript = GetComponent<Player>();
         ParkingScript = FindFirstObjectByType<FreeParkiingScript>();
         jailScript = FindFirstObjectByType<JailScript>();
-        //dice1 = FindFirstObjectByType<RollDice>();
+        dice1 = FindFirstObjectByType<RollDice>();
         dice2 = FindFirstObjectByType<DiceScript>();
-        ShowProp = FindFirstObjectByType<ShowProperty>();
+        ShowProp = FindFirstObjectByType<ShowPropery>();
 
     }
 

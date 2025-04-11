@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ShowProperty : MonoBehaviour
+public class ShowPropery : MonoBehaviour
 {
     public GameObject PropCard;
     public GameObject StatCard;
